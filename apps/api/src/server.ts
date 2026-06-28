@@ -80,6 +80,14 @@ interface ExtractedCaseMetadata {
   legalArea?: string;
 }
 
+interface CaseMetadataDiagnostics {
+  totalCaseFiles: number;
+  extractedTextFiles: number;
+  emptyTextFiles: number;
+  likelyScannedPdf: boolean;
+  emptyTextFileNames: string[];
+}
+
 function hasCriticalMetadata(meta: ExtractedCaseMetadata): boolean {
   return Boolean(meta.number && meta.court && meta.plaintiff && meta.defendant);
 }
@@ -356,6 +364,30 @@ async function extractCaseMetadataFromSummary(
   };
 }
 
+function buildCaseMetadataDiagnostics(
+  summary: Awaited<ReturnType<typeof ingestKnowledgeSources>> | undefined,
+): CaseMetadataDiagnostics {
+  const items = summary?.items ?? [];
+  const totalCaseFiles = items.length;
+  const emptyTextFileNames = items
+    .filter((item) => item.textLength === 0)
+    .map((item) => item.fileName);
+  const emptyTextFiles = emptyTextFileNames.length;
+  const extractedTextFiles = Math.max(0, totalCaseFiles - emptyTextFiles);
+  const likelyScannedPdf =
+    totalCaseFiles > 0 &&
+    items.every((item) => item.extension.toLowerCase() === ".pdf") &&
+    emptyTextFiles === totalCaseFiles;
+
+  return {
+    totalCaseFiles,
+    extractedTextFiles,
+    emptyTextFiles,
+    likelyScannedPdf,
+    emptyTextFileNames,
+  };
+}
+
 function getGeminiRuntimeStatus(): {
   configured: boolean;
   runtime: "online" | "not_configured" | "quota_exceeded";
@@ -433,6 +465,7 @@ app.post("/api/ingest", async (req, res) => {
       (entry) => path.resolve(entry.sourceDir) === path.resolve(scopedSourceDir),
     );
     const caseMetadata = await extractCaseMetadataFromSummary(scopedSummary);
+    const caseMetadataDiagnostics = buildCaseMetadataDiagnostics(scopedSummary);
 
     pushLog("ingestion_completed", {
       sourceDir: toPosixPath(path.relative(ROOT, scopedSourceDir)),
@@ -441,7 +474,7 @@ app.post("/api/ingest", async (req, res) => {
       processed: summary.processed,
       errors: summary.errors,
     });
-    res.json({ ...summary, caseMetadata });
+    res.json({ ...summary, caseMetadata, caseMetadataDiagnostics });
   } catch (error) {
     pushLog("ingestion_failed", { error: error instanceof Error ? error.message : "unknown" });
     res.status(500).json({

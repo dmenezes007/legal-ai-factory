@@ -38,6 +38,14 @@ interface ExtractedCaseMetadata {
   legalArea?: string;
 }
 
+interface CaseMetadataDiagnostics {
+  totalCaseFiles?: number;
+  extractedTextFiles?: number;
+  emptyTextFiles?: number;
+  likelyScannedPdf?: boolean;
+  emptyTextFileNames?: string[];
+}
+
 function hasCriticalMetadata(meta: ExtractedCaseMetadata): boolean {
   return Boolean(meta.number && meta.court && meta.plaintiff && meta.defendant);
 }
@@ -163,6 +171,7 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
         }
 
         const extractedMetadata: ExtractedCaseMetadata = payload.caseMetadata || {};
+        const diagnostics: CaseMetadataDiagnostics = payload.caseMetadataDiagnostics || {};
         if (extractedMetadata.number) {
           setNumber(extractedMetadata.number);
         }
@@ -230,7 +239,11 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
               total: Number(payload.total ?? docs.length),
             }, extractedMetadata);
           } else {
-            setFolderPreprocessError('Pré-processamento concluído, mas não foi possível extrair metadados críticos (número, juízo, autor e réu). Revise os campos antes de criar o caso.');
+            if (diagnostics.likelyScannedPdf) {
+              setFolderPreprocessError('Pré-processamento concluído, mas os PDFs da pasta parecem imagem sem OCR (texto extraído = 0). Por isso a IA não identificou número, juízo, autor e réu automaticamente. Execute OCR nos PDFs ou preencha os campos manualmente.');
+            } else {
+              setFolderPreprocessError('Pré-processamento concluído, mas não foi possível extrair metadados críticos (número, juízo, autor e réu). Revise os campos antes de criar o caso.');
+            }
           }
         }
       } catch (error) {

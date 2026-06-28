@@ -3,10 +3,44 @@ import { promises as fs } from "node:fs";
 import { randomUUID } from "node:crypto";
 import mammoth from "mammoth";
 import pdfParse from "pdf-parse";
+import { GoogleGenAI, createPartFromBase64, createPartFromText } from "@google/genai";
 import { classifySource } from "./classifier";
 import type { IngestionResult, IngestionSummary } from "./types";
 
 const SUPPORTED_EXTENSIONS = new Set([".txt", ".md", ".pdf", ".docx"]);
+const GEMINI_PDF_MAX_BYTES = 20 * 1024 * 1024;
+
+async function extractPdfTextWithGemini(data: Buffer): Promise<{ text: string | null; warning?: string }> {
+  if (!process.env.GEMINI_API_KEY) {
+    return { text: null, warning: "Fallback Gemini OCR indisponivel: GEMINI_API_KEY ausente." };
+  }
+
+  if (data.byteLength > GEMINI_PDF_MAX_BYTES) {
+    return { text: null, warning: `Fallback Gemini OCR ignorado: PDF maior que ${GEMINI_PDF_MAX_BYTES} bytes.` };
+  }
+
+  try {
+    const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+    const model = process.env.GEMINI_MODEL?.trim() || "gemini-2.5-flash";
+    const response = await ai.models.generateContent({
+      model,
+      contents: [
+        createPartFromText(
+          "Extraia o texto integral deste PDF juridico em portugues do Brasil. Retorne somente o texto extraido, sem comentarios.",
+        ),
+        createPartFromBase64(data.toString("base64"), "application/pdf"),
+      ],
+    });
+
+    const text = response.text?.trim();
+    return text && text.length > 0
+      ? { text }
+      : { text: null, warning: "Fallback Gemini OCR nao retornou texto para o PDF." };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error ?? "erro desconhecido");
+    return { text: null, warning: `Fallback Gemini OCR falhou: ${message}` };
+  }
+}
 
 async function listFilesRecursively(dir: string): Promise<string[]> {
   const entries = await fs.readdir(dir, { withFileTypes: true });
@@ -34,7 +68,23 @@ async function extractText(filePath: string): Promise<{ text: string; warnings: 
     if (ext === ".pdf") {
       const data = await fs.readFile(filePath);
       const parsed = await pdfParse(data);
-      return { text: parsed.text?.trim() ?? "", warnings, extracted: true };
+      const parsedText = parsed.text?.trim() ?? "";
+      if (parsedText.length > 0) {
+        return { text: parsedText, warnings, extracted: true };
+      }
+
+      const geminiOcr = await extractPdfTextWithGemini(data);
+      if (geminiOcr.text && geminiOcr.text.length > 0) {
+        warnings.push("Texto do PDF extraido via Gemini multimodal (fallback OCR). ");
+        return { text: geminiOcr.text, warnings, extracted: true };
+      }
+
+      if (geminiOcr.warning) {
+        warnings.push(geminiOcr.warning);
+      }
+
+      warnings.push("PDF sem texto extraivel (possivel documento escaneado sem OCR). ");
+      return { text: "", warnings, extracted: true };
     }
 
     if (ext === ".docx") {
