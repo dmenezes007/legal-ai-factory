@@ -1,0 +1,1048 @@
+{
+  "generatedAt": "2026-06-28T13:38:43.532Z",
+  "sourceRoot": "knowledge/sources/original/notebooklm",
+  "totals": {
+    "documents": 25,
+    "exactDuplicateGroups": 2,
+    "similarPairs": 1,
+    "complementaryPairs": 8
+  },
+  "taxonomyCoverage": {
+    "doutrina": 1,
+    "documento_processual": 3,
+    "jurisprudencia": 13,
+    "modelo_peca": 4,
+    "mapa_de_teses": 1,
+    "skill": 3
+  },
+  "areaCoverage": {
+    "Saude Suplementar Empresarial": 18,
+    "Nao identificado": 2,
+    "Processual Civil Probatorio": 4,
+    "Contencioso Civel e Consumidor": 1
+  },
+  "executiveSummary": {
+    "documentosPorAreaJuridica": {
+      "Saude Suplementar Empresarial": 18,
+      "Nao identificado": 2,
+      "Processual Civil Probatorio": 4,
+      "Contencioso Civel e Consumidor": 1
+    },
+    "quantidadeModelosDePecas": 4,
+    "quantidadeMapasDeTeses": 1,
+    "quantidadeFluxosIdentificados": 1,
+    "quantidadePossiveisSkills": 1,
+    "maturidadePorDominio": [
+      {
+        "areaJuridica": "Saude Suplementar Empresarial",
+        "documentCount": 18,
+        "categories": [
+          "documento_processual",
+          "doutrina",
+          "jurisprudencia",
+          "mapa_de_teses",
+          "modelo_peca",
+          "skill"
+        ],
+        "maturityScore": 5,
+        "maturityLevel": "Avancado"
+      },
+      {
+        "areaJuridica": "Nao identificado",
+        "documentCount": 2,
+        "categories": [
+          "jurisprudencia"
+        ],
+        "maturityScore": 1.8,
+        "maturityLevel": "Inicial"
+      },
+      {
+        "areaJuridica": "Processual Civil Probatorio",
+        "documentCount": 4,
+        "categories": [
+          "documento_processual",
+          "jurisprudencia"
+        ],
+        "maturityScore": 3,
+        "maturityLevel": "Intermediario"
+      },
+      {
+        "areaJuridica": "Contencioso Civel e Consumidor",
+        "documentCount": 1,
+        "categories": [
+          "skill"
+        ],
+        "maturityScore": 1,
+        "maturityLevel": "Inicial"
+      }
+    ]
+  },
+  "documents": [
+    {
+      "id": "doc_001",
+      "filePath": "knowledge/sources/original/notebooklm/doutrina/Reajuste_Doutrina_Validade_Contratos_Coletivos_Empresariais.txt",
+      "fileName": "Reajuste_Doutrina_Validade_Contratos_Coletivos_Empresariais.txt",
+      "sizeBytes": 11439,
+      "sha256": "3cdb97af2e5387f19c0d924c165d3eb29d0a4576d7beed1f04fcaa9ce5c36f00",
+      "areaJuridica": "Saude Suplementar Empresarial",
+      "taxonomyCategory": "doutrina",
+      "documentType": "doutrina_juridica",
+      "mainTheme": "reajuste_anual_falso_coletivo_produto_557",
+      "keywords": [
+        "juridica",
+        "saude",
+        "coletivo",
+        "contrato",
+        "lealdade",
+        "plano",
+        "estipulante",
+        "falso",
+        "pessoa",
+        "beneficiarios",
+        "contratual",
+        "sinalagma"
+      ],
+      "qualityFlags": [],
+      "candidateTypes": [
+        "Knowledge Object"
+      ],
+      "duplicates": [],
+      "similarDocuments": [],
+      "complementaryDocuments": [
+        {
+          "id": "doc_021",
+          "score": 0.158
+        },
+        {
+          "id": "doc_018",
+          "score": 0.107
+        },
+        {
+          "id": "doc_009",
+          "score": 0.102
+        },
+        {
+          "id": "doc_011",
+          "score": 0.087
+        }
+      ]
+    },
+    {
+      "id": "doc_002",
+      "filePath": "knowledge/sources/original/notebooklm/extratos/Reajuste_Extratos_Pormenorizados_PME_2014_2025.txt",
+      "fileName": "Reajuste_Extratos_Pormenorizados_PME_2014_2025.txt",
+      "sizeBytes": 3948,
+      "sha256": "4bf08b729ec443d1e12f246f9ba0fa2e9bc527625ba9ec719cd483e5891da727",
+      "areaJuridica": "Saude Suplementar Empresarial",
+      "taxonomyCategory": "documento_processual",
+      "documentType": "extrato_atuarial",
+      "mainTheme": "memoria_atuarial_e_calculo_de_reajuste",
+      "keywords": [
+        "indice",
+        "vcmh",
+        "reajuste",
+        "sinistro",
+        "sinistralidade",
+        "memoria",
+        "calculo",
+        "contrato",
+        "periodo",
+        "empresa",
+        "beneficiario",
+        "premio"
+      ],
+      "qualityFlags": [],
+      "candidateTypes": [
+        "Knowledge Object",
+        "Workflow"
+      ],
+      "duplicates": [],
+      "similarDocuments": [],
+      "complementaryDocuments": []
+    },
+    {
+      "id": "doc_003",
+      "filePath": "knowledge/sources/original/notebooklm/jurisprudencia/0085849-19.2023.8.05.0001 - RECURSO ESPECIAL N 2214841 - SP (2025.0182109-1).txt",
+      "fileName": "0085849-19.2023.8.05.0001 - RECURSO ESPECIAL N 2214841 - SP (2025.0182109-1).txt",
+      "sizeBytes": 11,
+      "sha256": "1708940227de929934e4bae47bf4a207918837bc4240070f2c6c8af5177eab17",
+      "areaJuridica": "Nao identificado",
+      "taxonomyCategory": "jurisprudencia",
+      "documentType": "acordao_ou_recurso",
+      "mainTheme": "tema_nao_identificado",
+      "keywords": [],
+      "qualityFlags": [
+        "conteudo_curto"
+      ],
+      "candidateTypes": [
+        "Knowledge Object"
+      ],
+      "duplicates": [],
+      "similarDocuments": [],
+      "complementaryDocuments": []
+    },
+    {
+      "id": "doc_004",
+      "filePath": "knowledge/sources/original/notebooklm/jurisprudencia/ACORDAO - reforma falso coletivo - TJSE - CIV-032572.25.txt",
+      "fileName": "ACORDAO - reforma falso coletivo - TJSE - CIV-032572.25.txt",
+      "sizeBytes": 17,
+      "sha256": "e72539cbd2b03bb3199404142936456750f35c4c05aba2fecdc6fbcf07308bec",
+      "areaJuridica": "Saude Suplementar Empresarial",
+      "taxonomyCategory": "jurisprudencia",
+      "documentType": "acordao_ou_recurso",
+      "mainTheme": "reajuste_anual_falso_coletivo_produto_557",
+      "keywords": [],
+      "qualityFlags": [
+        "conteudo_curto"
+      ],
+      "candidateTypes": [
+        "Knowledge Object"
+      ],
+      "duplicates": [],
+      "similarDocuments": [],
+      "complementaryDocuments": []
+    },
+    {
+      "id": "doc_005",
+      "filePath": "knowledge/sources/original/notebooklm/jurisprudencia/Acordao AI - revogacao tutela - 557 - falso coletivo - TJ SP.txt",
+      "fileName": "Acordao AI - revogacao tutela - 557 - falso coletivo - TJ SP.txt",
+      "sizeBytes": 3,
+      "sha256": "9478ac3ef61ae9df286d951edbfce4c24049f65e860f053ed9eb2c3fbd78d051",
+      "areaJuridica": "Saude Suplementar Empresarial",
+      "taxonomyCategory": "jurisprudencia",
+      "documentType": "acordao_ou_recurso",
+      "mainTheme": "reajuste_anual_falso_coletivo_produto_557",
+      "keywords": [],
+      "qualityFlags": [
+        "conteudo_curto"
+      ],
+      "candidateTypes": [
+        "Knowledge Object"
+      ],
+      "duplicates": [
+        "doc_015",
+        "doc_017"
+      ],
+      "similarDocuments": [],
+      "complementaryDocuments": []
+    },
+    {
+      "id": "doc_006",
+      "filePath": "knowledge/sources/original/notebooklm/jurisprudencia/Acordao Apelacao - TJSP - falso coletivo - cerceamento de defesa - produto 557.txt",
+      "fileName": "Acordao Apelacao - TJSP - falso coletivo - cerceamento de defesa - produto 557.txt",
+      "sizeBytes": 9,
+      "sha256": "72babeb35d543219be557f8a5a73974b98a74a4a417117e9834d70f1384497c8",
+      "areaJuridica": "Saude Suplementar Empresarial",
+      "taxonomyCategory": "jurisprudencia",
+      "documentType": "acordao_ou_recurso",
+      "mainTheme": "reajuste_anual_falso_coletivo_produto_557",
+      "keywords": [],
+      "qualityFlags": [
+        "conteudo_curto"
+      ],
+      "candidateTypes": [
+        "Knowledge Object"
+      ],
+      "duplicates": [],
+      "similarDocuments": [],
+      "complementaryDocuments": []
+    },
+    {
+      "id": "doc_007",
+      "filePath": "knowledge/sources/original/notebooklm/jurisprudencia/Acordao Resp 1964110 SP - 2021.02971993 - produto 515 - Min Raul Araújo - reajuste anual.txt",
+      "fileName": "Acordao Resp 1964110 SP - 2021.02971993 - produto 515 - Min Raul Araújo - reajuste anual.txt",
+      "sizeBytes": 8,
+      "sha256": "a61f149fa51d21a7666743f05977a61c858db20e63ecc70834dd3885b3062550",
+      "areaJuridica": "Saude Suplementar Empresarial",
+      "taxonomyCategory": "jurisprudencia",
+      "documentType": "acordao_ou_recurso",
+      "mainTheme": "reajuste_anual_falso_coletivo_produto_557",
+      "keywords": [],
+      "qualityFlags": [
+        "conteudo_curto"
+      ],
+      "candidateTypes": [
+        "Knowledge Object"
+      ],
+      "duplicates": [],
+      "similarDocuments": [],
+      "complementaryDocuments": []
+    },
+    {
+      "id": "doc_008",
+      "filePath": "knowledge/sources/original/notebooklm/jurisprudencia/Acordão TJSP - cerceamento de defesa - falso coletivo - sentenca anulada - pericia aturial - produto 557.txt",
+      "fileName": "Acordão TJSP - cerceamento de defesa - falso coletivo - sentenca anulada - pericia aturial - produto 557.txt",
+      "sizeBytes": 6,
+      "sha256": "7b2aa16484b6ad79ef5bec51da3501f5079367b625da44bf97468422d27e8e95",
+      "areaJuridica": "Saude Suplementar Empresarial",
+      "taxonomyCategory": "jurisprudencia",
+      "documentType": "sentenca",
+      "mainTheme": "reajuste_anual_falso_coletivo_produto_557",
+      "keywords": [],
+      "qualityFlags": [
+        "conteudo_curto"
+      ],
+      "candidateTypes": [
+        "Knowledge Object"
+      ],
+      "duplicates": [],
+      "similarDocuments": [],
+      "complementaryDocuments": []
+    },
+    {
+      "id": "doc_009",
+      "filePath": "knowledge/sources/original/notebooklm/jurisprudencia/Acórdão - Nº 2628808 SP - 2024 0160580-4.txt",
+      "fileName": "Acórdão - Nº 2628808 SP - 2024 0160580-4.txt",
+      "sizeBytes": 43437,
+      "sha256": "e574ba45226cfceb9e5e83e88bbfa0ed4203d8dc259cd69e771030eb4f6a22ad",
+      "areaJuridica": "Saude Suplementar Empresarial",
+      "taxonomyCategory": "modelo_peca",
+      "documentType": "acordao_ou_recurso",
+      "mainTheme": "reajuste_anual_falso_coletivo_produto_557",
+      "keywords": [
+        "contratos",
+        "indices",
+        "reajuste",
+        "plano",
+        "saude",
+        "documento",
+        "assinado",
+        "ministro",
+        "caso",
+        "operadora",
+        "reajustes",
+        "coletivo"
+      ],
+      "qualityFlags": [],
+      "candidateTypes": [
+        "Template",
+        "Workflow"
+      ],
+      "duplicates": [],
+      "similarDocuments": [],
+      "complementaryDocuments": [
+        {
+          "id": "doc_011",
+          "score": 0.251
+        },
+        {
+          "id": "doc_001",
+          "score": 0.102
+        }
+      ]
+    },
+    {
+      "id": "doc_010",
+      "filePath": "knowledge/sources/original/notebooklm/jurisprudencia/Acórdão do Agravo Interno - 2.008.784-SP - necessidade de pericia.txt",
+      "fileName": "Acórdão do Agravo Interno - 2.008.784-SP - necessidade de pericia.txt",
+      "sizeBytes": 21937,
+      "sha256": "542a6623e8fc0ed1a3a9e6b22824d1ce575e60ef4e61cd5637f02672c08197ca",
+      "areaJuridica": "Saude Suplementar Empresarial",
+      "taxonomyCategory": "jurisprudencia",
+      "documentType": "acordao_ou_recurso",
+      "mainTheme": "cerceamento_de_defesa_e_necessidade_pericia_atuarial",
+      "keywords": [
+        "contratos",
+        "ministro",
+        "documento",
+        "agravo",
+        "beneficiarios",
+        "reajuste",
+        "assinado",
+        "saude",
+        "raul",
+        "araujo",
+        "interno",
+        "coletivos"
+      ],
+      "qualityFlags": [],
+      "candidateTypes": [
+        "Knowledge Object"
+      ],
+      "duplicates": [],
+      "similarDocuments": [],
+      "complementaryDocuments": []
+    },
+    {
+      "id": "doc_011",
+      "filePath": "knowledge/sources/original/notebooklm/jurisprudencia/ACÓRDÃO RECURSO ESPECIAL Nº 2061483 - SP 2023 0087659-0.txt",
+      "fileName": "ACÓRDÃO RECURSO ESPECIAL Nº 2061483 - SP 2023 0087659-0.txt",
+      "sizeBytes": 13805,
+      "sha256": "fd69331508b6d774bfd4fcba9f393249b8f804945738414aa50f0d285b3aac18",
+      "areaJuridica": "Saude Suplementar Empresarial",
+      "taxonomyCategory": "jurisprudencia",
+      "documentType": "acordao_ou_recurso",
+      "mainTheme": "reajuste_anual_falso_coletivo_produto_557",
+      "keywords": [
+        "recurso",
+        "saude",
+        "sinistralidade",
+        "especial",
+        "agravo",
+        "reajuste",
+        "plano",
+        "documento",
+        "interno",
+        "eletronico",
+        "reajustes",
+        "assinado"
+      ],
+      "qualityFlags": [],
+      "candidateTypes": [
+        "Knowledge Object"
+      ],
+      "duplicates": [],
+      "similarDocuments": [],
+      "complementaryDocuments": [
+        {
+          "id": "doc_009",
+          "score": 0.251
+        },
+        {
+          "id": "doc_018",
+          "score": 0.122
+        },
+        {
+          "id": "doc_021",
+          "score": 0.116
+        },
+        {
+          "id": "doc_022",
+          "score": 0.088
+        },
+        {
+          "id": "doc_001",
+          "score": 0.087
+        }
+      ]
+    },
+    {
+      "id": "doc_012",
+      "filePath": "knowledge/sources/original/notebooklm/jurisprudencia/Sentenca-improcedente-557-faixa-etaria-pericia-in-loco-tjsp.txt",
+      "fileName": "Sentenca-improcedente-557-faixa-etaria-pericia-in-loco-tjsp.txt",
+      "sizeBytes": 7,
+      "sha256": "9e43591d85d480f056a1e21f8ddfa0de6ca3a31ca1f1bc0428a9e93b52b1f6eb",
+      "areaJuridica": "Processual Civil Probatorio",
+      "taxonomyCategory": "jurisprudencia",
+      "documentType": "sentenca",
+      "mainTheme": "tema_nao_identificado",
+      "keywords": [],
+      "qualityFlags": [
+        "conteudo_curto"
+      ],
+      "candidateTypes": [
+        "Knowledge Object"
+      ],
+      "duplicates": [],
+      "similarDocuments": [],
+      "complementaryDocuments": []
+    },
+    {
+      "id": "doc_013",
+      "filePath": "knowledge/sources/original/notebooklm/jurisprudencia/Sentenca-improcedente-Suzano-TJ-SP-produto-557-base-atuarial-idonea-nucleo-4.0.txt",
+      "fileName": "Sentenca-improcedente-Suzano-TJ-SP-produto-557-base-atuarial-idonea-nucleo-4.0.txt",
+      "sizeBytes": 5,
+      "sha256": "2e9faebbd47a57f8d00d2f73a2e412bbf5353a95a112f2278b24f69ee5d14b62",
+      "areaJuridica": "Processual Civil Probatorio",
+      "taxonomyCategory": "jurisprudencia",
+      "documentType": "sentenca",
+      "mainTheme": "tema_nao_identificado",
+      "keywords": [],
+      "qualityFlags": [
+        "conteudo_curto"
+      ],
+      "candidateTypes": [
+        "Knowledge Object"
+      ],
+      "duplicates": [
+        "doc_014",
+        "doc_016"
+      ],
+      "similarDocuments": [],
+      "complementaryDocuments": []
+    },
+    {
+      "id": "doc_014",
+      "filePath": "knowledge/sources/original/notebooklm/jurisprudencia/Sentenca-TJSP-anual-falso-coletivo-produto-557-sem-pericia.txt",
+      "fileName": "Sentenca-TJSP-anual-falso-coletivo-produto-557-sem-pericia.txt",
+      "sizeBytes": 5,
+      "sha256": "2e9faebbd47a57f8d00d2f73a2e412bbf5353a95a112f2278b24f69ee5d14b62",
+      "areaJuridica": "Processual Civil Probatorio",
+      "taxonomyCategory": "jurisprudencia",
+      "documentType": "sentenca",
+      "mainTheme": "tema_nao_identificado",
+      "keywords": [],
+      "qualityFlags": [
+        "conteudo_curto"
+      ],
+      "candidateTypes": [
+        "Knowledge Object"
+      ],
+      "duplicates": [
+        "doc_013",
+        "doc_016"
+      ],
+      "similarDocuments": [],
+      "complementaryDocuments": []
+    },
+    {
+      "id": "doc_015",
+      "filePath": "knowledge/sources/original/notebooklm/jurisprudencia/SENTENÇA-DE-IMPROCEDÊNCIA-4001635-55.2026.8.26.0577-anual-falso-coletivo-produto-557-TJSP.txt",
+      "fileName": "SENTENÇA-DE-IMPROCEDÊNCIA-4001635-55.2026.8.26.0577-anual-falso-coletivo-produto-557-TJSP.txt",
+      "sizeBytes": 3,
+      "sha256": "9478ac3ef61ae9df286d951edbfce4c24049f65e860f053ed9eb2c3fbd78d051",
+      "areaJuridica": "Nao identificado",
+      "taxonomyCategory": "jurisprudencia",
+      "documentType": "sentenca",
+      "mainTheme": "tema_nao_identificado",
+      "keywords": [],
+      "qualityFlags": [
+        "conteudo_curto"
+      ],
+      "candidateTypes": [
+        "Knowledge Object"
+      ],
+      "duplicates": [
+        "doc_005",
+        "doc_017"
+      ],
+      "similarDocuments": [],
+      "complementaryDocuments": []
+    },
+    {
+      "id": "doc_016",
+      "filePath": "knowledge/sources/original/notebooklm/jurisprudencia/Sentença-–-TJSP-–-557-–-falso-coletivo-reajustes-devidos-anual.txt",
+      "fileName": "Sentença-–-TJSP-–-557-–-falso-coletivo-reajustes-devidos-anual.txt",
+      "sizeBytes": 5,
+      "sha256": "2e9faebbd47a57f8d00d2f73a2e412bbf5353a95a112f2278b24f69ee5d14b62",
+      "areaJuridica": "Saude Suplementar Empresarial",
+      "taxonomyCategory": "jurisprudencia",
+      "documentType": "sentenca",
+      "mainTheme": "reajuste_anual_falso_coletivo_produto_557",
+      "keywords": [],
+      "qualityFlags": [
+        "conteudo_curto"
+      ],
+      "candidateTypes": [
+        "Knowledge Object"
+      ],
+      "duplicates": [
+        "doc_013",
+        "doc_014"
+      ],
+      "similarDocuments": [],
+      "complementaryDocuments": []
+    },
+    {
+      "id": "doc_017",
+      "filePath": "knowledge/sources/original/notebooklm/laudos/Antonio cordeiro produto 557 - favorável.txt",
+      "fileName": "Antonio cordeiro produto 557 - favorável.txt",
+      "sizeBytes": 3,
+      "sha256": "9478ac3ef61ae9df286d951edbfce4c24049f65e860f053ed9eb2c3fbd78d051",
+      "areaJuridica": "Saude Suplementar Empresarial",
+      "taxonomyCategory": "documento_processual",
+      "documentType": "laudo_pericial",
+      "mainTheme": "reajuste_anual_falso_coletivo_produto_557",
+      "keywords": [],
+      "qualityFlags": [
+        "conteudo_curto"
+      ],
+      "candidateTypes": [
+        "Knowledge Object",
+        "Workflow"
+      ],
+      "duplicates": [
+        "doc_005",
+        "doc_015"
+      ],
+      "similarDocuments": [],
+      "complementaryDocuments": []
+    },
+    {
+      "id": "doc_018",
+      "filePath": "knowledge/sources/original/notebooklm/laudos/LAUDO-FAVORÁVEL-078.9823-EMPRESARIAL-PRODUTO-557-PERITA-ADELITA-ADAMS.txt",
+      "fileName": "LAUDO-FAVORÁVEL-078.9823-EMPRESARIAL-PRODUTO-557-PERITA-ADELITA-ADAMS.txt",
+      "sizeBytes": 80858,
+      "sha256": "66dfd45fcc745abb1ff4b663073deb52f109790c486d6b2b8fdf05806d157955",
+      "areaJuridica": "Saude Suplementar Empresarial",
+      "taxonomyCategory": "modelo_peca",
+      "documentType": "laudo_pericial",
+      "mainTheme": "reajuste_anual_falso_coletivo_produto_557",
+      "keywords": [
+        "reajustes",
+        "reajuste",
+        "contrato",
+        "contratos",
+        "original",
+        "planos",
+        "parte",
+        "aplicados",
+        "agrupamento",
+        "saude",
+        "resposta",
+        "plano"
+      ],
+      "qualityFlags": [],
+      "candidateTypes": [
+        "Template",
+        "Workflow"
+      ],
+      "duplicates": [],
+      "similarDocuments": [],
+      "complementaryDocuments": [
+        {
+          "id": "doc_011",
+          "score": 0.122
+        },
+        {
+          "id": "doc_001",
+          "score": 0.107
+        }
+      ]
+    },
+    {
+      "id": "doc_019",
+      "filePath": "knowledge/sources/original/notebooklm/laudos/Laudo-favorável-produto-557-perito-Jose-Luiz-Montelo-da-Fonseca.txt",
+      "fileName": "Laudo-favorável-produto-557-perito-Jose-Luiz-Montelo-da-Fonseca.txt",
+      "sizeBytes": 32,
+      "sha256": "308c1cf897a05c3584d7186e30bb80ba686ce171f54cb380b20fab93799f7341",
+      "areaJuridica": "Processual Civil Probatorio",
+      "taxonomyCategory": "documento_processual",
+      "documentType": "laudo_pericial",
+      "mainTheme": "tema_nao_identificado",
+      "keywords": [],
+      "qualityFlags": [
+        "conteudo_curto"
+      ],
+      "candidateTypes": [
+        "Knowledge Object",
+        "Workflow"
+      ],
+      "duplicates": [],
+      "similarDocuments": [],
+      "complementaryDocuments": []
+    },
+    {
+      "id": "doc_020",
+      "filePath": "knowledge/sources/original/notebooklm/mapas/MAPA_DE_ADERENCIA_DE_TESES.txt",
+      "fileName": "MAPA_DE_ADERENCIA_DE_TESES.txt",
+      "sizeBytes": 156544,
+      "sha256": "efbce9ca45ecbec67cca9433efe5d1164a8d167009e32e8e869e89399751580e",
+      "areaJuridica": "Saude Suplementar Empresarial",
+      "taxonomyCategory": "mapa_de_teses",
+      "documentType": "laudo_pericial",
+      "mainTheme": "memoria_atuarial_e_calculo_de_reajuste",
+      "keywords": [
+        "generic",
+        "cell",
+        "alta",
+        "requer",
+        "media",
+        "processual",
+        "quando",
+        "material",
+        "favoravel",
+        "codigo",
+        "atuarial",
+        "civil"
+      ],
+      "qualityFlags": [],
+      "candidateTypes": [
+        "Mapa de Teses",
+        "Workflow"
+      ],
+      "duplicates": [],
+      "similarDocuments": [],
+      "complementaryDocuments": []
+    },
+    {
+      "id": "doc_021",
+      "filePath": "knowledge/sources/original/notebooklm/modelos/Aviso_Previo_Premio_Complementar_SulAmerica_Contestacao.txt",
+      "fileName": "Aviso_Previo_Premio_Complementar_SulAmerica_Contestacao.txt",
+      "sizeBytes": 134390,
+      "sha256": "b08d58bdbc19475e5f10e8add8fa65c43c15057a12c5b7d6fb7b935c4dde7163",
+      "areaJuridica": "Saude Suplementar Empresarial",
+      "taxonomyCategory": "modelo_peca",
+      "documentType": "modelo_contestacao",
+      "mainTheme": "reajuste_anual_falso_coletivo_produto_557",
+      "keywords": [
+        "saude",
+        "contrato",
+        "estipulante",
+        "operadora",
+        "artigo",
+        "forma",
+        "juridica",
+        "civil",
+        "direito",
+        "empresa",
+        "codigo",
+        "plano"
+      ],
+      "qualityFlags": [],
+      "candidateTypes": [
+        "Template",
+        "Workflow"
+      ],
+      "duplicates": [],
+      "similarDocuments": [],
+      "complementaryDocuments": [
+        {
+          "id": "doc_001",
+          "score": 0.158
+        },
+        {
+          "id": "doc_011",
+          "score": 0.116
+        }
+      ]
+    },
+    {
+      "id": "doc_022",
+      "filePath": "knowledge/sources/original/notebooklm/modelos/Reajuste_SulAmerica_Contestacao.txt",
+      "fileName": "Reajuste_SulAmerica_Contestacao.txt",
+      "sizeBytes": 5255,
+      "sha256": "2ba4b40d6c17121b9e34b7e677e549e33fdb0c80aca4695b81cc57f859479c68",
+      "areaJuridica": "Saude Suplementar Empresarial",
+      "taxonomyCategory": "modelo_peca",
+      "documentType": "extrato_atuarial",
+      "mainTheme": "reajuste_anual_falso_coletivo_produto_557",
+      "keywords": [
+        "tese",
+        "coletivo",
+        "caso",
+        "direito",
+        "processuais",
+        "revogacao",
+        "judicial",
+        "prescricao",
+        "alcada",
+        "aplicacao",
+        "prova",
+        "trechos"
+      ],
+      "qualityFlags": [],
+      "candidateTypes": [
+        "Template",
+        "Workflow"
+      ],
+      "duplicates": [],
+      "similarDocuments": [],
+      "complementaryDocuments": [
+        {
+          "id": "doc_011",
+          "score": 0.088
+        }
+      ]
+    },
+    {
+      "id": "doc_023",
+      "filePath": "knowledge/sources/original/notebooklm/skills/SKILL DE REDAÇÃO JURÍDICA PARA JEC.txt",
+      "fileName": "SKILL DE REDAÇÃO JURÍDICA PARA JEC.txt",
+      "sizeBytes": 8350,
+      "sha256": "a4e1b810b6d1395ea1cb1e2001c2ba01c1f51c882929ce5f299afe6d098e0a07",
+      "areaJuridica": "Saude Suplementar Empresarial",
+      "taxonomyCategory": "skill",
+      "documentType": "guia_de_redacao_ou_skill_primitiva",
+      "mainTheme": "metodologia_redacao_contestacao",
+      "keywords": [
+        "aviso",
+        "peca",
+        "previo",
+        "coletivo",
+        "premio",
+        "complementar",
+        "inicial",
+        "tese",
+        "falso",
+        "diretriz",
+        "deve",
+        "cancelamento"
+      ],
+      "qualityFlags": [],
+      "candidateTypes": [
+        "Skill",
+        "Workflow"
+      ],
+      "duplicates": [],
+      "similarDocuments": [
+        {
+          "id": "doc_024",
+          "score": 0.423
+        }
+      ],
+      "complementaryDocuments": []
+    },
+    {
+      "id": "doc_024",
+      "filePath": "knowledge/sources/original/notebooklm/skills/SKILL DE REDAÇÃO JURÍDICA PARA JUSTIÇA COMUM.txt",
+      "fileName": "SKILL DE REDAÇÃO JURÍDICA PARA JUSTIÇA COMUM.txt",
+      "sizeBytes": 8400,
+      "sha256": "08f5145f5b880cf487fe413d861604a6d0bec476647ca21007d919acdf1c736c",
+      "areaJuridica": "Saude Suplementar Empresarial",
+      "taxonomyCategory": "skill",
+      "documentType": "guia_de_redacao_ou_skill_primitiva",
+      "mainTheme": "metodologia_redacao_contestacao",
+      "keywords": [
+        "prova",
+        "peca",
+        "onus",
+        "justica",
+        "aviso",
+        "termos",
+        "deve",
+        "autora",
+        "diretriz",
+        "previo",
+        "coletivo",
+        "premio"
+      ],
+      "qualityFlags": [],
+      "candidateTypes": [
+        "Skill",
+        "Workflow"
+      ],
+      "duplicates": [],
+      "similarDocuments": [
+        {
+          "id": "doc_023",
+          "score": 0.423
+        }
+      ],
+      "complementaryDocuments": []
+    },
+    {
+      "id": "doc_025",
+      "filePath": "knowledge/sources/original/notebooklm/skills/SKILL.txt",
+      "fileName": "SKILL.txt",
+      "sizeBytes": 16911,
+      "sha256": "5d3d125373ac62daadb7dbb1c7bb02e149251882bd221219323823ed4af96f35",
+      "areaJuridica": "Contencioso Civel e Consumidor",
+      "taxonomyCategory": "skill",
+      "documentType": "guia_de_redacao_ou_skill_primitiva",
+      "mainTheme": "metodologia_redacao_contestacao",
+      "keywords": [
+        "comando",
+        "deve",
+        "devera",
+        "teses",
+        "preliminares",
+        "apos",
+        "apenas",
+        "merito",
+        "posso",
+        "prosseguir",
+        "topico",
+        "responder"
+      ],
+      "qualityFlags": [],
+      "candidateTypes": [
+        "Skill",
+        "Workflow"
+      ],
+      "duplicates": [],
+      "similarDocuments": [],
+      "complementaryDocuments": []
+    }
+  ],
+  "duplicateGroups": [
+    {
+      "hash": "9478ac3ef61ae9df286d951edbfce4c24049f65e860f053ed9eb2c3fbd78d051",
+      "documents": [
+        "doc_005",
+        "doc_015",
+        "doc_017"
+      ]
+    },
+    {
+      "hash": "2e9faebbd47a57f8d00d2f73a2e412bbf5353a95a112f2278b24f69ee5d14b62",
+      "documents": [
+        "doc_013",
+        "doc_014",
+        "doc_016"
+      ]
+    }
+  ],
+  "similarDocuments": [
+    {
+      "docA": "doc_023",
+      "docB": "doc_024",
+      "score": 0.423
+    }
+  ],
+  "complementaryDocuments": [
+    {
+      "docA": "doc_001",
+      "docB": "doc_009",
+      "reason": "Tema compartilhado (reajuste_anual_falso_coletivo_produto_557) com categorias distintas",
+      "score": 0.102
+    },
+    {
+      "docA": "doc_001",
+      "docB": "doc_011",
+      "reason": "Tema compartilhado (reajuste_anual_falso_coletivo_produto_557) com categorias distintas",
+      "score": 0.087
+    },
+    {
+      "docA": "doc_001",
+      "docB": "doc_018",
+      "reason": "Tema compartilhado (reajuste_anual_falso_coletivo_produto_557) com categorias distintas",
+      "score": 0.107
+    },
+    {
+      "docA": "doc_001",
+      "docB": "doc_021",
+      "reason": "Tema compartilhado (reajuste_anual_falso_coletivo_produto_557) com categorias distintas",
+      "score": 0.158
+    },
+    {
+      "docA": "doc_009",
+      "docB": "doc_011",
+      "reason": "Tema compartilhado (reajuste_anual_falso_coletivo_produto_557) com categorias distintas",
+      "score": 0.251
+    },
+    {
+      "docA": "doc_011",
+      "docB": "doc_018",
+      "reason": "Tema compartilhado (reajuste_anual_falso_coletivo_produto_557) com categorias distintas",
+      "score": 0.122
+    },
+    {
+      "docA": "doc_011",
+      "docB": "doc_021",
+      "reason": "Tema compartilhado (reajuste_anual_falso_coletivo_produto_557) com categorias distintas",
+      "score": 0.116
+    },
+    {
+      "docA": "doc_011",
+      "docB": "doc_022",
+      "reason": "Tema compartilhado (reajuste_anual_falso_coletivo_produto_557) com categorias distintas",
+      "score": 0.088
+    }
+  ],
+  "migrationCandidates": [
+    {
+      "id": "cand_01",
+      "name": "Skill de Contestacao de Reajuste Anual (Falso Coletivo Produto 557)",
+      "candidateType": "Skill",
+      "evidence": [
+        "doc_001",
+        "doc_004",
+        "doc_005",
+        "doc_006",
+        "doc_007",
+        "doc_008",
+        "doc_009",
+        "doc_011",
+        "doc_016",
+        "doc_017",
+        "doc_018",
+        "doc_021",
+        "doc_022",
+        "doc_023"
+      ],
+      "completeness": 5,
+      "reusability": 5,
+      "operationalValue": 5,
+      "externalDependency": 2,
+      "weightedScore": 4.85,
+      "migrationPriority": "Alta prioridade"
+    },
+    {
+      "id": "cand_02",
+      "name": "Workflow de Montagem Defensiva (doutrina + jurisprudencia + mapa + modelo)",
+      "candidateType": "Workflow",
+      "evidence": [
+        "doc_001",
+        "doc_003",
+        "doc_004",
+        "doc_005",
+        "doc_006",
+        "doc_007",
+        "doc_008",
+        "doc_009",
+        "doc_010",
+        "doc_011",
+        "doc_012",
+        "doc_013",
+        "doc_014",
+        "doc_015",
+        "doc_016",
+        "doc_018"
+      ],
+      "completeness": 4,
+      "reusability": 5,
+      "operationalValue": 4,
+      "externalDependency": 3,
+      "weightedScore": 4.1,
+      "migrationPriority": "Media prioridade"
+    },
+    {
+      "id": "cand_03",
+      "name": "Mapa de Aderencia de Teses para reajuste anual",
+      "candidateType": "Mapa de Teses",
+      "evidence": [
+        "doc_020"
+      ],
+      "completeness": 4,
+      "reusability": 4,
+      "operationalValue": 4,
+      "externalDependency": 1,
+      "weightedScore": 4.15,
+      "migrationPriority": "Media prioridade"
+    },
+    {
+      "id": "cand_04",
+      "name": "Template de Contestacao de Reajuste SulAmerica",
+      "candidateType": "Template",
+      "evidence": [
+        "doc_009",
+        "doc_018",
+        "doc_021",
+        "doc_022"
+      ],
+      "completeness": 4,
+      "reusability": 5,
+      "operationalValue": 5,
+      "externalDependency": 1,
+      "weightedScore": 4.7,
+      "migrationPriority": "Alta prioridade"
+    },
+    {
+      "id": "cand_05",
+      "name": "Knowledge Objects de Jurisprudencia por tese",
+      "candidateType": "Knowledge Object",
+      "evidence": [
+        "doc_003",
+        "doc_004",
+        "doc_005",
+        "doc_006",
+        "doc_007",
+        "doc_008",
+        "doc_010",
+        "doc_011",
+        "doc_012",
+        "doc_013",
+        "doc_014",
+        "doc_015",
+        "doc_016"
+      ],
+      "completeness": 4,
+      "reusability": 4,
+      "operationalValue": 4,
+      "externalDependency": 1,
+      "weightedScore": 4.15,
+      "migrationPriority": "Media prioridade"
+    }
+  ],
+  "selectedMvpSkill": {
+    "id": "cand_01",
+    "name": "Skill de Contestacao de Reajuste Anual (Falso Coletivo Produto 557)",
+    "rationale": {
+      "completeness": "Combina modelos de contestacao, mapa de teses, doutrina, extratos atuariais, laudos e jurisprudencia correlata.",
+      "reusability": "Reaplicavel em litigios repetitivos de reajuste anual com mesma estrutura argumentativa.",
+      "operationalValue": "Impacta diretamente o fluxo fim-a-fim de geracao de peca e defesa de maior recorrencia no acervo.",
+      "lowExternalDependency": "Depende majoritariamente de acervo interno consolidado, com baixa necessidade de fontes externas adicionais."
+    }
+  }
+}

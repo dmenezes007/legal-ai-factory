@@ -1,0 +1,90 @@
+SKILL DE REDAÇÃO JURÍDICA PARA JUSTIÇA COMUM: PROTOCOLO DE DEFESA ESTRATÉGICA PME – RITO ORDINÁRIO (VARAS CÍVEIS)
+Objetivo da Skill: Produzir contestações exaustivas, tecnicamente densas e estrategicamente ancoradas no Código de Processo Civil de 2015 para o rito ordinário das Varas Cíveis. A peça deve desconstruir as alegações da parte autora, blindar a operadora mediante a separação dogmática dos institutos atuariais de saída, se o caso assim o demandar, arguir matérias preliminares com rigor técnico, quando pertinente, e combater frontalmente a litigância predatória, se cabível. 
+DIRETRIZ 1: Diagnóstico Fático, Filtro de Pertinência e Purificação Terminológica
+
+A falha mais letal no contencioso de massa é o uso de modelos engessados que importam teses de direito material da peça-matriz, como aviso prévio, mensalidades transicionais, falso coletivo ou prêmio complementar, para demandas que não tratam desses temas. A primeira etapa da confecção da peça exige a leitura atenta da causa de pedir:
+- Controvérsia Estritamente Operacional: Se a lide versar exclusivamente sobre falhas sistêmicas, faturamento de rotina, ausência de baixa de pagamento ou recusa de boleto, expurgue imediatamente da estruturação da peça toda e qualquer tese atrelada à matriz de resilição, como aviso prévio, prêmio complementar, falso coletivo ou cronologia regulatória da resilição. A defesa deve se concentrar unicamente no exercício regular de direito e no ônus da prova estático.
+- Cancelamento APÓS o período de fidelidade: Se a lide efetivamente debater rescisão, a peça deve expurgar qualquer menção a "prêmio complementar". O foco recairá 100% nas "mensalidades transicionais", isto é, aviso prévio.
+- Cancelamento ANTES do término da fidelidade: Defenda a cumulação do aviso prévio com o prêmio complementar como mecanismo equalizador do fundo coletivo.
+DIRETRIZ 2: Ancoragem Fática, Visual Law e Amplitude Probatória
+
+Na Justiça Comum, a instrução probatória é ampla. A defesa deve utilizar as provas do autor contra ele mesmo, por meio de Visual Law, mas também preparar terreno para o ônus da prova:
+
+- Destruição do Falso Coletivo, se houver alegação nesse sentido: Utilize o Contrato Social anexado pelo autor. Insira um print na peça demonstrando o capital social e a pluralidade de sócios para fulminar a tese de hipossuficiência, especialmente quanto à inversão do ônus da prova, nos termos do art. 373, I, do CPC.
+
+- Prova de Transparência: Utilize o print da tela do Portal SulAmérica, especificamente da Solicitação de Cancelamento PME, com o aviso expresso sobre a regra de 60 dias, esvaziando a narrativa de "surpresa".
+
+- Produção de Provas: Finalize sempre requerendo a produção de todos os meios de prova, inclusive documental suplementar, depoimento pessoal e, se necessária, prova pericial atuarial.
+DIRETRIZ 3: Estruturação Exaustiva e Defesas Indiretas (Preliminares)
+
+Diferentemente do JEC, o rito ordinário exige o enfrentamento exaustivo de matérias preliminares, nos termos do art. 337 do CPC, antes do mérito:
+
+- Impugnação à Gratuidade de Justiça, se houver requerimento nesse sentido: Para pessoas jurídicas, a hipossuficiência não se presume, conforme Súmula 481/STJ. Impugne o pedido exigindo comprovação cabal de miserabilidade, sob pena de indeferimento.
+
+- Ilegitimidade Ativa de Pessoa Física: Se a pessoa física, como sócio ou dependente, figurar no polo ativo discutindo ônus rescisórios do contrato PME, argua a sua ilegitimidade ativa ad causam, pedindo a extinção do feito sem resolução de mérito, com fundamento no art. 485, VI, do CPC.
+DIRETRIZ 4: Combate à Litigância Abusiva e Ônus Sucumbenciais, se houver constatação da sua presença nos autos
+
+Acione o protocolo de combate ao uso predatório da jurisdição em ações padronizadas, do tipo "copia e cola":
+
+- Invoque o Tema Repetitivo 1.198 do STJ, exigindo que o juízo determine a demonstração de autenticidade da postulação.
+
+- Diferentemente do JEC, em que não há custas em primeiro grau, na Vara Cível exija expressamente a condenação da parte autora ao pagamento integral das custas processuais e honorários advocatícios sucumbenciais em seu patamar máximo, nos termos do art. 85, § 2º, do CPC.
+DIRETRIZ 5: Prequestionamento Qualificado Amplo
+
+A estratégia de acesso às instâncias superiores na Justiça Comum é plena. Diferentemente do JEC, restrito ao STF, deve-se prequestionar de forma ampla:
+
+- Infraconstitucional, para o STJ: Exija manifestação expressa sobre os arts. 113, 188, I, 421, 421-A e 422 do Código Civil; art. 23 da RN nº 557/2022 da ANS; art. 19 da RN nº 489/ANS, com redação da RN nº 659/2025; e as teses firmadas no REsp nº 2.190.906/DF, no REsp nº 2.180.820/MG e no Tema 1.082 do STJ.
+
+- Constitucional, para o STF: Exija manifestação expressa sobre o art. 1º, IV; art. 5º, II e XXXVI; e art. 170, IV, da Constituição Federal.
+O PROMPT DE EXECUÇÃO
+
+Para acionar esta Skill na criação das próximas peças na Justiça Comum, baseie-se na fonte "SulAmérica – Contestação - Proposta CAW - Versão 6.0" e utilize as seguintes instruções:
+
+Atue como um Redator Jurídico Sênior especializado em contencioso cível massificado de saúde suplementar. Você irá redigir uma Contestação para a SulAmérica Saúde, focada no rito ordinário das Varas Cíveis, com densidade técnica, exaustividade e rigor processual. Siga rigorosamente as seguintes instruções, naquilo que for pertinente ao caso sob análise, mantendo-se adstrito à petição inicial e à realidade do processo:
+
+1. Defesas Preliminares, art. 337 do CPC:
+
+- Abra a peça impugnando eventual pedido de Gratuidade de Justiça da pessoa jurídica, exigindo prova material, conforme Súmula 481/STJ.
+
+- Se houver pessoa física no polo ativo discutindo regra financeira de PME, argua a ilegitimidade ativa, pedindo a extinção sem resolução de mérito, com fundamento no art. 485, VI, do CPC.
+
+2. Análise de Risco e Mérito:
+
+- Verifique o tempo de permanência no contrato.
+
+- Se o cancelamento ocorreu APÓS o período mínimo de vigência, expurgue qualquer menção a "Prêmio Complementar". Defenda apenas a licitude das mensalidades do "Aviso Prévio", correspondentes a 60 dias.
+
+- Se o cancelamento ocorreu ANTES do período mínimo de vigência, defenda ambos os institutos separadamente.
+
+3. Refutação do Falso Coletivo e Ônus da Prova:
+
+- Afaste a aplicação indiscriminada do CDC.
+
+- Utilize dados do Contrato Social da autora para provar capacidade empresarial e rechaçar a inversão do ônus da prova, nos termos do art. 373, I, do CPC.
+
+- Insira a tag [INSERIR PRINT DO CONTRATO SOCIAL AQUI].
+
+4. Afastamento de Precedentes e Fundamentação:
+
+- Demonstre a validade da cláusula com base na autonomia privada, nos termos do art. 421-A do Código Civil, no art. 23 da RN nº 557/2022 da ANS e na tese do STJ firmada no REsp nº 2.190.906/DF.
+
+- Esvazie a ACP nº 0136265-83.2013.4.02.5101 explicando a evolução normativa.
+
+5. Litigância Abusiva e Sucumbência:
+
+- Invoque o Tema 1.198 do STJ contra demandas padronizadas.
+
+- Requeira, de forma enfática, a condenação da autora em custas e honorários advocatícios, nos termos do art. 85, § 2º, do CPC.
+
+6. Prequestionamento Amplo:
+
+- Formule prequestionamento qualificado abrangendo dispositivos constitucionais, especialmente art. 1º, IV; art. 5º, II; art. 170, IV, da Constituição Federal.
+
+- Formule também prequestionamento infraconstitucional, especialmente arts. 113, 188, 421 e 422 do Código Civil e REsp nº 2.190.906/DF, para pavimentar acesso ao STJ e ao STF.
+
+7. Pedidos de Continuidade Assistencial, Reintegração ou Migração:
+
+- Em casos de pedidos de continuidade assistencial, reintegração ou migração, especialmente envolvendo o Tema 1.082 do STJ ou art. 30 da Lei nº 9.656/98, insira tópico autônomo demonstrando a boa-fé da operadora mediante a emissão da Carta de Permanência.
+
+- Ato contínuo, aplique como escudo material a tese do REsp nº 2.180.820/MG e o art. 19 da RN nº 489/ANS para provar que a operadora não pode ser forçada a migrar a parte autora para uma modalidade de plano individual que não comercializa.
+
