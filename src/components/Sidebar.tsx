@@ -43,16 +43,15 @@ export default function Sidebar({
     const currentIdx = statusOrder.indexOf(activeCase.status);
 
     switch(step) {
+      case 'newcase':
+        return { label: 'Caso', bg: 'bg-emerald-950/40 text-emerald-400 border-emerald-900/30', bgDot: 'bg-emerald-500' } as any;
       case 'sources':
         if (currentIdx >= 1) return { label: 'Processado', bg: 'bg-emerald-950/40 text-emerald-400 border-emerald-900/30', bgDot: 'bg-emerald-500' } as any;
         return { label: 'Pendente', bg: 'bg-amber-950/40 text-amber-400 border-amber-900/30', bgDot: 'bg-amber-500' } as any;
-      case 'diagnostic':
-        if (currentIdx >= 2) return { label: 'Pronto', bg: 'bg-emerald-950/40 text-emerald-400 border-emerald-900/30', bgDot: 'bg-emerald-500' } as any;
+      case 'processing':
+        if (currentIdx >= 3) return { label: 'Concluido', bg: 'bg-emerald-950/40 text-emerald-400 border-emerald-900/30', bgDot: 'bg-emerald-500' } as any;
+        if (currentIdx >= 2) return { label: 'Em curso', bg: 'bg-indigo-950/40 text-indigo-400 border-indigo-900/30', bgDot: 'bg-indigo-500' } as any;
         if (currentIdx === 1) return { label: 'Gerar', bg: 'bg-amber-950/40 text-amber-400 border-amber-900/30', bgDot: 'bg-amber-500' } as any;
-        return { label: 'Aguardando', bg: 'bg-[#001D24] text-[#668288] border-[#003D4D]', bgDot: 'bg-slate-600' } as any;
-      case 'theses':
-        if (currentIdx >= 3) return { label: 'Mapeado', bg: 'bg-emerald-950/40 text-emerald-400 border-emerald-900/30', bgDot: 'bg-emerald-500' } as any;
-        if (currentIdx === 2) return { label: 'Curar', bg: 'bg-amber-950/40 text-amber-400 border-amber-900/30', bgDot: 'bg-amber-500' } as any;
         return { label: 'Aguardando', bg: 'bg-[#001D24] text-[#668288] border-[#003D4D]', bgDot: 'bg-slate-600' } as any;
       case 'architecture':
         if (currentIdx >= 4) return { label: 'Roteiro', bg: 'bg-emerald-950/40 text-emerald-400 border-emerald-900/30', bgDot: 'bg-emerald-500' } as any;
@@ -63,8 +62,12 @@ export default function Sidebar({
         if (currentIdx === 4) return { label: 'Redigir', bg: 'bg-amber-950/40 text-amber-400 border-amber-900/30', bgDot: 'bg-amber-500' } as any;
         return { label: 'Aguardando', bg: 'bg-[#001D24] text-[#668288] border-[#003D4D]', bgDot: 'bg-slate-600' } as any;
       case 'revision':
-        if (currentIdx === 6) return { label: 'Completo', bg: 'bg-emerald-950/40 text-emerald-400 border-emerald-900/30', bgDot: 'bg-emerald-500' } as any;
+        if (currentIdx === 6) return { label: 'Revisado', bg: 'bg-emerald-950/40 text-emerald-400 border-emerald-900/30', bgDot: 'bg-emerald-500' } as any;
         if (currentIdx === 5) return { label: 'Revisar', bg: 'bg-amber-950/40 text-amber-400 border-amber-900/30', bgDot: 'bg-amber-500' } as any;
+        return { label: 'Aguardando', bg: 'bg-[#001D24] text-[#668288] border-[#003D4D]', bgDot: 'bg-slate-600' } as any;
+      case 'export':
+        if (currentIdx === 6) return { label: 'Exportar', bg: 'bg-amber-950/40 text-amber-400 border-amber-900/30', bgDot: 'bg-amber-500' } as any;
+        if (currentIdx > 6) return { label: 'Concluido', bg: 'bg-emerald-950/40 text-emerald-400 border-emerald-900/30', bgDot: 'bg-emerald-500' } as any;
         return { label: 'Aguardando', bg: 'bg-[#001D24] text-[#668288] border-[#003D4D]', bgDot: 'bg-slate-600' } as any;
       default:
         return null;
@@ -73,13 +76,13 @@ export default function Sidebar({
 
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { id: 'newcase', label: 'Novo Processo', icon: PlusCircle },
-    { id: 'sources', label: '1. Fontes do Caso', icon: FolderOpen, isStep: true },
-    { id: 'diagnostic', label: '2. Diagnóstico', icon: Brain, isStep: true },
-    { id: 'theses', label: '3. Mapa de Teses', icon: Layers, isStep: true },
-    { id: 'architecture', label: '4. Roteiro / Arquitetura', icon: Scale, isStep: true },
-    { id: 'drafting', label: '5. Redação da Peça', icon: FileEdit, isStep: true },
-    { id: 'revision', label: '6. Revisão & Exportar', icon: FileCheck, isStep: true },
+    { id: 'newcase', label: '1. Novo Caso', icon: PlusCircle, isStep: true },
+    { id: 'sources', label: '2. Fontes', icon: FolderOpen, isStep: true },
+    { id: 'processing', label: '3. Processamento', icon: Brain, isStep: true },
+    { id: 'architecture', label: '4. Arquitetura da Defesa', icon: Scale, isStep: true },
+    { id: 'drafting', label: '5. Produção', icon: FileEdit, isStep: true },
+    { id: 'revision', label: '6. Revisão', icon: Layers, isStep: true },
+    { id: 'export', label: '7. Exportação', icon: FileCheck, isStep: true },
     { id: 'logs', label: 'Logs e Auditoria', icon: Activity },
   ];
 

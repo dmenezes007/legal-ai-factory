@@ -35,6 +35,16 @@ async function postJson<T>(path: string, payload: unknown): Promise<T> {
  * with real fetch requests to a server-side route running the @google/genai SDK.
  */
 export const geminiService = {
+  async autoReviewChapter(content: string): Promise<string> {
+    await delay(300);
+
+    return content
+      .replace(/\n{3,}/g, '\n\n')
+      .replace(/\s+\./g, '.')
+      .replace(/\s+,/g, ',')
+      .trim();
+  },
+
   /**
    * Simulates OCR and text extraction from uploaded PDFs, DOCX, and TXT files.
    */

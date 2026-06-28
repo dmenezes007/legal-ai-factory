@@ -40,13 +40,14 @@ export default function Drafting({
     setIsGenerating(prev => ({ ...prev, [item.id]: true }));
     try {
       const result = await geminiService.draftChapter(activeCase, item, selectedTheses);
+      const reviewedContent = await geminiService.autoReviewChapter(result.draftedContent);
       
       const updated = outline.map(o => {
         if (o.id === item.id) {
           return {
             ...o,
-            content: result.draftedContent,
-            status: 'gerado' as const
+            content: reviewedContent,
+            status: 'revisado' as const
           };
         }
         return o;
@@ -142,7 +143,7 @@ export default function Drafting({
                 : 'bg-[#D4AF37] hover:bg-[#C2A02C] text-slate-950 border-[#D4AF37]/40'
             }`}
           >
-            Revisão Geral e Exportação
+            Prosseguir para Revisão
             <ArrowRight className="h-4.5 w-4.5 text-slate-950" />
           </button>
         </div>

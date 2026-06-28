@@ -21,6 +21,7 @@ interface DiagnosticProps {
   diagnostic: CaseDiagnostic | null;
   onDiagnosticGenerated: (diag: CaseDiagnostic, newLogs: any[]) => void;
   onNextStep: () => void;
+  showNextButton?: boolean;
 }
 
 export default function Diagnostic({
@@ -28,7 +29,8 @@ export default function Diagnostic({
   documents,
   diagnostic,
   onDiagnosticGenerated,
-  onNextStep
+  onNextStep,
+  showNextButton = true
 }: DiagnosticProps) {
   const [isGenerating, setIsGenerating] = useState(false);
 
@@ -87,13 +89,15 @@ export default function Diagnostic({
               <RotateCw className={`h-3.5 w-3.5 ${isGenerating ? 'animate-spin' : ''}`} />
               Refazer Análise
             </button>
-            <button
-              onClick={onNextStep}
-              className="flex items-center gap-2 bg-[#D4AF37] hover:bg-[#C2A02C] text-slate-950 px-4 py-2.5 rounded-md text-sm font-bold transition-all shadow border border-[#D4AF37]/40 cursor-pointer"
-            >
-              Mapear Teses
-              <ArrowRight className="h-4.5 w-4.5 text-slate-950" />
-            </button>
+            {showNextButton && (
+              <button
+                onClick={onNextStep}
+                className="flex items-center gap-2 bg-[#D4AF37] hover:bg-[#C2A02C] text-slate-950 px-4 py-2.5 rounded-md text-sm font-bold transition-all shadow border border-[#D4AF37]/40 cursor-pointer"
+              >
+                Mapear Teses
+                <ArrowRight className="h-4.5 w-4.5 text-slate-950" />
+              </button>
+            )}
           </div>
         ) : (
           <button

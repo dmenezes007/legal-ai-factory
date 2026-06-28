@@ -24,13 +24,17 @@ interface RevisionProps {
   outline: OutlineItem[];
   onOutlineUpdated: (updatedOutline: OutlineItem[]) => void;
   onCaseCompleted: () => void;
+  mode?: 'review' | 'export';
+  onNextStep?: () => void;
 }
 
 export default function Revision({
   activeCase,
   outline,
   onOutlineUpdated,
-  onCaseCompleted
+  onCaseCompleted,
+  mode = 'review',
+  onNextStep
 }: RevisionProps) {
   const [version, setVersion] = useState('1.0');
   const [isExporting, setIsExporting] = useState<string | null>(null);
@@ -144,11 +148,24 @@ export default function Revision({
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-5">
         <div>
-          <h2 className="text-2xl font-sans font-bold text-slate-900 tracking-tight">Revisão e Exportação Final</h2>
+          <h2 className="text-2xl font-sans font-bold text-slate-900 tracking-tight">
+            {mode === 'review' ? 'Revisão Final da Contestação' : 'Exportação Final'}
+          </h2>
           <p className="text-sm text-slate-500">
-            Aprecie a peça unificada em formato de página de petição física. Baixe o arquivo final editável ou sincronize em nuvem.
+            {mode === 'review'
+              ? 'Revise o conteúdo consolidado e a ordem dos capítulos antes de exportar.'
+              : 'Gere o DOCX final com formatação jurídica e conclua a produção da peça.'}
           </p>
         </div>
+        {mode === 'review' && onNextStep && (
+          <button
+            onClick={onNextStep}
+            className="flex items-center gap-2 bg-[#D4AF37] hover:bg-[#C2A02C] text-slate-950 px-4 py-2.5 rounded-md text-sm font-bold transition-all shadow border border-[#D4AF37]/40 cursor-pointer"
+          >
+            Ir para Exportação
+            <ArrowRight className="h-4.5 w-4.5 text-slate-950" />
+          </button>
+        )}
       </div>
 
       {exportMessage && (
@@ -240,6 +257,7 @@ export default function Revision({
 
         {/* Right Column: Export and version control panel */}
         <div className="lg:col-span-5 space-y-6">
+          {mode === 'export' && (
           <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-5">
             <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest">Ações de Exportação</h4>
 
@@ -311,6 +329,7 @@ export default function Revision({
               </button>
             </div>
           </div>
+          )}
 
           {/* Versions and History Panel */}
           <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-4">

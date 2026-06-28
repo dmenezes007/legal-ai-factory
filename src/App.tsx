@@ -30,7 +30,7 @@ import AuditLogs from './components/AuditLogs';
 
 export default function App() {
   // Navigation active tab
-  const [activeTab, setActiveTab] = useState<string>('dashboard');
+  const [activeTab, setActiveTab] = useState<string>('newcase');
   
   // App-wide state with robust localstorage lazy hydration
   const [cases, setCases] = useState<LegalCase[]>(() => {
@@ -169,7 +169,6 @@ export default function App() {
     }
 
     setLogs(prev => [...newLogs, ...prev]);
-    setActiveTab('diagnostic');
   };
 
   // Theses mapping callback
@@ -287,7 +286,7 @@ export default function App() {
       setTheses(DEFAULT_THESES);
       setOutlines(DEFAULT_OUTLINES);
       setLogs(DEFAULT_LOGS);
-      setActiveTab('dashboard');
+      setActiveTab('newcase');
     }
   };
 
@@ -336,27 +335,29 @@ export default function App() {
               activeCase={activeCase}
               documents={activeCaseDocs}
               onDocumentsProcessed={handleDocumentsProcessed}
-              onNextStep={() => setActiveTab('diagnostic')}
+              onNextStep={() => setActiveTab('processing')}
             />
           )}
 
-          {activeTab === 'diagnostic' && activeCase && (
-            <Diagnostic 
-              activeCase={activeCase}
-              documents={activeCaseDocs}
-              diagnostic={activeCaseDiag}
-              onDiagnosticGenerated={handleDiagnosticGenerated}
-              onNextStep={() => setActiveTab('theses')}
-            />
-          )}
-
-          {activeTab === 'theses' && activeCase && (
-            <ThesesMap 
-              activeCase={activeCase}
-              theses={activeCaseTheses}
-              onThesesUpdated={handleThesesUpdated}
-              onNextStep={handleNextStepFromTheses}
-            />
+          {activeTab === 'processing' && activeCase && (
+            <div className="space-y-8">
+              <Diagnostic 
+                activeCase={activeCase}
+                documents={activeCaseDocs}
+                diagnostic={activeCaseDiag}
+                onDiagnosticGenerated={handleDiagnosticGenerated}
+                onNextStep={() => setActiveTab('processing')}
+                showNextButton={false}
+              />
+              {activeCaseDiag && (
+                <ThesesMap 
+                  activeCase={activeCase}
+                  theses={activeCaseTheses}
+                  onThesesUpdated={handleThesesUpdated}
+                  onNextStep={handleNextStepFromTheses}
+                />
+              )}
+            </div>
           )}
 
           {activeTab === 'architecture' && activeCase && (
@@ -385,6 +386,18 @@ export default function App() {
               outline={activeCaseOutline}
               onOutlineUpdated={handleOutlineDraftsUpdated}
               onCaseCompleted={handleCaseCompleted}
+              mode="review"
+              onNextStep={() => setActiveTab('export')}
+            />
+          )}
+
+          {activeTab === 'export' && activeCase && (
+            <Revision 
+              activeCase={activeCase}
+              outline={activeCaseOutline}
+              onOutlineUpdated={handleOutlineDraftsUpdated}
+              onCaseCompleted={handleCaseCompleted}
+              mode="export"
             />
           )}
 

@@ -35,19 +35,19 @@ export default function Dashboard({
   const handleOpenCase = (caseId: string, status: string) => {
     setSelectedCaseId(caseId);
     if (status === 'draft') {
-      setActiveTab('sources');
+      setActiveTab('newcase');
     } else if (status === 'processed') {
-      setActiveTab('diagnostic');
+      setActiveTab('processing');
     } else if (status === 'diagnosed') {
-      setActiveTab('theses');
+      setActiveTab('processing');
     } else if (status === 'theses_mapped') {
       setActiveTab('architecture');
     } else if (status === 'architecture_defined') {
       setActiveTab('drafting');
     } else if (status === 'drafting') {
-      setActiveTab('drafting');
-    } else {
       setActiveTab('revision');
+    } else {
+      setActiveTab('export');
     }
   };
 
@@ -176,12 +176,12 @@ export default function Dashboard({
                 cases.map((c) => {
                   const getStatusText = (status: string) => {
                     switch (status) {
-                      case 'draft': return 'Aguardando Fontes';
-                      case 'processed': return 'Fontes Ingeridas';
-                      case 'diagnosed': return 'Diagnóstico Feito';
-                      case 'theses_mapped': return 'Teses Mapeadas';
+                      case 'draft': return 'Novo Caso';
+                      case 'processed': return 'Fontes Processadas';
+                      case 'diagnosed': return 'Processamento em Andamento';
+                      case 'theses_mapped': return 'Processamento Concluído';
                       case 'architecture_defined': return 'Roteiro Definido';
-                      case 'drafting': return 'Em Redação';
+                      case 'drafting': return 'Produção Concluída';
                       case 'completed': return 'Finalizado / DOCX';
                       default: return status;
                     }
