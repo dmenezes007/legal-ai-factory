@@ -2,6 +2,7 @@ import "dotenv/config";
 import path from "node:path";
 import { promises as fs } from "node:fs";
 import express from "express";
+import { GoogleGenAI } from "@google/genai";
 import {
   draftChapter,
   generateArchitecture,
@@ -77,6 +78,10 @@ interface ExtractedCaseMetadata {
   client?: string;
   rite?: string;
   legalArea?: string;
+}
+
+function hasCriticalMetadata(meta: ExtractedCaseMetadata): boolean {
+  return Boolean(meta.number && meta.court && meta.plaintiff && meta.defendant);
 }
 
 function toPosixPath(rawPath: string): string {
@@ -171,6 +176,71 @@ function firstRegexValue(patterns: RegExp[], texts: string[]): string | undefine
   return undefined;
 }
 
+function safeJsonParse<T>(raw: string): T | null {
+  try {
+    return JSON.parse(raw) as T;
+  } catch {
+    const fenced = raw.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
+    if (!fenced || !fenced[1]) {
+      return null;
+    }
+    try {
+      return JSON.parse(fenced[1]) as T;
+    } catch {
+      return null;
+    }
+  }
+}
+
+async function extractCaseMetadataWithGemini(texts: string[]): Promise<ExtractedCaseMetadata> {
+  if (!process.env.GEMINI_API_KEY || texts.length === 0) {
+    return {};
+  }
+
+  try {
+    const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+    const model = process.env.GEMINI_MODEL?.trim() || "gemini-2.5-flash";
+    const corpus = texts.slice(0, 3).map((text, idx) => `---DOCUMENTO ${idx + 1}---\n${text.slice(0, 12000)}`).join("\n\n");
+
+    const prompt = [
+      "Extraia metadados processuais em portugues juridico a partir dos textos abaixo.",
+      "Retorne APENAS JSON valido no formato:",
+      '{"number":"","court":"","plaintiff":"","defendant":"","client":"","rite":"","legalArea":""}',
+      "Regras:",
+      "1) Se nao identificar um campo com confianca, retorne string vazia.",
+      "2) Nao invente dados.",
+      "3) number deve preferir o padrao CNJ completo quando existir.",
+      "4) court deve incluir vara/juizo/comarca quando disponivel.",
+      "5) plaintiff e defendant devem conter os nomes das partes processuais.",
+      "Textos:",
+      corpus,
+    ].join("\n");
+
+    const response = await ai.models.generateContent({
+      model,
+      contents: prompt,
+      config: { responseMimeType: "application/json" },
+    });
+
+    const parsed = safeJsonParse<ExtractedCaseMetadata>(response.text ?? "");
+    if (!parsed) {
+      return {};
+    }
+
+    return {
+      number: parsed.number?.trim() || undefined,
+      court: parsed.court?.trim() || undefined,
+      plaintiff: parsed.plaintiff?.trim() || undefined,
+      defendant: parsed.defendant?.trim() || undefined,
+      client: parsed.client?.trim() || undefined,
+      rite: parsed.rite?.trim() || undefined,
+      legalArea: parsed.legalArea?.trim() || undefined,
+    };
+  } catch {
+    return {};
+  }
+}
+
 function inferLegalAreaFromTexts(texts: string[]): string | undefined {
   const bag = texts.join("\n").toLowerCase();
   if (/trabalh|clt|reclama[çc][aã]o trabalhista/.test(bag)) {
@@ -217,18 +287,26 @@ async function extractCaseMetadataFromSummary(
     try {
       const raw = await fs.readFile(item.processedPath, "utf8");
       if (raw.trim().length > 0) {
-        texts.push(raw.slice(0, 8000));
+        texts.push(raw.slice(0, 16000));
       }
     } catch {
       // Ignora arquivos sem leitura util para metadados.
     }
   }
 
-  const number = firstRegexValue([/(\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4})/], texts);
+  const number = firstRegexValue(
+    [
+      /(\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4})/,
+      /(\d{20})/,
+      /processo\s*(?:n[ºo°.]?|numero)?\s*[:\-]?\s*(\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4})/i,
+    ],
+    texts,
+  );
   const court = firstRegexValue(
     [
       /(?:ju[ií]zo|vara|tribunal)\s*[:\-]?\s*([^\n.;]{8,180})/i,
       /((?:\d{1,2}ª?\s+vara[^\n.;]{4,180}))/i,
+      /(?:comarca|foro)\s+de\s+([^\n.;]{4,160})/i,
     ],
     texts,
   );
@@ -236,6 +314,7 @@ async function extractCaseMetadataFromSummary(
     [
       /(?:autor(?:a)?|requerente|impugnante)\s*[:\-]\s*([^\n.;]{3,140})/i,
       /proposta\s+por\s+([^\n,.;]{3,140})/i,
+      /(?:exequente|embargante|reclamante|impetrante)\s*[:\-]\s*([^\n.;]{3,140})/i,
     ],
     texts,
   );
@@ -243,6 +322,7 @@ async function extractCaseMetadataFromSummary(
     [
       /(?:r[ée]u|requerid[oa]|demandad[oa])\s*[:\-]\s*([^\n.;]{3,140})/i,
       /em\s+face\s+de\s+([^\n,.;]{3,140})/i,
+      /(?:executad[oa]|embargad[oa]|reclamad[oa]|autoridad[ea]\s+coatora)\s*[:\-]\s*([^\n.;]{3,140})/i,
     ],
     texts,
   );
@@ -250,7 +330,7 @@ async function extractCaseMetadataFromSummary(
   const rite = inferRiteFromTexts(texts);
   const legalArea = inferLegalAreaFromTexts(texts);
 
-  return {
+  const regexMetadata: ExtractedCaseMetadata = {
     number,
     court,
     plaintiff,
@@ -258,6 +338,21 @@ async function extractCaseMetadataFromSummary(
     client: defendant,
     rite,
     legalArea,
+  };
+
+  if (hasCriticalMetadata(regexMetadata)) {
+    return regexMetadata;
+  }
+
+  const aiMetadata = await extractCaseMetadataWithGemini(texts);
+  return {
+    number: regexMetadata.number || aiMetadata.number,
+    court: regexMetadata.court || aiMetadata.court,
+    plaintiff: regexMetadata.plaintiff || aiMetadata.plaintiff,
+    defendant: regexMetadata.defendant || aiMetadata.defendant,
+    client: regexMetadata.client || aiMetadata.client || aiMetadata.defendant,
+    rite: regexMetadata.rite || aiMetadata.rite,
+    legalArea: regexMetadata.legalArea || aiMetadata.legalArea,
   };
 }
 
