@@ -10,7 +10,7 @@
       "jurisprudencia",
       "txt"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   },
   {
     "id": "ko-903a7499-37f5-4d1c-ac3f-5801927ddb28",
@@ -23,7 +23,7 @@
       "skill",
       "txt"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   },
   {
     "id": "ko-3c0d9eb1-f0ca-42ca-b795-9e02edec13e3",
@@ -36,7 +36,7 @@
       "jurisprudencia",
       "txt"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   },
   {
     "id": "ko-276b7c8c-3eb4-4bdc-8a89-1f3a0195deac",
@@ -49,7 +49,7 @@
       "jurisprudencia",
       "txt"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   },
   {
     "id": "ko-8f290c28-3d7f-4bfd-b397-646c2b82c81b",
@@ -62,7 +62,7 @@
       "jurisprudencia",
       "txt"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   },
   {
     "id": "ko-58537dcf-ecdd-457c-99f9-c14a5b7a2951",
@@ -75,7 +75,7 @@
       "mapa_de_teses",
       "txt"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   },
   {
     "id": "ko-9fdf2cfd-8f10-497e-a0d1-cb96c66ccb9e",
@@ -88,7 +88,7 @@
       "mapa_de_teses",
       "txt"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   },
   {
     "id": "ko-75acb0b7-7dd0-4cf0-93eb-a19a36bc4635",
@@ -101,7 +101,7 @@
       "jurisprudencia",
       "txt"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   },
   {
     "id": "ko-7d47d7ab-4aa5-466a-bf5b-62df031dc39f",
@@ -114,7 +114,7 @@
       "documento_processual",
       "txt"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   },
   {
     "id": "ko-fcdfa88e-8186-4699-8842-594f9eb21c3e",
@@ -127,7 +127,7 @@
       "desconhecido",
       "txt"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   },
   {
     "id": "ko-57aa7c6a-a6ac-428d-b9eb-3dd3430ab3da",
@@ -140,7 +140,7 @@
       "mapa_de_teses",
       "txt"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   },
   {
     "id": "ko-7e22e7bb-d65d-41f9-8941-e5a02d1ab210",
@@ -153,20 +153,20 @@
       "modelo_peca",
       "md"
     ],
-    "updated_at": "2026-06-28T13:55:46.794Z"
+    "updated_at": "2026-06-28T14:41:15.216Z"
   },
   {
-    "id": "ko-9be226a0-75fb-4d2e-aeaa-8b664de8daa7",
-    "title": "governance-fixture-1782654943886",
+    "id": "ko-71d9cbff-12d4-4a93-a05c-4ac94d68c921",
+    "title": "governance-fixture-1782657672363",
     "type": "knowledge_source",
     "category": "modelo_peca",
-    "source_path": "knowledge/sources/original/governance-fixture-1782654943886.md",
+    "source_path": "knowledge/sources/original/governance-fixture-1782657672363.md",
     "status": "processed",
     "tags": [
       "modelo_peca",
       "md"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   },
   {
     "id": "ko-288ce268-b147-4eef-9150-41df435a6deb",
@@ -179,7 +179,7 @@
       "skill",
       "txt"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   },
   {
     "id": "ko-6bcda81b-686f-4bd0-bfdd-fc3ee46515a8",
@@ -192,7 +192,7 @@
       "desconhecido",
       "txt"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   },
   {
     "id": "ko-734cfda6-bce4-4302-bfec-4243b9b7655b",
@@ -205,7 +205,7 @@
       "skill",
       "txt"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   },
   {
     "id": "ko-bf71989e-7ced-4cf9-8cb2-514b226ad847",
@@ -218,7 +218,7 @@
       "mapa_de_teses",
       "txt"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   },
   {
     "id": "ko-17a29e28-6091-4b0e-87fe-4ac643b2d03d",
@@ -231,7 +231,7 @@
       "desconhecido",
       "txt"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   },
   {
     "id": "ko-e82b366e-e0dd-4312-94ab-10d72d1553c7",
@@ -244,7 +244,7 @@
       "mapa_de_teses",
       "txt"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   },
   {
     "id": "ko-1e322497-f35a-4e73-9399-064b861523a3",
@@ -257,7 +257,7 @@
       "desconhecido",
       "txt"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   },
   {
     "id": "ko-c6241e3f-486b-4e72-87d5-bb7cf28e93a9",
@@ -270,7 +270,7 @@
       "desconhecido",
       "txt"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   },
   {
     "id": "ko-200f197e-03f1-479d-9808-9e628e99abfe",
@@ -283,7 +283,7 @@
       "documento_processual",
       "txt"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   },
   {
     "id": "ko-14ab226e-b9f5-4feb-881a-9b74cb1c849b",
@@ -296,7 +296,7 @@
       "documento_processual",
       "txt"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   },
   {
     "id": "ko-c1c5f30f-f0ea-4d5a-bc15-e988ca6fc10e",
@@ -309,7 +309,7 @@
       "documento_processual",
       "txt"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   },
   {
     "id": "ko-73c39880-fa4d-4588-bc28-17150a89f9ee",
@@ -322,7 +322,7 @@
       "skill",
       "txt"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   },
   {
     "id": "ko-2f9a59b1-94fe-4c79-94c7-2974059caaa0",
@@ -335,7 +335,7 @@
       "skill",
       "txt"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   },
   {
     "id": "ko-4694c688-7b50-41b1-b864-8d657187a0ef",
@@ -348,6 +348,6 @@
       "skill",
       "txt"
     ],
-    "updated_at": "2026-06-28T13:55:46.795Z"
+    "updated_at": "2026-06-28T14:41:15.217Z"
   }
 ]

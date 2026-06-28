@@ -61,9 +61,9 @@
       "title": "fixture-ingestao"
     },
     {
-      "id": "ko-9be226a0-75fb-4d2e-aeaa-8b664de8daa7",
+      "id": "ko-9564ca9b-84f6-4156-96f4-6f70d59e2f5c",
       "type": "knowledge_source",
-      "title": "governance-fixture-1782654943886"
+      "title": "governance-fixture-1782657672363"
     },
     {
       "id": "ko-288ce268-b147-4eef-9150-41df435a6deb",
@@ -228,5 +228,5 @@
       "relation": "supports_workflow"
     }
   ],
-  "updated_at": "2026-06-28T13:55:46.808Z"
+  "updated_at": "2026-06-28T14:41:15.218Z"
 }

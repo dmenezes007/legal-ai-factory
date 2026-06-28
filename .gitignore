@@ -6,3 +6,7 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Generated ingestion artifacts (volatile)
+knowledge/sources/metadata/*.metadata.json
+knowledge/sources/processed/*.processed.txt

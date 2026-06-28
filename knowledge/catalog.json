@@ -5,7 +5,7 @@
     "type": "knowledge_source",
     "category": "jurisprudencia",
     "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/0085849-19.2023.8.05.0001 - RECURSO ESPECIAL N 2214841 - SP (2025.0182109-1).txt",
-    "processed_path": "knowledge/sources/processed/0085849-19.2023.8.05.0001 - RECURSO ESPECIAL N 2214841 - SP (2025.0182109-1).5a037992-240d-4304-9455-c100b7b77863.processed.txt",
+    "processed_path": "knowledge/sources/processed/0085849-19.2023.8.05.0001 - RECURSO ESPECIAL N 2214841 - SP (2025.0182109-1).f7a0e087-5192-45ab-a82b-10b0734761eb.processed.txt",
     "status": "processed",
     "tags": [
       "jurisprudencia",
@@ -14,9 +14,9 @@
     "related_skills": [],
     "related_workflows": [],
     "created_at": "2026-06-28T13:55:46.725Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "5a037992-240d-4304-9455-c100b7b77863",
+      "ingestion_id": "f7a0e087-5192-45ab-a82b-10b0734761eb",
       "source_format": ".txt",
       "extracted": true,
       "extraction_warnings": []
@@ -29,7 +29,7 @@
     "type": "knowledge_source",
     "category": "skill",
     "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Acórdão - Nº 2628808 SP - 2024 0160580-4.txt",
-    "processed_path": "knowledge/sources/processed/Acórdão - Nº 2628808 SP - 2024 0160580-4.274f371e-9bd1-453f-acd5-10716f2fb1b4.processed.txt",
+    "processed_path": "knowledge/sources/processed/Acórdão - Nº 2628808 SP - 2024 0160580-4.78e84ed5-ff14-4987-b9f6-70cf0e1f69be.processed.txt",
     "status": "processed",
     "tags": [
       "skill",
@@ -42,9 +42,9 @@
       "workflow.contestacao-saude.v1"
     ],
     "created_at": "2026-06-28T13:55:46.725Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "274f371e-9bd1-453f-acd5-10716f2fb1b4",
+      "ingestion_id": "78e84ed5-ff14-4987-b9f6-70cf0e1f69be",
       "source_format": ".txt",
       "extracted": true,
       "extraction_warnings": []
@@ -57,7 +57,7 @@
     "type": "knowledge_source",
     "category": "jurisprudencia",
     "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/ACORDAO - reforma falso coletivo - TJSE - CIV-032572.25.txt",
-    "processed_path": "knowledge/sources/processed/ACORDAO - reforma falso coletivo - TJSE - CIV-032572.25.8c6d9a51-f423-4b7a-a4df-7ed81adc259a.processed.txt",
+    "processed_path": "knowledge/sources/processed/ACORDAO - reforma falso coletivo - TJSE - CIV-032572.25.489cd84a-ed97-4c04-b204-5c9d0bdb5d96.processed.txt",
     "status": "processed",
     "tags": [
       "jurisprudencia",
@@ -66,9 +66,9 @@
     "related_skills": [],
     "related_workflows": [],
     "created_at": "2026-06-28T13:55:46.725Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "8c6d9a51-f423-4b7a-a4df-7ed81adc259a",
+      "ingestion_id": "489cd84a-ed97-4c04-b204-5c9d0bdb5d96",
       "source_format": ".txt",
       "extracted": true,
       "extraction_warnings": []
@@ -81,7 +81,7 @@
     "type": "knowledge_source",
     "category": "jurisprudencia",
     "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Acordao AI - revogacao tutela - 557 - falso coletivo - TJ SP.txt",
-    "processed_path": "knowledge/sources/processed/Acordao AI - revogacao tutela - 557 - falso coletivo - TJ SP.cf2e17e1-03fb-4c4e-a720-26fd2872b364.processed.txt",
+    "processed_path": "knowledge/sources/processed/Acordao AI - revogacao tutela - 557 - falso coletivo - TJ SP.fab333b0-9f53-40d9-bdb2-e46eac671a96.processed.txt",
     "status": "processed",
     "tags": [
       "jurisprudencia",
@@ -90,9 +90,9 @@
     "related_skills": [],
     "related_workflows": [],
     "created_at": "2026-06-28T13:55:46.725Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "cf2e17e1-03fb-4c4e-a720-26fd2872b364",
+      "ingestion_id": "fab333b0-9f53-40d9-bdb2-e46eac671a96",
       "source_format": ".txt",
       "extracted": true,
       "extraction_warnings": []
@@ -105,7 +105,7 @@
     "type": "knowledge_source",
     "category": "jurisprudencia",
     "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Acordao Apelacao - TJSP - falso coletivo - cerceamento de defesa - produto 557.txt",
-    "processed_path": "knowledge/sources/processed/Acordao Apelacao - TJSP - falso coletivo - cerceamento de defesa - produto 557.1086cecb-61a2-47bc-9a8a-216c7b2a0f4a.processed.txt",
+    "processed_path": "knowledge/sources/processed/Acordao Apelacao - TJSP - falso coletivo - cerceamento de defesa - produto 557.987c00bd-4f54-4c0f-8ab3-a374220cf3a7.processed.txt",
     "status": "processed",
     "tags": [
       "jurisprudencia",
@@ -114,9 +114,9 @@
     "related_skills": [],
     "related_workflows": [],
     "created_at": "2026-06-28T13:55:46.725Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "1086cecb-61a2-47bc-9a8a-216c7b2a0f4a",
+      "ingestion_id": "987c00bd-4f54-4c0f-8ab3-a374220cf3a7",
       "source_format": ".txt",
       "extracted": true,
       "extraction_warnings": []
@@ -129,7 +129,7 @@
     "type": "knowledge_source",
     "category": "mapa_de_teses",
     "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Acórdão do Agravo Interno - 2.008.784-SP - necessidade de pericia.txt",
-    "processed_path": "knowledge/sources/processed/Acórdão do Agravo Interno - 2.008.784-SP - necessidade de pericia.0fa2f06d-506d-4c1e-a798-c91a3ade2598.processed.txt",
+    "processed_path": "knowledge/sources/processed/Acórdão do Agravo Interno - 2.008.784-SP - necessidade de pericia.1c99c610-6c05-423b-a42a-05fb169c07e8.processed.txt",
     "status": "processed",
     "tags": [
       "mapa_de_teses",
@@ -138,9 +138,9 @@
     "related_skills": [],
     "related_workflows": [],
     "created_at": "2026-06-28T13:55:46.725Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "0fa2f06d-506d-4c1e-a798-c91a3ade2598",
+      "ingestion_id": "1c99c610-6c05-423b-a42a-05fb169c07e8",
       "source_format": ".txt",
       "extracted": true,
       "extraction_warnings": []
@@ -153,7 +153,7 @@
     "type": "knowledge_source",
     "category": "mapa_de_teses",
     "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/ACÓRDÃO RECURSO ESPECIAL Nº 2061483 - SP 2023 0087659-0.txt",
-    "processed_path": "knowledge/sources/processed/ACÓRDÃO RECURSO ESPECIAL Nº 2061483 - SP 2023 0087659-0.2c6f3b2b-3b14-410e-beb8-75140add7b7d.processed.txt",
+    "processed_path": "knowledge/sources/processed/ACÓRDÃO RECURSO ESPECIAL Nº 2061483 - SP 2023 0087659-0.0a131139-3df6-4f03-9e2a-98fa144811f3.processed.txt",
     "status": "processed",
     "tags": [
       "mapa_de_teses",
@@ -162,9 +162,9 @@
     "related_skills": [],
     "related_workflows": [],
     "created_at": "2026-06-28T13:55:46.725Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "2c6f3b2b-3b14-410e-beb8-75140add7b7d",
+      "ingestion_id": "0a131139-3df6-4f03-9e2a-98fa144811f3",
       "source_format": ".txt",
       "extracted": true,
       "extraction_warnings": []
@@ -177,7 +177,7 @@
     "type": "knowledge_source",
     "category": "jurisprudencia",
     "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Acordao Resp 1964110 SP - 2021.02971993 - produto 515 - Min Raul Araújo - reajuste anual.txt",
-    "processed_path": "knowledge/sources/processed/Acordao Resp 1964110 SP - 2021.02971993 - produto 515 - Min Raul Araújo - reajuste anual.cdbeb32f-d09a-4451-bc9c-88cd67ba2722.processed.txt",
+    "processed_path": "knowledge/sources/processed/Acordao Resp 1964110 SP - 2021.02971993 - produto 515 - Min Raul Araújo - reajuste anual.8fd31fe0-dcb1-4b9d-b3e0-e00cc3f1761f.processed.txt",
     "status": "processed",
     "tags": [
       "jurisprudencia",
@@ -186,9 +186,9 @@
     "related_skills": [],
     "related_workflows": [],
     "created_at": "2026-06-28T13:55:46.725Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "cdbeb32f-d09a-4451-bc9c-88cd67ba2722",
+      "ingestion_id": "8fd31fe0-dcb1-4b9d-b3e0-e00cc3f1761f",
       "source_format": ".txt",
       "extracted": true,
       "extraction_warnings": []
@@ -201,7 +201,7 @@
     "type": "knowledge_source",
     "category": "documento_processual",
     "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Acordão TJSP - cerceamento de defesa - falso coletivo - sentenca anulada - pericia aturial - produto 557.txt",
-    "processed_path": "knowledge/sources/processed/Acordão TJSP - cerceamento de defesa - falso coletivo - sentenca anulada - pericia aturial - produto 557.ec98ecdf-bf23-4dab-ae23-ecc406c2bb32.processed.txt",
+    "processed_path": "knowledge/sources/processed/Acordão TJSP - cerceamento de defesa - falso coletivo - sentenca anulada - pericia aturial - produto 557.204329c8-c170-4e53-9b49-94f9d17dd1c7.processed.txt",
     "status": "processed",
     "tags": [
       "documento_processual",
@@ -210,9 +210,9 @@
     "related_skills": [],
     "related_workflows": [],
     "created_at": "2026-06-28T13:55:46.725Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "ec98ecdf-bf23-4dab-ae23-ecc406c2bb32",
+      "ingestion_id": "204329c8-c170-4e53-9b49-94f9d17dd1c7",
       "source_format": ".txt",
       "extracted": true,
       "extraction_warnings": []
@@ -225,7 +225,7 @@
     "type": "knowledge_source",
     "category": "desconhecido",
     "source_path": "knowledge/sources/original/notebooklm/laudos/Antonio cordeiro produto 557 - favorável.txt",
-    "processed_path": "knowledge/sources/processed/Antonio cordeiro produto 557 - favorável.df4ad01a-56d3-4398-91f4-8a4c42b29241.processed.txt",
+    "processed_path": "knowledge/sources/processed/Antonio cordeiro produto 557 - favorável.c12ab52a-083e-4c95-8535-3a1035643461.processed.txt",
     "status": "processed",
     "tags": [
       "desconhecido",
@@ -234,9 +234,9 @@
     "related_skills": [],
     "related_workflows": [],
     "created_at": "2026-06-28T13:55:46.725Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "df4ad01a-56d3-4398-91f4-8a4c42b29241",
+      "ingestion_id": "c12ab52a-083e-4c95-8535-3a1035643461",
       "source_format": ".txt",
       "extracted": true,
       "extraction_warnings": []
@@ -249,7 +249,7 @@
     "type": "knowledge_source",
     "category": "mapa_de_teses",
     "source_path": "knowledge/sources/original/notebooklm/modelos/Aviso_Previo_Premio_Complementar_SulAmerica_Contestacao.txt",
-    "processed_path": "knowledge/sources/processed/Aviso_Previo_Premio_Complementar_SulAmerica_Contestacao.b06154db-a12f-4007-acd2-f4d3aa74aa13.processed.txt",
+    "processed_path": "knowledge/sources/processed/Aviso_Previo_Premio_Complementar_SulAmerica_Contestacao.47c710e9-f08e-4a2a-99b1-6478dd43512a.processed.txt",
     "status": "processed",
     "tags": [
       "mapa_de_teses",
@@ -262,9 +262,9 @@
       "workflow.contestacao-saude.v1"
     ],
     "created_at": "2026-06-28T13:55:46.725Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "b06154db-a12f-4007-acd2-f4d3aa74aa13",
+      "ingestion_id": "47c710e9-f08e-4a2a-99b1-6478dd43512a",
       "source_format": ".txt",
       "extracted": true,
       "extraction_warnings": []
@@ -277,7 +277,7 @@
     "type": "knowledge_source",
     "category": "modelo_peca",
     "source_path": "knowledge/sources/original/fixture-ingestao.md",
-    "processed_path": "knowledge/sources/processed/fixture-ingestao.c327b7f4-a8bb-4caf-82c9-7bf2ad75b30e.processed.txt",
+    "processed_path": "knowledge/sources/processed/fixture-ingestao.d2c2af67-1d39-4f05-8489-8a12ce6b5298.processed.txt",
     "status": "processed",
     "tags": [
       "modelo_peca",
@@ -286,9 +286,9 @@
     "related_skills": [],
     "related_workflows": [],
     "created_at": "2026-06-28T13:55:46.724Z",
-    "updated_at": "2026-06-28T13:55:46.794Z",
+    "updated_at": "2026-06-28T14:41:15.206Z",
     "provenance": {
-      "ingestion_id": "c327b7f4-a8bb-4caf-82c9-7bf2ad75b30e",
+      "ingestion_id": "d2c2af67-1d39-4f05-8489-8a12ce6b5298",
       "source_format": ".md",
       "extracted": true,
       "extraction_warnings": []
@@ -296,12 +296,12 @@
     "notes": "Fonte processada e indexada pelo pipeline local."
   },
   {
-    "id": "ko-9be226a0-75fb-4d2e-aeaa-8b664de8daa7",
-    "title": "governance-fixture-1782654943886",
+    "id": "ko-9564ca9b-84f6-4156-96f4-6f70d59e2f5c",
+    "title": "governance-fixture-1782657672363",
     "type": "knowledge_source",
     "category": "modelo_peca",
-    "source_path": "knowledge/sources/original/governance-fixture-1782654943886.md",
-    "processed_path": "knowledge/sources/processed/governance-fixture-1782654943886.a4e1df15-ee62-4e58-a49d-e4e534f1cc8d.processed.txt",
+    "source_path": "knowledge/sources/original/governance-fixture-1782657672363.md",
+    "processed_path": "knowledge/sources/processed/governance-fixture-1782657672363.7b8178e9-0bfa-4a49-a27b-a083e09e0425.processed.txt",
     "status": "processed",
     "tags": [
       "modelo_peca",
@@ -309,10 +309,10 @@
     ],
     "related_skills": [],
     "related_workflows": [],
-    "created_at": "2026-06-28T13:55:46.724Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "created_at": "2026-06-28T14:41:15.207Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "a4e1df15-ee62-4e58-a49d-e4e534f1cc8d",
+      "ingestion_id": "7b8178e9-0bfa-4a49-a27b-a083e09e0425",
       "source_format": ".md",
       "extracted": true,
       "extraction_warnings": []
@@ -325,7 +325,7 @@
     "type": "knowledge_source",
     "category": "skill",
     "source_path": "knowledge/sources/original/notebooklm/laudos/LAUDO-FAVORÁVEL-078.9823-EMPRESARIAL-PRODUTO-557-PERITA-ADELITA-ADAMS.txt",
-    "processed_path": "knowledge/sources/processed/LAUDO-FAVORÁVEL-078.9823-EMPRESARIAL-PRODUTO-557-PERITA-ADELITA-ADAMS.39802114-cc23-4165-ac8d-63cbfb1a6883.processed.txt",
+    "processed_path": "knowledge/sources/processed/LAUDO-FAVORÁVEL-078.9823-EMPRESARIAL-PRODUTO-557-PERITA-ADELITA-ADAMS.24634e4a-de56-4f78-af64-3b4e2ffed9f8.processed.txt",
     "status": "processed",
     "tags": [
       "skill",
@@ -338,9 +338,9 @@
       "workflow.contestacao-saude.v1"
     ],
     "created_at": "2026-06-28T13:55:46.725Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "39802114-cc23-4165-ac8d-63cbfb1a6883",
+      "ingestion_id": "24634e4a-de56-4f78-af64-3b4e2ffed9f8",
       "source_format": ".txt",
       "extracted": true,
       "extraction_warnings": []
@@ -353,7 +353,7 @@
     "type": "knowledge_source",
     "category": "desconhecido",
     "source_path": "knowledge/sources/original/notebooklm/laudos/Laudo-favorável-produto-557-perito-Jose-Luiz-Montelo-da-Fonseca.txt",
-    "processed_path": "knowledge/sources/processed/Laudo-favorável-produto-557-perito-Jose-Luiz-Montelo-da-Fonseca.6ef278db-c511-4141-a96d-7d65dcb02a8a.processed.txt",
+    "processed_path": "knowledge/sources/processed/Laudo-favorável-produto-557-perito-Jose-Luiz-Montelo-da-Fonseca.5b155749-d7a9-49d5-905a-c40978c1167e.processed.txt",
     "status": "processed",
     "tags": [
       "desconhecido",
@@ -362,9 +362,9 @@
     "related_skills": [],
     "related_workflows": [],
     "created_at": "2026-06-28T13:55:46.725Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "6ef278db-c511-4141-a96d-7d65dcb02a8a",
+      "ingestion_id": "5b155749-d7a9-49d5-905a-c40978c1167e",
       "source_format": ".txt",
       "extracted": true,
       "extraction_warnings": []
@@ -377,7 +377,7 @@
     "type": "knowledge_source",
     "category": "skill",
     "source_path": "knowledge/sources/original/notebooklm/mapas/MAPA_DE_ADERENCIA_DE_TESES.txt",
-    "processed_path": "knowledge/sources/processed/MAPA_DE_ADERENCIA_DE_TESES.9b8a2c4a-c9d8-49a4-b13b-05446a77e8ef.processed.txt",
+    "processed_path": "knowledge/sources/processed/MAPA_DE_ADERENCIA_DE_TESES.df44e47a-bbf2-4b56-8f78-4bf06fedb9b8.processed.txt",
     "status": "processed",
     "tags": [
       "skill",
@@ -390,9 +390,9 @@
       "workflow.contestacao-saude.v1"
     ],
     "created_at": "2026-06-28T13:55:46.725Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "9b8a2c4a-c9d8-49a4-b13b-05446a77e8ef",
+      "ingestion_id": "df44e47a-bbf2-4b56-8f78-4bf06fedb9b8",
       "source_format": ".txt",
       "extracted": true,
       "extraction_warnings": []
@@ -405,7 +405,7 @@
     "type": "knowledge_source",
     "category": "mapa_de_teses",
     "source_path": "knowledge/sources/original/notebooklm/doutrina/Reajuste_Doutrina_Validade_Contratos_Coletivos_Empresariais.txt",
-    "processed_path": "knowledge/sources/processed/Reajuste_Doutrina_Validade_Contratos_Coletivos_Empresariais.e9b5c112-1159-4837-8286-f9f0179e9c87.processed.txt",
+    "processed_path": "knowledge/sources/processed/Reajuste_Doutrina_Validade_Contratos_Coletivos_Empresariais.defc2f44-efe7-4480-ad4d-24ecf0a6e72a.processed.txt",
     "status": "processed",
     "tags": [
       "mapa_de_teses",
@@ -414,9 +414,9 @@
     "related_skills": [],
     "related_workflows": [],
     "created_at": "2026-06-28T13:55:46.725Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "e9b5c112-1159-4837-8286-f9f0179e9c87",
+      "ingestion_id": "defc2f44-efe7-4480-ad4d-24ecf0a6e72a",
       "source_format": ".txt",
       "extracted": true,
       "extraction_warnings": []
@@ -429,7 +429,7 @@
     "type": "knowledge_source",
     "category": "desconhecido",
     "source_path": "knowledge/sources/original/notebooklm/extratos/Reajuste_Extratos_Pormenorizados_PME_2014_2025.txt",
-    "processed_path": "knowledge/sources/processed/Reajuste_Extratos_Pormenorizados_PME_2014_2025.8c8e38cf-d43d-4111-90e2-c7180865ef27.processed.txt",
+    "processed_path": "knowledge/sources/processed/Reajuste_Extratos_Pormenorizados_PME_2014_2025.07a3d1be-7330-42fe-882d-9767d2fed25c.processed.txt",
     "status": "processed",
     "tags": [
       "desconhecido",
@@ -438,9 +438,9 @@
     "related_skills": [],
     "related_workflows": [],
     "created_at": "2026-06-28T13:55:46.725Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "8c8e38cf-d43d-4111-90e2-c7180865ef27",
+      "ingestion_id": "07a3d1be-7330-42fe-882d-9767d2fed25c",
       "source_format": ".txt",
       "extracted": true,
       "extraction_warnings": []
@@ -453,7 +453,7 @@
     "type": "knowledge_source",
     "category": "mapa_de_teses",
     "source_path": "knowledge/sources/original/notebooklm/modelos/Reajuste_SulAmerica_Contestacao.txt",
-    "processed_path": "knowledge/sources/processed/Reajuste_SulAmerica_Contestacao.0c452502-3efc-493e-9b4b-d224a1d31865.processed.txt",
+    "processed_path": "knowledge/sources/processed/Reajuste_SulAmerica_Contestacao.8ce22d0d-9d00-481c-9ea0-9a62feeb527f.processed.txt",
     "status": "processed",
     "tags": [
       "mapa_de_teses",
@@ -466,9 +466,9 @@
       "workflow.contestacao-saude.v1"
     ],
     "created_at": "2026-06-28T13:55:46.725Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "0c452502-3efc-493e-9b4b-d224a1d31865",
+      "ingestion_id": "8ce22d0d-9d00-481c-9ea0-9a62feeb527f",
       "source_format": ".txt",
       "extracted": true,
       "extraction_warnings": []
@@ -481,7 +481,7 @@
     "type": "knowledge_source",
     "category": "desconhecido",
     "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Sentença-–-TJSP-–-557-–-falso-coletivo-reajustes-devidos-anual.txt",
-    "processed_path": "knowledge/sources/processed/Sentença-–-TJSP-–-557-–-falso-coletivo-reajustes-devidos-anual.1425267d-6324-45aa-94c4-f3b9c11d2342.processed.txt",
+    "processed_path": "knowledge/sources/processed/Sentença-–-TJSP-–-557-–-falso-coletivo-reajustes-devidos-anual.bdbbbd6b-815c-44d7-97e1-a10a85b37e55.processed.txt",
     "status": "processed",
     "tags": [
       "desconhecido",
@@ -490,9 +490,9 @@
     "related_skills": [],
     "related_workflows": [],
     "created_at": "2026-06-28T13:55:46.725Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "1425267d-6324-45aa-94c4-f3b9c11d2342",
+      "ingestion_id": "bdbbbd6b-815c-44d7-97e1-a10a85b37e55",
       "source_format": ".txt",
       "extracted": true,
       "extraction_warnings": []
@@ -505,7 +505,7 @@
     "type": "knowledge_source",
     "category": "desconhecido",
     "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/SENTENÇA-DE-IMPROCEDÊNCIA-4001635-55.2026.8.26.0577-anual-falso-coletivo-produto-557-TJSP.txt",
-    "processed_path": "knowledge/sources/processed/SENTENÇA-DE-IMPROCEDÊNCIA-4001635-55.2026.8.26.0577-anual-falso-coletivo-produto-557-TJSP.a28c9930-8c73-4a91-881f-180249391c5a.processed.txt",
+    "processed_path": "knowledge/sources/processed/SENTENÇA-DE-IMPROCEDÊNCIA-4001635-55.2026.8.26.0577-anual-falso-coletivo-produto-557-TJSP.c7f09fde-fc24-41a9-a5c2-d9e1c64d99c3.processed.txt",
     "status": "processed",
     "tags": [
       "desconhecido",
@@ -514,9 +514,9 @@
     "related_skills": [],
     "related_workflows": [],
     "created_at": "2026-06-28T13:55:46.725Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "a28c9930-8c73-4a91-881f-180249391c5a",
+      "ingestion_id": "c7f09fde-fc24-41a9-a5c2-d9e1c64d99c3",
       "source_format": ".txt",
       "extracted": true,
       "extraction_warnings": []
@@ -529,7 +529,7 @@
     "type": "knowledge_source",
     "category": "documento_processual",
     "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Sentenca-improcedente-557-faixa-etaria-pericia-in-loco-tjsp.txt",
-    "processed_path": "knowledge/sources/processed/Sentenca-improcedente-557-faixa-etaria-pericia-in-loco-tjsp.c567f62d-c17b-49f2-82ef-8ce4676eb699.processed.txt",
+    "processed_path": "knowledge/sources/processed/Sentenca-improcedente-557-faixa-etaria-pericia-in-loco-tjsp.8644f55e-3986-4256-94a7-6ad17e62a41a.processed.txt",
     "status": "processed",
     "tags": [
       "documento_processual",
@@ -538,9 +538,9 @@
     "related_skills": [],
     "related_workflows": [],
     "created_at": "2026-06-28T13:55:46.725Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "c567f62d-c17b-49f2-82ef-8ce4676eb699",
+      "ingestion_id": "8644f55e-3986-4256-94a7-6ad17e62a41a",
       "source_format": ".txt",
       "extracted": true,
       "extraction_warnings": []
@@ -553,7 +553,7 @@
     "type": "knowledge_source",
     "category": "documento_processual",
     "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Sentenca-improcedente-Suzano-TJ-SP-produto-557-base-atuarial-idonea-nucleo-4.0.txt",
-    "processed_path": "knowledge/sources/processed/Sentenca-improcedente-Suzano-TJ-SP-produto-557-base-atuarial-idonea-nucleo-4.0.afcb4d21-9ac6-4de9-bc37-290ef04bdef7.processed.txt",
+    "processed_path": "knowledge/sources/processed/Sentenca-improcedente-Suzano-TJ-SP-produto-557-base-atuarial-idonea-nucleo-4.0.93103aa6-7f5e-4dd1-bb07-1773d866d816.processed.txt",
     "status": "processed",
     "tags": [
       "documento_processual",
@@ -562,9 +562,9 @@
     "related_skills": [],
     "related_workflows": [],
     "created_at": "2026-06-28T13:55:46.725Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "afcb4d21-9ac6-4de9-bc37-290ef04bdef7",
+      "ingestion_id": "93103aa6-7f5e-4dd1-bb07-1773d866d816",
       "source_format": ".txt",
       "extracted": true,
       "extraction_warnings": []
@@ -577,7 +577,7 @@
     "type": "knowledge_source",
     "category": "documento_processual",
     "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Sentenca-TJSP-anual-falso-coletivo-produto-557-sem-pericia.txt",
-    "processed_path": "knowledge/sources/processed/Sentenca-TJSP-anual-falso-coletivo-produto-557-sem-pericia.13c95f7d-f393-4688-bfaa-9895b6abba3b.processed.txt",
+    "processed_path": "knowledge/sources/processed/Sentenca-TJSP-anual-falso-coletivo-produto-557-sem-pericia.95a3d6ff-0036-4b24-bbd3-2724856a2e1f.processed.txt",
     "status": "processed",
     "tags": [
       "documento_processual",
@@ -586,9 +586,9 @@
     "related_skills": [],
     "related_workflows": [],
     "created_at": "2026-06-28T13:55:46.725Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "13c95f7d-f393-4688-bfaa-9895b6abba3b",
+      "ingestion_id": "95a3d6ff-0036-4b24-bbd3-2724856a2e1f",
       "source_format": ".txt",
       "extracted": true,
       "extraction_warnings": []
@@ -601,7 +601,7 @@
     "type": "knowledge_source",
     "category": "skill",
     "source_path": "knowledge/sources/original/notebooklm/skills/SKILL.txt",
-    "processed_path": "knowledge/sources/processed/SKILL.0ff7fbf7-45fd-4cce-91fd-1eca09ff2167.processed.txt",
+    "processed_path": "knowledge/sources/processed/SKILL.5301da18-9561-40a8-8c68-5c722251c28e.processed.txt",
     "status": "processed",
     "tags": [
       "skill",
@@ -614,9 +614,9 @@
       "workflow.contestacao-saude.v1"
     ],
     "created_at": "2026-06-28T13:55:46.725Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "0ff7fbf7-45fd-4cce-91fd-1eca09ff2167",
+      "ingestion_id": "5301da18-9561-40a8-8c68-5c722251c28e",
       "source_format": ".txt",
       "extracted": true,
       "extraction_warnings": []
@@ -629,7 +629,7 @@
     "type": "knowledge_source",
     "category": "skill",
     "source_path": "knowledge/sources/original/notebooklm/skills/SKILL DE REDAÇÃO JURÍDICA PARA JEC.txt",
-    "processed_path": "knowledge/sources/processed/SKILL DE REDAÇÃO JURÍDICA PARA JEC.74f485e6-b5af-498f-a9bf-52b855355616.processed.txt",
+    "processed_path": "knowledge/sources/processed/SKILL DE REDAÇÃO JURÍDICA PARA JEC.9ef3abc0-23ea-46cc-8ca3-912bad9c34dc.processed.txt",
     "status": "processed",
     "tags": [
       "skill",
@@ -642,9 +642,9 @@
       "workflow.contestacao-saude.v1"
     ],
     "created_at": "2026-06-28T13:55:46.725Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "74f485e6-b5af-498f-a9bf-52b855355616",
+      "ingestion_id": "9ef3abc0-23ea-46cc-8ca3-912bad9c34dc",
       "source_format": ".txt",
       "extracted": true,
       "extraction_warnings": []
@@ -657,7 +657,7 @@
     "type": "knowledge_source",
     "category": "skill",
     "source_path": "knowledge/sources/original/notebooklm/skills/SKILL DE REDAÇÃO JURÍDICA PARA JUSTIÇA COMUM.txt",
-    "processed_path": "knowledge/sources/processed/SKILL DE REDAÇÃO JURÍDICA PARA JUSTIÇA COMUM.ddbc2af7-4c9a-4651-a7db-e6e5593ee0d2.processed.txt",
+    "processed_path": "knowledge/sources/processed/SKILL DE REDAÇÃO JURÍDICA PARA JUSTIÇA COMUM.88900907-7b77-4cca-bd91-ef23d2d1200a.processed.txt",
     "status": "processed",
     "tags": [
       "skill",
@@ -670,9 +670,9 @@
       "workflow.contestacao-saude.v1"
     ],
     "created_at": "2026-06-28T13:55:46.725Z",
-    "updated_at": "2026-06-28T13:55:46.795Z",
+    "updated_at": "2026-06-28T14:41:15.207Z",
     "provenance": {
-      "ingestion_id": "ddbc2af7-4c9a-4651-a7db-e6e5593ee0d2",
+      "ingestion_id": "88900907-7b77-4cca-bd91-ef23d2d1200a",
       "source_format": ".txt",
       "extracted": true,
       "extraction_warnings": []
