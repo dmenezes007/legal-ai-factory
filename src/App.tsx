@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  DEFAULT_CASES, 
-  DEFAULT_DOCUMENTS, 
-  DEFAULT_DIAGNOSTICS, 
-  DEFAULT_THESES, 
-  DEFAULT_OUTLINES, 
-  DEFAULT_LOGS 
-} from './data/mockData';
-import { 
   LegalCase, 
   CaseDocument, 
   CaseDiagnostic, 
@@ -28,49 +20,73 @@ import Drafting from './components/Drafting';
 import Revision from './components/Revision';
 import AuditLogs from './components/AuditLogs';
 
+const LEGACY_DEMO_CASE_IDS = new Set(['case_1', 'case_2']);
+
+function isLegacyDemoCase(entry: { id: string; defendant?: string; client?: string }): boolean {
+  if (LEGACY_DEMO_CASE_IDS.has(entry.id)) {
+    return true;
+  }
+
+  return entry.defendant === 'AeroBrasil Linhas Aéreas S/A'
+    || entry.defendant === 'TechSoluções Serviços S/A'
+    || entry.client === 'AeroBrasil Linhas Aéreas S/A'
+    || entry.client === 'TechSoluções Serviços S/A';
+}
+
+function parseStoredJson<T>(key: string, fallback: T): T {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? (JSON.parse(raw) as T) : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
 export default function App() {
   // Navigation active tab
   const [activeTab, setActiveTab] = useState<string>('newcase');
   
   // App-wide state with robust localstorage lazy hydration
   const [cases, setCases] = useState<LegalCase[]>(() => {
-    const saved = localStorage.getItem('legal_ai_cases');
-    return saved ? JSON.parse(saved) : DEFAULT_CASES;
+    const storedCases = parseStoredJson<LegalCase[]>('legal_ai_cases', []);
+    return storedCases.filter((entry) => !isLegacyDemoCase(entry));
   });
 
   const [selectedCaseId, setSelectedCaseId] = useState<string | null>(() => {
-    const saved = localStorage.getItem('legal_ai_active_case_id');
-    return saved ? JSON.parse(saved) : 'case_1';
+    const storedCases = parseStoredJson<LegalCase[]>('legal_ai_cases', []).filter((entry) => !isLegacyDemoCase(entry));
+    const saved = parseStoredJson<string | null>('legal_ai_active_case_id', null);
+    const selectedExists = typeof saved === 'string' && storedCases.some((entry) => entry.id === saved);
+    return selectedExists ? saved : null;
   });
 
   const [documents, setDocuments] = useState<CaseDocument[]>(() => {
-    const saved = localStorage.getItem('legal_ai_documents');
-    return saved ? JSON.parse(saved) : DEFAULT_DOCUMENTS;
+    const storedDocs = parseStoredJson<CaseDocument[]>('legal_ai_documents', []);
+    return storedDocs.filter((entry) => !LEGACY_DEMO_CASE_IDS.has(entry.caseId));
   });
 
   const [diagnostics, setDiagnostics] = useState<Record<string, CaseDiagnostic>>(() => {
-    const saved = localStorage.getItem('legal_ai_diagnostics');
-    return saved ? JSON.parse(saved) : DEFAULT_DIAGNOSTICS;
+    const stored = parseStoredJson<Record<string, CaseDiagnostic>>('legal_ai_diagnostics', {});
+    return Object.fromEntries(Object.entries(stored).filter(([key]) => !LEGACY_DEMO_CASE_IDS.has(key)));
   });
 
   const [theses, setTheses] = useState<LegalThesis[]>(() => {
-    const saved = localStorage.getItem('legal_ai_theses');
-    return saved ? JSON.parse(saved) : DEFAULT_THESES;
+    const stored = parseStoredJson<LegalThesis[]>('legal_ai_theses', []);
+    return stored.filter((entry) => !LEGACY_DEMO_CASE_IDS.has(entry.caseId));
   });
 
   const [outlines, setOutlines] = useState<Record<string, OutlineItem[]>>(() => {
-    const saved = localStorage.getItem('legal_ai_outlines');
-    return saved ? JSON.parse(saved) : DEFAULT_OUTLINES;
+    const stored = parseStoredJson<Record<string, OutlineItem[]>>('legal_ai_outlines', {});
+    return Object.fromEntries(Object.entries(stored).filter(([key]) => !LEGACY_DEMO_CASE_IDS.has(key)));
   });
 
   const [logs, setLogs] = useState<AuditLog[]>(() => {
-    const saved = localStorage.getItem('legal_ai_logs');
-    return saved ? JSON.parse(saved) : DEFAULT_LOGS;
+    const stored = parseStoredJson<AuditLog[]>('legal_ai_logs', []);
+    return stored.filter((entry) => !LEGACY_DEMO_CASE_IDS.has(entry.caseId));
   });
 
   const [integrationMode, setIntegrationMode] = useState<'simulado' | 'real'>(() => {
-    const saved = localStorage.getItem('legal_ai_integration_mode');
-    return saved ? (JSON.parse(saved) as any) : 'simulado';
+    const saved = parseStoredJson<'simulado' | 'real'>('legal_ai_integration_mode', 'simulado');
+    return saved === 'real' ? 'real' : 'simulado';
   });
 
   // Sync state changes to localstorage to avoid state loss
@@ -279,13 +295,13 @@ export default function App() {
   const handleResetApp = () => {
     if (window.confirm('Deseja resetar o banco de dados da sandbox para as configurações padrão? Todos os seus novos dados salvos serão apagados.')) {
       localStorage.clear();
-      setCases(DEFAULT_CASES);
-      setSelectedCaseId('case_1');
-      setDocuments(DEFAULT_DOCUMENTS);
-      setDiagnostics(DEFAULT_DIAGNOSTICS);
-      setTheses(DEFAULT_THESES);
-      setOutlines(DEFAULT_OUTLINES);
-      setLogs(DEFAULT_LOGS);
+      setCases([]);
+      setSelectedCaseId(null);
+      setDocuments([]);
+      setDiagnostics({});
+      setTheses([]);
+      setOutlines({});
+      setLogs([]);
       setActiveTab('newcase');
     }
   };

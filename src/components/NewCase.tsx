@@ -2,10 +2,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import { 
   Scale, 
   Upload, 
-  Link, 
   Folder, 
   HelpCircle, 
-  Plus, 
   FileText, 
   Check, 
   Sparkles,
@@ -45,12 +43,20 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
   const [observations, setObservations] = useState('');
   
   // Storage source option
-  const [driveLink, setDriveLink] = useState('');
   const [localFolder, setLocalFolder] = useState('');
-  const [storageType, setStorageType] = useState<'upload' | 'drive' | 'local'>('upload');
+  const [storageType, setStorageType] = useState<'upload' | 'local'>('upload');
   const [folderCases, setFolderCases] = useState<FolderCaseSource[]>([]);
   const [selectedFolderCaseId, setSelectedFolderCaseId] = useState('');
   const [isLoadingFolderCases, setIsLoadingFolderCases] = useState(false);
+  const [isPreprocessingFolder, setIsPreprocessingFolder] = useState(false);
+  const [folderPreprocessError, setFolderPreprocessError] = useState<string | null>(null);
+  const [preprocessedFolderDocs, setPreprocessedFolderDocs] = useState<Array<{
+    name: string;
+    size: string;
+    type: string;
+    status: 'pending' | 'processing' | 'processed' | 'error';
+    contentSnippet?: string;
+  }>>([]);
   const selectedFolderCase = folderCases.find(item => item.id === selectedFolderCaseId) || null;
 
   // Documents state
@@ -90,9 +96,86 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
   }, [storageType]);
 
   useEffect(() => {
+    if (storageType !== 'local') {
+      setSelectedFolderCaseId('');
+      setLocalFolder('');
+      setPreprocessedFolderDocs([]);
+      setFolderPreprocessError(null);
+    }
+  }, [storageType]);
+
+  useEffect(() => {
     if (!selectedFolderCase) {
+      setPreprocessedFolderDocs([]);
+      setFolderPreprocessError(null);
       return;
     }
+
+    let isCancelled = false;
+
+    const preprocessSelectedFolder = async () => {
+      setIsPreprocessingFolder(true);
+      setFolderPreprocessError(null);
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/ingest`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sourceSubdir: selectedFolderCase.relativePath })
+        });
+
+        if (!response.ok) {
+          throw new Error(`Falha de ingestão antecipada (${response.status})`);
+        }
+
+        const payload = await response.json();
+        if (isCancelled) {
+          return;
+        }
+
+        const metadataByName = new Map<string, any>();
+        (payload.items || []).forEach((item: any) => {
+          metadataByName.set(String(item.fileName || '').toLowerCase(), item);
+        });
+
+        const docs = selectedFolderCase.files.map((file) => {
+          const meta = metadataByName.get(file.name.toLowerCase());
+          const normalizedType = file.type.toLowerCase();
+
+          if (!meta) {
+            return {
+              name: file.name,
+              size: file.size,
+              type: normalizedType,
+              status: 'error' as const,
+              contentSnippet: 'Arquivo não retornou metadados na ingestão antecipada.'
+            };
+          }
+
+          return {
+            name: file.name,
+            size: file.size,
+            type: normalizedType,
+            status: (meta.extracted ? 'processed' : 'error') as 'processed' | 'error',
+            contentSnippet: meta.extracted
+              ? `[Pré-processado] ${meta.category} | ${meta.textLength} caracteres extraídos.`
+              : 'Falha de extração na ingestão antecipada.'
+          };
+        });
+
+        setPreprocessedFolderDocs(docs);
+        setObservations(`Caso carregado da subpasta commitada: ${selectedFolderCase.relativePath}. Pré-processamento: ${payload.processed}/${payload.total} arquivo(s) com sucesso.`);
+      } catch (error) {
+        if (!isCancelled) {
+          setPreprocessedFolderDocs([]);
+          setFolderPreprocessError(error instanceof Error ? error.message : 'Erro na ingestão antecipada da subpasta.');
+        }
+      } finally {
+        if (!isCancelled) {
+          setIsPreprocessingFolder(false);
+        }
+      }
+    };
 
     setLocalFolder(selectedFolderCase.relativePath);
     setSelectedFiles(
@@ -103,12 +186,18 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
       })),
     );
 
-    if (!number) {
+    const processNumberMatch = selectedFolderCase.displayName.match(/\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}/);
+    if (processNumberMatch) {
+      setNumber(processNumberMatch[0]);
+    } else if (!number) {
       setNumber(selectedFolderCase.displayName);
     }
-    if (!observations) {
-      setObservations(`Caso carregado a partir da subpasta commitada: ${selectedFolderCase.relativePath}`);
-    }
+
+    preprocessSelectedFolder();
+
+    return () => {
+      isCancelled = true;
+    };
   }, [selectedFolderCase]);
 
   // Pre-load default values for quick testing button! (Extremely satisfying for the user)
@@ -182,40 +271,54 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
       client,
       legalArea,
       selectedSkillId,
-      sourceMode: storageType === 'local' ? 'repository_folder' : storageType === 'upload' ? 'interface_upload' : 'drive',
+      sourceMode: storageType === 'local' ? 'repository_folder' : 'interface_upload',
       sourceFolder: storageType === 'local' ? localFolder : undefined,
-      simulatedData: true,
+      simulatedData: false,
       observations,
       createdAt: new Date().toISOString(),
-      status: 'draft'
+      status: storageType === 'local' && preprocessedFolderDocs.length > 0 && preprocessedFolderDocs.every((entry) => entry.status === 'processed')
+        ? 'processed'
+        : 'draft'
     };
 
     // Create case documents based on uploads/drive
     const documents: CaseDocument[] = [];
 
     // Local uploads
+    if (storageType === 'local') {
+      if (!localFolder || !selectedFolderCase) {
+        alert('Selecione uma subpasta commitada para criar o caso.');
+        return;
+      }
+
+      if (isPreprocessingFolder) {
+        alert('Aguarde o término do pré-processamento da subpasta selecionada.');
+        return;
+      }
+
+      if (preprocessedFolderDocs.length === 0 || folderPreprocessError) {
+        alert('Não foi possível validar a ingestão antecipada da subpasta. Selecione novamente e aguarde o pré-processamento.');
+        return;
+      }
+    }
+
     selectedFiles.forEach((file, index) => {
+      const preprocessed = storageType === 'local'
+        ? preprocessedFolderDocs.find((entry) => entry.name.toLowerCase() === file.name.toLowerCase())
+        : undefined;
+
       documents.push({
         id: `doc_${caseId}_${index}`,
         caseId,
         name: file.name,
         size: file.size,
         type: (['pdf', 'docx', 'txt'].includes(file.type.toLowerCase()) ? file.type.toLowerCase() : 'pdf') as any,
-        status: 'pending'
+        status: preprocessed ? preprocessed.status : 'pending',
+        contentSnippet: preprocessed?.contentSnippet
       });
     });
 
-    // Google Drive / Local Folder simulation
-    if (storageType === 'drive' && driveLink) {
-      documents.push({
-        id: `doc_${caseId}_drive`,
-        caseId,
-        name: `Pasta Google Drive: ${driveLink.substring(0, 30)}...`,
-        size: 'N/A (Nuvem)',
-        type: 'drive',
-        status: 'pending'
-      });
-    } else if (storageType === 'local' && localFolder && selectedFiles.length === 0) {
+    if (storageType === 'local' && localFolder && selectedFiles.length === 0) {
       documents.push({
         id: `doc_${caseId}_local`,
         caseId,
@@ -403,21 +506,19 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
               </button>
               <button
                 type="button"
-                onClick={() => setStorageType('drive')}
-                className={`py-1.5 text-center rounded text-xs font-bold transition-all cursor-pointer ${
-                  storageType === 'drive' ? 'bg-[#002B36] text-white shadow-sm' : 'text-slate-500 hover:text-slate-800'
-                }`}
-              >
-                Google Drive
-              </button>
-              <button
-                type="button"
                 onClick={() => setStorageType('local')}
                 className={`py-1.5 text-center rounded text-xs font-bold transition-all cursor-pointer ${
                   storageType === 'local' ? 'bg-[#002B36] text-white shadow-sm' : 'text-slate-500 hover:text-slate-800'
                 }`}
               >
                 Pastas Commitadas
+              </button>
+              <button
+                type="button"
+                disabled
+                className="py-1.5 text-center rounded text-xs font-bold text-slate-400 bg-slate-200 cursor-not-allowed"
+              >
+                Integrações Externas
               </button>
             </div>
 
@@ -468,34 +569,11 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
               </div>
             )}
 
-            {storageType === 'drive' && (
-              <div className="space-y-3">
-                <div className="p-3 bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded text-xs text-slate-600 flex gap-2">
-                  <HelpCircle className="h-4.5 w-4.5 shrink-0 text-[#D4AF37]" />
-                  <span>A D. Menezes Legal AI irá sincronizar todos os documentos contidos no diretório compartilhado do Google Drive.</span>
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
-                    <Link className="h-3.5 w-3.5 text-[#D4AF37]" />
-                    Link da Pasta do Google Drive
-                  </label>
-                  <input 
-                    id="newcase-drive-url"
-                    type="url" 
-                    value={driveLink}
-                    onChange={e => setDriveLink(e.target.value)}
-                    placeholder="https://drive.google.com/drive/folders/..."
-                    className="w-full bg-slate-50 text-slate-900 text-sm py-2 px-3 rounded border border-slate-200 focus:outline-none focus:border-[#002B36] transition-colors"
-                  />
-                </div>
-              </div>
-            )}
-
             {storageType === 'local' && (
               <div className="space-y-3">
                 <div className="p-3 bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded text-xs text-slate-600 flex gap-2">
                   <HelpCircle className="h-4.5 w-4.5 shrink-0 text-[#D4AF37]" />
-                  <span>Selecione uma subpasta commitada em knowledge/sources/original para montar o caso pelas fontes já versionadas.</span>
+                  <span>Selecione uma subpasta commitada em knowledge/sources/original. O sistema executa pré-processamento automático para popular os módulos do caso.</span>
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Caso por Subpasta Commitada</label>
@@ -527,11 +605,22 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
                     id="newcase-local-path"
                     type="text" 
                     value={localFolder}
-                    onChange={e => setLocalFolder(e.target.value)}
-                    placeholder="Ex: notebooklm/casos/caso-aerobrasil"
+                    readOnly
+                    placeholder="Selecione a subpasta no campo acima"
                     className="w-full bg-slate-50 text-slate-900 text-sm py-2 px-3 rounded border border-slate-200 focus:outline-none focus:border-[#002B36] transition-colors"
                   />
                 </div>
+                {isPreprocessingFolder && (
+                  <p className="text-[11px] text-amber-700">Pré-processando subpasta selecionada...</p>
+                )}
+                {!isPreprocessingFolder && folderPreprocessError && (
+                  <p className="text-[11px] text-rose-700">Erro no pré-processamento: {folderPreprocessError}</p>
+                )}
+                {!isPreprocessingFolder && !folderPreprocessError && preprocessedFolderDocs.length > 0 && (
+                  <p className="text-[11px] text-emerald-700">
+                    Pré-processamento concluído: {preprocessedFolderDocs.filter((entry) => entry.status === 'processed').length}/{preprocessedFolderDocs.length} arquivos prontos.
+                  </p>
+                )}
                 {selectedFolderCase && (
                   <div className="space-y-2 max-h-40 overflow-y-auto border border-slate-100 p-2 rounded">
                     <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Fontes detectadas ({selectedFolderCase.fileCount})</p>
