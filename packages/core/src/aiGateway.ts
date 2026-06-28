@@ -1,6 +1,23 @@
 import { GoogleGenAI } from "@google/genai";
 import type { AIExecutionRequest, AIExecutionResponse, SkillExecutionOptions } from "./types";
 
+function isQuotaError(error: unknown): boolean {
+  const message = error instanceof Error ? error.message : String(error ?? "");
+  return /429|resource_exhausted|quota exceeded/i.test(message);
+}
+
+function uniqueModels(preferredModel: string): string[] {
+  const candidates = [preferredModel, "gemini-2.5-flash"];
+  const seen = new Set<string>();
+  return candidates.filter((model) => {
+    if (!model || seen.has(model)) {
+      return false;
+    }
+    seen.add(model);
+    return true;
+  });
+}
+
 function buildMockResponse(request: AIExecutionRequest): string {
   if (request.outputFormat === "json" && request.task === "architecture") {
     return JSON.stringify(
@@ -32,16 +49,32 @@ export class AIGateway {
     }
 
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-    const response = await ai.models.generateContent({
-      model: "gemini-2.5-pro",
-      contents: `${request.prompt.system}\n\n${request.prompt.user}`,
-      config: request.outputFormat === "json" ? { responseMimeType: "application/json" } : undefined,
-    });
+    const configuredModel = process.env.GEMINI_MODEL?.trim() || "gemini-2.5-pro";
+    const models = uniqueModels(configuredModel);
 
-    return {
-      provider: request.provider,
-      model: "gemini-2.5-pro",
-      text: response.text ?? "",
-    };
+    let lastError: unknown;
+    for (const model of models) {
+      try {
+        const response = await ai.models.generateContent({
+          model,
+          contents: `${request.prompt.system}\n\n${request.prompt.user}`,
+          config: request.outputFormat === "json" ? { responseMimeType: "application/json" } : undefined,
+        });
+
+        return {
+          provider: request.provider,
+          model,
+          text: response.text ?? "",
+        };
+      } catch (error) {
+        lastError = error;
+        if (!isQuotaError(error)) {
+          break;
+        }
+      }
+    }
+
+    throw lastError instanceof Error ? lastError : new Error(String(lastError ?? "Falha desconhecida no gateway Gemini"));
+
   }
 }
