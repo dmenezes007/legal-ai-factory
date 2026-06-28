@@ -1,3 +1,5 @@
+import path from "node:path";
+import { promises as fs } from "node:fs";
 import { AIGateway } from "./aiGateway";
 import { planCase } from "./planner";
 import { compileArchitecturePrompt, compileDraftPrompt, compileReviewPrompt } from "./promptCompiler";
@@ -44,8 +46,40 @@ function buildDefaultArchitecture(caseData: CasePayload): OutlineItemPayload[] {
   ];
 }
 
-function buildKnowledgeObjects(caseData: CasePayload): KnowledgeObject[] {
+const NOTEBOOKLM_SKILL_PATH = path.join(
+  process.cwd(),
+  "knowledge",
+  "sources",
+  "original",
+  "notebooklm",
+  "skills",
+  "SKILL.txt",
+);
+
+async function loadNotebooklmSkillContent(): Promise<string> {
+  try {
+    const raw = await fs.readFile(NOTEBOOKLM_SKILL_PATH, "utf8");
+    const normalized = raw.trim();
+    if (normalized.length > 0) {
+      return normalized;
+    }
+  } catch {
+    // fallback below
+  }
+
+  return "Diretriz padrão: utilizar as instruções jurídicas da base notebooklm/skills/SKILL.txt como referência mandatória para estrutura, tom e estratégia da defesa.";
+}
+
+async function buildKnowledgeObjects(caseData: CasePayload): Promise<KnowledgeObject[]> {
+  const notebooklmSkill = await loadNotebooklmSkillContent();
+
   return [
+    {
+      id: "k-skill-base-1",
+      kind: "strategy",
+      title: "Skill padrão obrigatório (notebooklm/skills/SKILL.txt)",
+      content: notebooklmSkill,
+    },
     {
       id: "k-facts-1",
       kind: "facts",
@@ -78,7 +112,7 @@ function normalizeOutlineItem(item: any, index: number): OutlineItemPayload {
 }
 
 export async function generateArchitecture(caseData: CasePayload, options: SkillExecutionOptions): Promise<OutlineItemPayload[]> {
-  const knowledgeObjects = buildKnowledgeObjects(caseData);
+  const knowledgeObjects = await buildKnowledgeObjects(caseData);
   const planner = planCase(caseData, knowledgeObjects);
   const fallbackOutline = planner.chapters.map((chapter) => ({
     id: chapter.id,
@@ -117,7 +151,7 @@ export async function draftChapter(
   chapter: OutlineItemPayload,
   options: SkillExecutionOptions,
 ): Promise<string> {
-  const knowledgeObjects = buildKnowledgeObjects(caseData);
+  const knowledgeObjects = await buildKnowledgeObjects(caseData);
   const planner = planCase(caseData, knowledgeObjects);
   const planChapter = planner.chapters.find((item) => item.id === chapter.id || item.order === chapter.order);
   const gateway = new AIGateway();
