@@ -66,6 +66,47 @@ const ROOT = process.cwd();
 const KNOWLEDGE_ORIGINAL = path.join(ROOT, "knowledge", "sources", "original");
 const KNOWLEDGE_PROCESSED = path.join(ROOT, "knowledge", "sources", "processed");
 const KNOWLEDGE_METADATA = path.join(ROOT, "knowledge", "sources", "metadata");
+const SUPPORTED_EXTENSIONS = new Set([".txt", ".md", ".pdf", ".docx"]);
+
+function toPosixPath(rawPath: string): string {
+  return rawPath.replace(/\\/g, "/");
+}
+
+function resolveInOriginalDir(sourceSubdir?: string): string | null {
+  if (!sourceSubdir || sourceSubdir.trim().length === 0) {
+    return KNOWLEDGE_ORIGINAL;
+  }
+
+  const cleaned = sourceSubdir.trim().replace(/^\/+/, "");
+  const resolved = path.resolve(KNOWLEDGE_ORIGINAL, cleaned);
+  const originalRoot = path.resolve(KNOWLEDGE_ORIGINAL);
+
+  if (resolved === originalRoot || resolved.startsWith(`${originalRoot}${path.sep}`)) {
+    return resolved;
+  }
+
+  return null;
+}
+
+async function listFilesRecursively(dir: string): Promise<string[]> {
+  const entries = await fs.readdir(dir, { withFileTypes: true });
+  const nested = await Promise.all(
+    entries.map(async (entry) => {
+      const fullPath = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        return listFilesRecursively(fullPath);
+      }
+
+      if (SUPPORTED_EXTENSIONS.has(path.extname(entry.name).toLowerCase())) {
+        return [fullPath];
+      }
+
+      return [];
+    }),
+  );
+
+  return nested.flat();
+}
 
 app.get("/api/health", (_req, res) => {
   pushLog("healthcheck", {});
@@ -81,20 +122,74 @@ app.get("/api/logs", (_req, res) => {
   res.json({ total: apiLogs.length, items: apiLogs });
 });
 
-app.post("/api/ingest", async (_req, res) => {
+app.post("/api/ingest", async (req, res) => {
   try {
+    const scopedSourceDir = resolveInOriginalDir(req.body?.sourceSubdir);
+    if (!scopedSourceDir) {
+      res.status(400).json({ error: "sourceSubdir invalido" });
+      return;
+    }
+
     const summary = await ingestKnowledgeSources({
-      sourceDir: KNOWLEDGE_ORIGINAL,
+      sourceDir: scopedSourceDir,
       processedDir: KNOWLEDGE_PROCESSED,
       metadataDir: KNOWLEDGE_METADATA,
     });
 
-    pushLog("ingestion_completed", { total: summary.total, processed: summary.processed, errors: summary.errors });
+    pushLog("ingestion_completed", {
+      sourceDir: toPosixPath(path.relative(ROOT, scopedSourceDir)),
+      total: summary.total,
+      processed: summary.processed,
+      errors: summary.errors,
+    });
     res.json(summary);
   } catch (error) {
     pushLog("ingestion_failed", { error: error instanceof Error ? error.message : "unknown" });
     res.status(500).json({
       error: error instanceof Error ? error.message : "Erro de ingestao desconhecido",
+    });
+  }
+});
+
+app.get("/api/sources/folder-cases", async (_req, res) => {
+  try {
+    await fs.mkdir(KNOWLEDGE_ORIGINAL, { recursive: true });
+    const files = await listFilesRecursively(KNOWLEDGE_ORIGINAL);
+    const folders = new Map<string, Array<{ name: string; size: string; type: string; relativePath: string }>>();
+
+    for (const filePath of files) {
+      const folderPath = path.dirname(filePath);
+      const relativeFolder = toPosixPath(path.relative(KNOWLEDGE_ORIGINAL, folderPath));
+      const relativeFile = toPosixPath(path.relative(KNOWLEDGE_ORIGINAL, filePath));
+      const stats = await fs.stat(filePath);
+      const extension = path.extname(filePath).toLowerCase().replace(".", "");
+      const entry = {
+        name: path.basename(filePath),
+        size: `${(stats.size / (1024 * 1024)).toFixed(2)} MB`,
+        type: extension || "txt",
+        relativePath: relativeFile,
+      };
+
+      const bucket = folders.get(relativeFolder) ?? [];
+      bucket.push(entry);
+      folders.set(relativeFolder, bucket);
+    }
+
+    const items = [...folders.entries()]
+      .filter(([, folderFiles]) => folderFiles.length > 0)
+      .map(([relativePath, folderFiles]) => ({
+        id: relativePath || "root",
+        displayName: relativePath ? path.basename(relativePath) : "Raiz",
+        relativePath,
+        fileCount: folderFiles.length,
+        files: folderFiles,
+      }))
+      .sort((a, b) => a.relativePath.localeCompare(b.relativePath));
+
+    res.json({ total: items.length, items });
+  } catch (error) {
+    res.status(500).json({
+      error: error instanceof Error ? error.message : "Erro ao listar casos por pasta",
     });
   }
 });

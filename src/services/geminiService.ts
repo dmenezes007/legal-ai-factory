@@ -68,10 +68,13 @@ export const geminiService = {
   async processDocuments(
     caseId: string,
     documents: CaseDocument[],
-    onProgress: (docId: string, progress: number) => void
+    onProgress: (docId: string, progress: number) => void,
+    sourceSubdir?: string
   ): Promise<{ processedDocs: CaseDocument[]; logs: AuditLog[] }> {
     try {
-      const apiResult = await postJson<any>('/api/ingest', {});
+      const apiResult = await postJson<any>('/api/ingest', {
+        sourceSubdir: sourceSubdir && sourceSubdir.trim().length > 0 ? sourceSubdir : undefined
+      });
       const metadataByName = new Map<string, any>();
 
       (apiResult.items || []).forEach((item: any) => {
@@ -131,7 +134,7 @@ export const geminiService = {
       const status = isError ? 'error' : 'processed';
       const snippet = isError 
         ? undefined 
-        : `[Trecho extraído por IA] Este documento refere-se ao arquivo "${doc.name}" anexado ao processo. Contém assinaturas eletrônicas válidas e foi indexado na base vetorial da Legal AI Factory em ${new Date().toLocaleDateString('pt-BR')}.`;
+        : `[Trecho extraído por IA] Este documento refere-se ao arquivo "${doc.name}" anexado ao processo. Contém assinaturas eletrônicas válidas e foi indexado na base vetorial da D. Menezes Legai AI em ${new Date().toLocaleDateString('pt-BR')}.`;
 
       processedDocs.push({
         ...doc,

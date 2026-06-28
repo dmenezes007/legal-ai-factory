@@ -94,8 +94,8 @@ export default function Sidebar({
           <Scale className="h-5 w-5 text-[#002B36]" />
         </div>
         <div className="leading-tight">
-          <h1 className="font-sans font-bold text-sm tracking-tight text-white italic">LEGAL AI</h1>
-          <span className="text-[10px] uppercase font-bold text-[#D4AF37] tracking-widest">FACTORY</span>
+          <h1 className="font-sans font-bold text-sm tracking-tight text-white italic">D. Menezes</h1>
+          <span className="text-[10px] uppercase font-bold text-[#D4AF37] tracking-widest">Legai AI</span>
         </div>
       </div>
 

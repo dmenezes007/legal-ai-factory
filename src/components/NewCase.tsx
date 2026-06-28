@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { 
   Scale, 
   Upload, 
@@ -17,6 +17,21 @@ interface NewCaseProps {
   onCaseCreated: (newCase: LegalCase, documents: CaseDocument[]) => void;
 }
 
+interface FolderCaseSource {
+  id: string;
+  displayName: string;
+  relativePath: string;
+  fileCount: number;
+  files: Array<{
+    name: string;
+    size: string;
+    type: string;
+    relativePath: string;
+  }>;
+}
+
+const API_BASE_URL = (import.meta as any).env?.VITE_API_BASE_URL || 'http://localhost:8787';
+
 export default function NewCase({ onCaseCreated }: NewCaseProps) {
   // Form fields state
   const [number, setNumber] = useState('');
@@ -33,11 +48,68 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
   const [driveLink, setDriveLink] = useState('');
   const [localFolder, setLocalFolder] = useState('');
   const [storageType, setStorageType] = useState<'upload' | 'drive' | 'local'>('upload');
+  const [folderCases, setFolderCases] = useState<FolderCaseSource[]>([]);
+  const [selectedFolderCaseId, setSelectedFolderCaseId] = useState('');
+  const [isLoadingFolderCases, setIsLoadingFolderCases] = useState(false);
+  const selectedFolderCase = folderCases.find(item => item.id === selectedFolderCaseId) || null;
 
   // Documents state
   const [selectedFiles, setSelectedFiles] = useState<{ name: string; size: string; type: string }[]>([]);
   const [isDragOver, setIsDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (storageType !== 'local') {
+      return;
+    }
+
+    let isCancelled = false;
+    const loadFolderCases = async () => {
+      setIsLoadingFolderCases(true);
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/sources/folder-cases`);
+        const payload = await response.json();
+        if (!isCancelled) {
+          setFolderCases(Array.isArray(payload.items) ? payload.items : []);
+        }
+      } catch {
+        if (!isCancelled) {
+          setFolderCases([]);
+        }
+      } finally {
+        if (!isCancelled) {
+          setIsLoadingFolderCases(false);
+        }
+      }
+    };
+
+    loadFolderCases();
+    return () => {
+      isCancelled = true;
+    };
+  }, [storageType]);
+
+  useEffect(() => {
+    if (!selectedFolderCase) {
+      return;
+    }
+
+    setLocalFolder(selectedFolderCase.relativePath);
+    setSelectedFiles(
+      selectedFolderCase.files.map((file) => ({
+        name: file.name,
+        size: file.size,
+        type: file.type,
+      })),
+    );
+
+    if (!number) {
+      setNumber(selectedFolderCase.displayName);
+    }
+    if (!observations) {
+      setObservations(`Caso carregado a partir da subpasta commitada: ${selectedFolderCase.relativePath}`);
+    }
+  }, [selectedFolderCase]);
 
   // Pre-load default values for quick testing button! (Extremely satisfying for the user)
   const loadExampleData = () => {
@@ -110,6 +182,8 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
       client,
       legalArea,
       selectedSkillId,
+      sourceMode: storageType === 'local' ? 'repository_folder' : storageType === 'upload' ? 'interface_upload' : 'drive',
+      sourceFolder: storageType === 'local' ? localFolder : undefined,
       simulatedData: true,
       observations,
       createdAt: new Date().toISOString(),
@@ -141,12 +215,12 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
         type: 'drive',
         status: 'pending'
       });
-    } else if (storageType === 'local' && localFolder) {
+    } else if (storageType === 'local' && localFolder && selectedFiles.length === 0) {
       documents.push({
         id: `doc_${caseId}_local`,
         caseId,
-        name: `Caminho Local: ${localFolder}`,
-        size: 'N/A (Rede)',
+        name: `Pasta Commitada: ${localFolder}`,
+        size: 'N/A',
         type: 'docx',
         status: 'pending'
       });
@@ -343,7 +417,7 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
                   storageType === 'local' ? 'bg-[#002B36] text-white shadow-sm' : 'text-slate-500 hover:text-slate-800'
                 }`}
               >
-                Pasta Local
+                Pastas Commitadas
               </button>
             </div>
 
@@ -398,7 +472,7 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
               <div className="space-y-3">
                 <div className="p-3 bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded text-xs text-slate-600 flex gap-2">
                   <HelpCircle className="h-4.5 w-4.5 shrink-0 text-[#D4AF37]" />
-                  <span>A Legal AI Factory irá sincronizar todos os documentos contidos no diretório compartilhado do Google Drive.</span>
+                  <span>A D. Menezes Legai AI irá sincronizar todos os documentos contidos no diretório compartilhado do Google Drive.</span>
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
@@ -421,22 +495,59 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
               <div className="space-y-3">
                 <div className="p-3 bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded text-xs text-slate-600 flex gap-2">
                   <HelpCircle className="h-4.5 w-4.5 shrink-0 text-[#D4AF37]" />
-                  <span>Integração por agente local (para escritórios com infraestrutura de rede local ou NAS).</span>
+                  <span>Selecione uma subpasta commitada em knowledge/sources/original para montar o caso pelas fontes já versionadas.</span>
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Caso por Subpasta Commitada</label>
+                  <select
+                    value={selectedFolderCaseId}
+                    onChange={e => setSelectedFolderCaseId(e.target.value)}
+                    className="w-full bg-slate-50 text-slate-900 text-sm py-2 px-3 rounded border border-slate-200 focus:outline-none focus:border-[#002B36] transition-colors"
+                  >
+                    <option value="">-- Selecionar Subpasta --</option>
+                    {folderCases.map(folderCase => (
+                      <option key={folderCase.id} value={folderCase.id}>
+                        {folderCase.displayName} ({folderCase.fileCount} arquivo(s))
+                      </option>
+                    ))}
+                  </select>
+                  {isLoadingFolderCases && (
+                    <p className="text-[11px] text-slate-500">Lendo subpastas versionadas...</p>
+                  )}
+                  {!isLoadingFolderCases && folderCases.length === 0 && (
+                    <p className="text-[11px] text-slate-500">Nenhuma subpasta com arquivos compatíveis foi encontrada.</p>
+                  )}
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
                     <Folder className="h-3.5 w-3.5 text-[#D4AF37]" />
-                    Caminho do Diretório Local
+                    Subpasta Selecionada
                   </label>
                   <input 
                     id="newcase-local-path"
                     type="text" 
                     value={localFolder}
                     onChange={e => setLocalFolder(e.target.value)}
-                    placeholder="Ex: Z:\\Processos\\Ativos\\2026\\AeroBrasil"
+                    placeholder="Ex: notebooklm/casos/caso-aerobrasil"
                     className="w-full bg-slate-50 text-slate-900 text-sm py-2 px-3 rounded border border-slate-200 focus:outline-none focus:border-[#002B36] transition-colors"
                   />
                 </div>
+                {selectedFolderCase && (
+                  <div className="space-y-2 max-h-40 overflow-y-auto border border-slate-100 p-2 rounded">
+                    <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Fontes detectadas ({selectedFolderCase.fileCount})</p>
+                    {selectedFolderCase.files.map((file, idx) => (
+                      <div key={`${file.relativePath}-${idx}`} className="flex items-center justify-between text-xs p-2 bg-slate-50 rounded border border-slate-150">
+                        <div className="flex items-center gap-2 truncate pr-2">
+                          <FileText className="h-3.5 w-3.5 text-[#002B36] shrink-0" />
+                          <span className="font-semibold text-slate-700 truncate">{file.name}</span>
+                        </div>
+                        <span className="font-mono text-[10px] text-slate-400 shrink-0 bg-white px-1.5 py-0.5 rounded border border-slate-100">
+                          {file.size}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
           </div>

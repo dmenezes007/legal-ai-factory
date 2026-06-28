@@ -205,7 +205,7 @@ export default function Revision({
               <div className="bg-white p-12 max-w-lg mx-auto shadow-md border border-slate-200 font-serif text-slate-800 text-sm leading-relaxed text-justify space-y-8 select-all relative">
                 {/* Decorative court margin seal */}
                 <div className="absolute top-4 right-4 text-[9px] font-mono text-slate-300 font-bold uppercase select-none tracking-widest rotate-6 border border-slate-200 p-1">
-                  Legal AI Factory - Verificado
+                  D. Menezes Legai AI - Verificado
                 </div>
 
                 <div className="text-right font-bold text-[13px] leading-tight select-none">

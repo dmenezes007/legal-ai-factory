@@ -341,7 +341,7 @@ export default function Architecture({
                 CONFORMIDADE PROCESSUAL
               </h4>
               <p className="text-xs text-slate-300 leading-relaxed">
-                A Legal AI Factory garante que a contestação seja estruturada de acordo com o Art. 336 e seguintes do CPC, ordenando de forma perfeita as preliminares antes do mérito de defesa.
+                A D. Menezes Legai AI garante que a contestação seja estruturada de acordo com o Art. 336 e seguintes do CPC, ordenando de forma perfeita as preliminares antes do mérito de defesa.
               </p>
             </div>
           </div>

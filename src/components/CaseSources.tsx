@@ -51,7 +51,8 @@ export default function CaseSources({
             ...prev,
             [docId]: progress
           }));
-        }
+        },
+        activeCase.sourceFolder
       );
 
       // Save processed documents and logs to app state

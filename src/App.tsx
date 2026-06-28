@@ -412,7 +412,7 @@ export default function App() {
         {/* Global Footer with Sandbox Control */}
         <footer className="border-t border-slate-200/60 pt-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 select-none">
           <span>
-            © {new Date().getFullYear()} <strong>Legal AI Factory</strong>. Todos os direitos reservados. Projetado para advocacia corporativa de alta performance.
+            © {new Date().getFullYear()} <strong>D. Menezes Legai AI</strong>. Todos os direitos reservados. Projetado para advocacia corporativa de alta performance.
           </span>
           <div className="flex items-center gap-4">
             <button 

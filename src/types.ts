@@ -8,6 +8,8 @@ export interface LegalCase {
   client: string; // Cliente
   legalArea: string; // Área Jurídica
   selectedSkillId?: string;
+  sourceMode?: 'interface_upload' | 'repository_folder' | 'drive' | 'local_path';
+  sourceFolder?: string;
   simulatedData?: boolean;
   observations: string;
   createdAt: string;
