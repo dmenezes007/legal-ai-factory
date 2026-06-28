@@ -12,6 +12,11 @@ import type {
   SkillExecutionOptions,
 } from "./types";
 
+interface SkillRuntimeContext {
+  knowledgeObjects?: KnowledgeObject[];
+  skillDirective?: string;
+}
+
 function buildDefaultArchitecture(caseData: CasePayload): OutlineItemPayload[] {
   const now = new Date().toLocaleDateString("pt-BR");
   return [
@@ -84,10 +89,13 @@ async function loadNotebooklmSkillContent(): Promise<string> {
   return "Diretriz padrão: utilizar as instruções jurídicas da base notebooklm/skills/SKILL.txt como referência mandatória para estrutura, tom e estratégia da defesa.";
 }
 
-async function buildKnowledgeObjects(caseData: CasePayload): Promise<KnowledgeObject[]> {
-  const notebooklmSkill = await loadNotebooklmSkillContent();
+async function buildKnowledgeObjects(
+  caseData: CasePayload,
+  runtime?: SkillRuntimeContext,
+): Promise<KnowledgeObject[]> {
+  const notebooklmSkill = runtime?.skillDirective?.trim() || (await loadNotebooklmSkillContent());
 
-  return [
+  const base: KnowledgeObject[] = [
     {
       id: "k-skill-base-1",
       kind: "strategy",
@@ -113,6 +121,9 @@ async function buildKnowledgeObjects(caseData: CasePayload): Promise<KnowledgeOb
       content: "Ausencia de nexo causal e necessidade de prova robusta.",
     },
   ];
+
+  const contextual = (runtime?.knowledgeObjects ?? []).filter((item) => item && item.content?.trim().length > 0);
+  return [...base, ...contextual];
 }
 
 function normalizeOutlineItem(item: any, index: number): OutlineItemPayload {
@@ -125,8 +136,12 @@ function normalizeOutlineItem(item: any, index: number): OutlineItemPayload {
   };
 }
 
-export async function generateArchitecture(caseData: CasePayload, options: SkillExecutionOptions): Promise<OutlineItemPayload[]> {
-  const knowledgeObjects = await buildKnowledgeObjects(caseData);
+export async function generateArchitecture(
+  caseData: CasePayload,
+  options: SkillExecutionOptions,
+  runtime?: SkillRuntimeContext,
+): Promise<OutlineItemPayload[]> {
+  const knowledgeObjects = await buildKnowledgeObjects(caseData, runtime);
   const planner = planCase(caseData, knowledgeObjects);
   const fallbackOutline = planner.chapters.map((chapter) => ({
     id: chapter.id,
@@ -164,8 +179,9 @@ export async function draftChapter(
   caseData: CasePayload,
   chapter: OutlineItemPayload,
   options: SkillExecutionOptions,
+  runtime?: SkillRuntimeContext,
 ): Promise<string> {
-  const knowledgeObjects = await buildKnowledgeObjects(caseData);
+  const knowledgeObjects = await buildKnowledgeObjects(caseData, runtime);
   const planner = planCase(caseData, knowledgeObjects);
   const planChapter = planner.chapters.find((item) => item.id === chapter.id || item.order === chapter.order);
   const gateway = new AIGateway();

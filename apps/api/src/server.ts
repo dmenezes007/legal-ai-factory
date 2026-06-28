@@ -11,6 +11,7 @@ import {
   runBenchmarkCase,
   reviewChapter,
 } from "../../../packages/core/src/index";
+import type { CasePayload, KnowledgeObject, SkillExecutionOptions } from "../../../packages/core/src/index";
 
 const app = express();
 
@@ -122,6 +123,16 @@ interface ReferenceBasePackage {
     extractionWarnings: string[];
     preview: string;
   }>;
+}
+
+interface WorkspaceExecutionRequest {
+  caseData?: Partial<CasePayload>;
+  sourceSubdirs?: string[];
+  includeReferenceBase?: boolean;
+  draftAllChapters?: boolean;
+  mode?: "mock" | "real";
+  simulatedData?: boolean;
+  skillDirective?: string;
 }
 
 function hasCriticalMetadata(meta: ExtractedCaseMetadata): boolean {
@@ -418,6 +429,91 @@ function safeJsonParse<T>(raw: string): T | null {
       return null;
     }
   }
+}
+
+function toKnowledgeKind(category: string): KnowledgeObject["kind"] {
+  const normalized = (category || "").toLowerCase();
+  if (normalized === "jurisprudencia" || normalized === "legislacao" || normalized === "doutrina") {
+    return "law";
+  }
+  if (normalized === "mapa_de_teses") {
+    return "thesis";
+  }
+  if (normalized === "skill" || normalized === "checklist" || normalized === "prompt_chain") {
+    return "strategy";
+  }
+  if (normalized === "documento_processual" || normalized === "modelo_peca") {
+    return "evidence";
+  }
+  return "facts";
+}
+
+async function summaryToKnowledgeObjects(
+  summary: Awaited<ReturnType<typeof ingestKnowledgeSources>>,
+  limit: number,
+): Promise<KnowledgeObject[]> {
+  const selected = summary.items.filter((item) => item.textLength > 0).slice(0, limit);
+  const objects: KnowledgeObject[] = [];
+
+  for (const item of selected) {
+    let raw = "";
+    try {
+      raw = await fs.readFile(item.processedPath, "utf8");
+    } catch {
+      raw = "";
+    }
+
+    const excerpt = raw.replace(/\s+/g, " ").trim().slice(0, 2400);
+    if (!excerpt) {
+      continue;
+    }
+
+    objects.push({
+      id: `ctx-${item.id}`,
+      kind: toKnowledgeKind(item.category),
+      title: item.fileName,
+      content: excerpt,
+    });
+  }
+
+  return objects;
+}
+
+function referencePackageToKnowledgeObjects(referencePackage: ReferenceBasePackage | undefined, limit = 10): KnowledgeObject[] {
+  if (!referencePackage) {
+    return [];
+  }
+
+  return referencePackage.items
+    .filter((item) => item.preview && item.preview.trim().length > 0)
+    .slice(0, limit)
+    .map((item) => ({
+      id: `ref-${item.id}`,
+      kind: toKnowledgeKind(item.category),
+      title: `[notebooklm] ${item.fileName}`,
+      content: item.preview,
+    }));
+}
+
+function normalizeCasePayload(input: Partial<CasePayload> | undefined): CasePayload | null {
+  const number = String(input?.number ?? "").trim();
+  const court = String(input?.court ?? "").trim();
+  const plaintiff = String(input?.plaintiff ?? "").trim();
+  const defendant = String(input?.defendant ?? "").trim();
+  const client = String(input?.client ?? "").trim() || defendant;
+
+  if (!number || !court || !plaintiff || !defendant || !client) {
+    return null;
+  }
+
+  return {
+    id: String(input?.id ?? `case-${Date.now()}`),
+    number,
+    court,
+    plaintiff,
+    defendant,
+    client,
+  };
 }
 
 async function extractCaseMetadataWithGemini(texts: string[]): Promise<ExtractedCaseMetadata> {
@@ -759,6 +855,124 @@ app.post("/api/ingest", async (req, res) => {
     pushLog("ingestion_failed", { error: error instanceof Error ? error.message : "unknown" });
     res.status(500).json({
       error: error instanceof Error ? error.message : "Erro de ingestao desconhecido",
+    });
+  }
+});
+
+app.post("/api/workspace/execute", async (req, res) => {
+  try {
+    const payload = (req.body ?? {}) as WorkspaceExecutionRequest;
+    const caseData = normalizeCasePayload(payload.caseData);
+    if (!caseData) {
+      res.status(400).json({
+        error: "caseData invalido: informe number, court, plaintiff, defendant e client.",
+      });
+      return;
+    }
+
+    const requestedSubdirs = Array.isArray(payload.sourceSubdirs)
+      ? payload.sourceSubdirs.map((item) => String(item).trim()).filter((item) => item.length > 0)
+      : [];
+
+    if (requestedSubdirs.length === 0) {
+      res.status(400).json({ error: "sourceSubdirs obrigatorio: selecione ao menos uma pasta de fontes." });
+      return;
+    }
+
+    const summaries: Array<Awaited<ReturnType<typeof ingestKnowledgeSources>>> = [];
+    for (const sourceSubdir of requestedSubdirs) {
+      const scopedSourceDir = resolveInOriginalDir(sourceSubdir);
+      if (!scopedSourceDir) {
+        res.status(400).json({ error: `sourceSubdir invalido: ${sourceSubdir}` });
+        return;
+      }
+
+      const summary = await ingestKnowledgeSources({
+        sourceDir: scopedSourceDir,
+        processedDir: KNOWLEDGE_PROCESSED,
+        metadataDir: KNOWLEDGE_METADATA,
+      });
+      summaries.push(summary);
+    }
+
+    const includeReferenceBase = payload.includeReferenceBase !== false;
+    let referenceSync: Awaited<ReturnType<typeof syncReferenceBaseAutomation>> | undefined;
+    if (includeReferenceBase) {
+      referenceSync = await syncReferenceBaseAutomation();
+      if (referenceSync.refreshedSummary) {
+        summaries.push(referenceSync.refreshedSummary);
+      }
+    }
+
+    const mergedSummary = mergeIngestionSummaries(summaries);
+    const selectedKnowledge = await summaryToKnowledgeObjects(mergedSummary, 24);
+    const referenceKnowledge = referencePackageToKnowledgeObjects(referenceSync?.referencePackage, 10);
+    const runtimeKnowledge = [...selectedKnowledge, ...referenceKnowledge];
+
+    const mode: SkillExecutionOptions["mode"] = payload.mode === "real" ? "real" : "mock";
+    const simulatedData = payload.simulatedData !== false;
+
+    const outline = await generateArchitecture(caseData, { mode, simulatedData }, {
+      knowledgeObjects: runtimeKnowledge,
+      skillDirective: payload.skillDirective,
+    });
+
+    const draftAllChapters = Boolean(payload.draftAllChapters);
+    const draftedChapters: Array<{ id: string; title: string; content: string }> = [];
+
+    if (draftAllChapters) {
+      for (const chapter of outline) {
+        const content = await draftChapter(caseData, chapter, { mode, simulatedData }, {
+          knowledgeObjects: runtimeKnowledge,
+          skillDirective: payload.skillDirective,
+        });
+        draftedChapters.push({ id: chapter.id, title: chapter.title, content });
+      }
+    }
+
+    pushLog("workspace_execute_completed", {
+      caseId: caseData.id,
+      sourceSubdirs: requestedSubdirs,
+      includeReferenceBase,
+      referenceBaseRefreshed: referenceSync?.refreshed,
+      referenceBaseSkippedAsCached: referenceSync?.skippedAsCached,
+      knowledgeObjects: runtimeKnowledge.length,
+      chapters: outline.length,
+      draftedChapters: draftedChapters.length,
+      mode,
+      simulatedData,
+    });
+
+    res.json({
+      caseData,
+      sourceSubdirs: requestedSubdirs,
+      includeReferenceBase,
+      mode,
+      simulatedData,
+      ingestion: {
+        total: mergedSummary.total,
+        processed: mergedSummary.processed,
+        errors: mergedSummary.errors,
+      },
+      referenceBase: includeReferenceBase
+        ? {
+            refreshed: referenceSync?.refreshed ?? false,
+            skippedAsCached: referenceSync?.skippedAsCached ?? false,
+            packageGeneratedAt: referenceSync?.referencePackage.generatedAt,
+          }
+        : undefined,
+      knowledgeContext: {
+        selectedSourcesObjects: selectedKnowledge.length,
+        referenceObjects: referenceKnowledge.length,
+        totalObjects: runtimeKnowledge.length,
+      },
+      outline,
+      draftedChapters,
+    });
+  } catch (error) {
+    pushLog("workspace_execute_failed", { error: error instanceof Error ? error.message : "unknown" });
+    res.status(500).json({
+      error: error instanceof Error ? error.message : "Erro ao executar workspace",
     });
   }
 });
