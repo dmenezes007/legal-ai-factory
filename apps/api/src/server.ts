@@ -73,6 +73,15 @@ function toPosixPath(rawPath: string): string {
   return rawPath.replace(/\\/g, "/");
 }
 
+function isNotebooklmReferencePath(relativePath: string): boolean {
+  const normalized = toPosixPath(relativePath || "")
+    .toLowerCase()
+    .replace(/^\.?\//, "")
+    .trim();
+
+  return normalized === "notebooklm" || normalized.startsWith("notebooklm/");
+}
+
 function resolveInOriginalDir(sourceSubdir?: string): string | null {
   if (!sourceSubdir || sourceSubdir.trim().length === 0) {
     return KNOWLEDGE_ORIGINAL;
@@ -223,8 +232,7 @@ app.get("/api/sources/folder-cases", async (_req, res) => {
           return false;
         }
 
-        const normalized = toPosixPath(relativePath || "").toLowerCase();
-        return normalized !== "notebooklm" && !normalized.startsWith("notebooklm/");
+        return !isNotebooklmReferencePath(relativePath);
       })
       .map(([relativePath, folderFiles]) => ({
         id: relativePath || "root",

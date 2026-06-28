@@ -30,6 +30,16 @@ interface FolderCaseSource {
 
 const API_BASE_URL = (import.meta as any).env?.VITE_API_BASE_URL || 'http://localhost:8787';
 
+function isNotebooklmPath(rawPath: string): boolean {
+  const normalized = (rawPath || '')
+    .replace(/\\/g, '/')
+    .toLowerCase()
+    .replace(/^\.?\//, '')
+    .trim();
+
+  return normalized === 'notebooklm' || normalized.startsWith('notebooklm/');
+}
+
 export default function NewCase({ onCaseCreated }: NewCaseProps) {
   const autoCreatedFolderRef = useRef<Set<string>>(new Set());
 
@@ -78,7 +88,8 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
         const response = await fetch(`${API_BASE_URL}/api/sources/folder-cases`);
         const payload = await response.json();
         if (!isCancelled) {
-          setFolderCases(Array.isArray(payload.items) ? payload.items : []);
+          const items = Array.isArray(payload.items) ? payload.items : [];
+          setFolderCases(items.filter((item: FolderCaseSource) => !isNotebooklmPath(item.relativePath)));
         }
       } catch {
         if (!isCancelled) {
