@@ -10,6 +10,28 @@ import type { IngestionResult, IngestionSummary } from "./types";
 const SUPPORTED_EXTENSIONS = new Set([".txt", ".md", ".pdf", ".docx"]);
 const GEMINI_PDF_MAX_BYTES = 20 * 1024 * 1024;
 
+function isRetryableGeminiError(error: unknown): boolean {
+  const message = error instanceof Error ? error.message : String(error ?? "");
+  return /503|unavailable|high demand|timeout|deadline exceeded|resource_exhausted|429/i.test(message);
+}
+
+function uniqueOcrModels(preferredModel: string): string[] {
+  const candidates = [preferredModel, "gemini-2.5-flash", "gemini-2.0-flash"];
+  const seen = new Set<string>();
+  return candidates.filter((model) => {
+    const normalized = (model || "").trim();
+    if (!normalized || seen.has(normalized)) {
+      return false;
+    }
+    seen.add(normalized);
+    return true;
+  });
+}
+
+function delay(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 async function extractPdfTextWithGemini(data: Buffer): Promise<{ text: string | null; warning?: string }> {
   if (!process.env.GEMINI_API_KEY) {
     return { text: null, warning: "Fallback Gemini OCR indisponivel: GEMINI_API_KEY ausente." };
@@ -21,21 +43,48 @@ async function extractPdfTextWithGemini(data: Buffer): Promise<{ text: string | 
 
   try {
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-    const model = process.env.GEMINI_MODEL?.trim() || "gemini-2.5-flash";
-    const response = await ai.models.generateContent({
-      model,
-      contents: [
-        createPartFromText(
-          "Extraia o texto integral deste PDF juridico em portugues do Brasil. Retorne somente o texto extraido, sem comentarios.",
-        ),
-        createPartFromBase64(data.toString("base64"), "application/pdf"),
-      ],
-    });
+    const models = uniqueOcrModels(process.env.GEMINI_MODEL?.trim() || "gemini-2.5-flash");
+    let lastError: unknown;
 
-    const text = response.text?.trim();
-    return text && text.length > 0
-      ? { text }
-      : { text: null, warning: "Fallback Gemini OCR nao retornou texto para o PDF." };
+    for (const model of models) {
+      for (let attempt = 1; attempt <= 3; attempt += 1) {
+        try {
+          const response = await ai.models.generateContent({
+            model,
+            contents: [
+              createPartFromText(
+                "Extraia o texto integral deste PDF juridico em portugues do Brasil. Retorne somente o texto extraido, sem comentarios.",
+              ),
+              createPartFromBase64(data.toString("base64"), "application/pdf"),
+            ],
+          });
+
+          const text = response.text?.trim();
+          if (text && text.length > 0) {
+            return { text };
+          }
+
+          lastError = new Error(`Modelo ${model} nao retornou texto no OCR multimodal.`);
+          break;
+        } catch (error) {
+          lastError = error;
+          if (!isRetryableGeminiError(error)) {
+            break;
+          }
+
+          if (attempt < 3) {
+            await delay(1200 * attempt);
+          }
+        }
+      }
+    }
+
+    if (!lastError) {
+      return { text: null, warning: "Fallback Gemini OCR nao retornou texto para o PDF." };
+    }
+
+    const message = lastError instanceof Error ? lastError.message : String(lastError ?? "erro desconhecido");
+    return { text: null, warning: `Fallback Gemini OCR falhou: ${message}` };
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error ?? "erro desconhecido");
     return { text: null, warning: `Fallback Gemini OCR falhou: ${message}` };
