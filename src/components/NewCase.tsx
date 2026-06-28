@@ -46,6 +46,29 @@ interface CaseMetadataDiagnostics {
   emptyTextFileNames?: string[];
 }
 
+interface ReferenceBaseStatus {
+  sourceDir: string;
+  signature: {
+    fileCount: number;
+    totalBytes: number;
+    maxMtimeMs: number;
+  };
+  packageReady: boolean;
+  packageGeneratedAt?: string;
+  stats?: {
+    emptyTextFiles: number;
+    nonEmptyTextFiles: number;
+    extensions: Record<string, number>;
+    categories: Record<string, number>;
+  };
+}
+
+interface ReferenceBaseSyncInfo {
+  refreshed: boolean;
+  skippedAsCached: boolean;
+  packageGeneratedAt?: string;
+}
+
 function hasCriticalMetadata(meta: ExtractedCaseMetadata): boolean {
   return Boolean(meta.number && meta.court && meta.plaintiff && meta.defendant);
 }
@@ -92,6 +115,11 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
     status: 'pending' | 'processing' | 'processed' | 'error';
     contentSnippet?: string;
   }>>([]);
+  const [referenceBaseStatus, setReferenceBaseStatus] = useState<ReferenceBaseStatus | null>(null);
+  const [isLoadingReferenceBaseStatus, setIsLoadingReferenceBaseStatus] = useState(false);
+  const [isSyncingReferenceBase, setIsSyncingReferenceBase] = useState(false);
+  const [referenceBaseStatusError, setReferenceBaseStatusError] = useState<string | null>(null);
+  const [referenceBaseSyncInfo, setReferenceBaseSyncInfo] = useState<ReferenceBaseSyncInfo | null>(null);
   const selectedFolderCase = folderCases.find(item => item.id === selectedFolderCaseId) || null;
   const isAutoCreatedForSelectedFolder = selectedFolderCase ? autoCreatedFolderIds.includes(selectedFolderCase.id) : false;
 
@@ -100,8 +128,84 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
   const [isDragOver, setIsDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const loadReferenceBaseStatus = async (silent = false) => {
+    if (!silent) {
+      setIsLoadingReferenceBaseStatus(true);
+    }
+    setReferenceBaseStatusError(null);
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/reference-base/status`);
+      if (!response.ok) {
+        throw new Error(`Falha ao consultar status da base (${response.status})`);
+      }
+      const payload = await response.json();
+      setReferenceBaseStatus(payload as ReferenceBaseStatus);
+    } catch (error) {
+      setReferenceBaseStatus(null);
+      setReferenceBaseStatusError(error instanceof Error ? error.message : 'Erro ao consultar status da base de referência.');
+    } finally {
+      if (!silent) {
+        setIsLoadingReferenceBaseStatus(false);
+      }
+    }
+  };
+
+  const syncReferenceBaseNow = async () => {
+    setIsSyncingReferenceBase(true);
+    setReferenceBaseStatusError(null);
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/reference-base/sync`, {
+        method: 'POST',
+      });
+      if (!response.ok) {
+        throw new Error(`Falha ao sincronizar base (${response.status})`);
+      }
+      const payload = await response.json();
+      setReferenceBaseSyncInfo({
+        refreshed: Boolean(payload.refreshed),
+        skippedAsCached: Boolean(payload.skippedAsCached),
+        packageGeneratedAt: payload.packageGeneratedAt,
+      });
+      await loadReferenceBaseStatus(true);
+    } catch (error) {
+      setReferenceBaseStatusError(error instanceof Error ? error.message : 'Erro ao sincronizar base de referência.');
+    } finally {
+      setIsSyncingReferenceBase(false);
+    }
+  };
+
+  const formatTimestamp = (raw?: string) => {
+    if (!raw) {
+      return 'N/A';
+    }
+
+    const value = new Date(raw);
+    if (Number.isNaN(value.getTime())) {
+      return 'N/A';
+    }
+
+    return value.toLocaleString('pt-BR');
+  };
+
+  const formatBytes = (bytes: number) => {
+    if (!Number.isFinite(bytes) || bytes <= 0) {
+      return '0 B';
+    }
+    if (bytes < 1024) {
+      return `${bytes} B`;
+    }
+    if (bytes < 1024 * 1024) {
+      return `${(bytes / 1024).toFixed(1)} KB`;
+    }
+    return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+  };
+
   useEffect(() => {
     if (storageType !== 'local') {
+      setReferenceBaseStatus(null);
+      setReferenceBaseSyncInfo(null);
+      setReferenceBaseStatusError(null);
       return;
     }
 
@@ -129,6 +233,42 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
     loadFolderCases();
     return () => {
       isCancelled = true;
+    };
+  }, [storageType]);
+
+  useEffect(() => {
+    if (storageType !== 'local') {
+      return;
+    }
+
+    let cancelled = false;
+    const run = async () => {
+      setIsLoadingReferenceBaseStatus(true);
+      setReferenceBaseStatusError(null);
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/reference-base/status`);
+        if (!response.ok) {
+          throw new Error(`Falha ao consultar status da base (${response.status})`);
+        }
+        const payload = await response.json();
+        if (!cancelled) {
+          setReferenceBaseStatus(payload as ReferenceBaseStatus);
+        }
+      } catch (error) {
+        if (!cancelled) {
+          setReferenceBaseStatus(null);
+          setReferenceBaseStatusError(error instanceof Error ? error.message : 'Erro ao consultar status da base de referência.');
+        }
+      } finally {
+        if (!cancelled) {
+          setIsLoadingReferenceBaseStatus(false);
+        }
+      }
+    };
+
+    run();
+    return () => {
+      cancelled = true;
     };
   }, [storageType]);
 
@@ -168,6 +308,14 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
         const payload = await response.json();
         if (isCancelled) {
           return;
+        }
+
+        if (typeof payload.referenceBaseRefreshed === 'boolean' || typeof payload.referenceBaseSkippedAsCached === 'boolean') {
+          setReferenceBaseSyncInfo({
+            refreshed: Boolean(payload.referenceBaseRefreshed),
+            skippedAsCached: Boolean(payload.referenceBaseSkippedAsCached),
+            packageGeneratedAt: payload.referenceBasePackageGeneratedAt,
+          });
         }
 
         const extractedMetadata: ExtractedCaseMetadata = payload.caseMetadata || {};
@@ -707,6 +855,60 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
                 <div className="p-3 bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded text-xs text-slate-600 flex gap-2">
                   <HelpCircle className="h-4.5 w-4.5 shrink-0 text-[#D4AF37]" />
                   <span>Selecione uma subpasta commitada em knowledge/sources/original. O sistema executa pré-processamento automático para popular os módulos do caso.</span>
+                </div>
+                <div className="rounded border border-slate-200 bg-slate-50 p-3 space-y-2">
+                  <div className="flex items-center justify-between gap-2">
+                    <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Base NotebookLM (Automação)</p>
+                    <button
+                      type="button"
+                      onClick={syncReferenceBaseNow}
+                      disabled={isSyncingReferenceBase}
+                      className={`text-[11px] px-2 py-1 rounded border font-semibold transition-colors ${
+                        isSyncingReferenceBase
+                          ? 'bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed'
+                          : 'bg-[#002B36] text-white border-[#002B36] hover:bg-[#004050]'
+                      }`}
+                    >
+                      {isSyncingReferenceBase ? 'Sincronizando...' : 'Sincronizar agora'}
+                    </button>
+                  </div>
+
+                  {isLoadingReferenceBaseStatus && (
+                    <p className="text-[11px] text-slate-500">Carregando status da base de referência...</p>
+                  )}
+
+                  {!isLoadingReferenceBaseStatus && referenceBaseStatus && (
+                    <div className="space-y-1.5 text-[11px] text-slate-600">
+                      <p>
+                        Pacote estruturado: <span className={`font-semibold ${referenceBaseStatus.packageReady ? 'text-emerald-700' : 'text-amber-700'}`}>
+                          {referenceBaseStatus.packageReady ? 'Pronto' : 'Pendente'}
+                        </span>
+                      </p>
+                      <p>Última geração: <span className="font-semibold text-slate-700">{formatTimestamp(referenceBaseStatus.packageGeneratedAt)}</span></p>
+                      <p>
+                        Assinatura: <span className="font-semibold text-slate-700">
+                          {referenceBaseStatus.signature.fileCount} arquivo(s), {formatBytes(referenceBaseStatus.signature.totalBytes)}
+                        </span>
+                      </p>
+                      {referenceBaseStatus.stats && (
+                        <p>
+                          OCR/base útil: <span className="font-semibold text-slate-700">{referenceBaseStatus.stats.nonEmptyTextFiles}</span> com texto,
+                          <span className="font-semibold text-slate-700"> {referenceBaseStatus.stats.emptyTextFiles}</span> vazios
+                        </p>
+                      )}
+                    </div>
+                  )}
+
+                  {referenceBaseSyncInfo && (
+                    <p className="text-[11px] text-emerald-700">
+                      Último sync: {referenceBaseSyncInfo.refreshed ? 'base atualizada' : 'cache reaproveitado'}
+                      {referenceBaseSyncInfo.packageGeneratedAt ? ` (${formatTimestamp(referenceBaseSyncInfo.packageGeneratedAt)})` : ''}.
+                    </p>
+                  )}
+
+                  {referenceBaseStatusError && (
+                    <p className="text-[11px] text-rose-700">{referenceBaseStatusError}</p>
+                  )}
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Caso por Subpasta Commitada</label>
