@@ -116,7 +116,7 @@ export default function AuditLogs({ activeCase, logs }: AuditLogsProps) {
 
             <div className="space-y-3.5 text-xs text-slate-600 leading-relaxed">
               <p>
-                A D. Menezes Legai AI segue diretrizes estritas de <strong>Explicabilidade da IA</strong> (Explainable AI - XAI). Cada parágrafo sugerido ou tese recomendada tem seus parâmetros mapeados.
+                A D. Menezes Legal AI segue diretrizes estritas de <strong>Explicabilidade da IA</strong> (Explainable AI - XAI). Cada parágrafo sugerido ou tese recomendada tem seus parâmetros mapeados.
               </p>
               
               <div className="p-3 bg-indigo-50 border border-indigo-100 rounded-lg flex gap-2">

@@ -134,7 +134,7 @@ export const geminiService = {
       const status = isError ? 'error' : 'processed';
       const snippet = isError 
         ? undefined 
-        : `[Trecho extraído por IA] Este documento refere-se ao arquivo "${doc.name}" anexado ao processo. Contém assinaturas eletrônicas válidas e foi indexado na base vetorial da D. Menezes Legai AI em ${new Date().toLocaleDateString('pt-BR')}.`;
+        : `[Trecho extraído por IA] Este documento refere-se ao arquivo "${doc.name}" anexado ao processo. Contém assinaturas eletrônicas válidas e foi indexado na base vetorial da D. Menezes Legal AI em ${new Date().toLocaleDateString('pt-BR')}.`;
 
       processedDocs.push({
         ...doc,

@@ -472,7 +472,7 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
               <div className="space-y-3">
                 <div className="p-3 bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded text-xs text-slate-600 flex gap-2">
                   <HelpCircle className="h-4.5 w-4.5 shrink-0 text-[#D4AF37]" />
-                  <span>A D. Menezes Legai AI irá sincronizar todos os documentos contidos no diretório compartilhado do Google Drive.</span>
+                  <span>A D. Menezes Legal AI irá sincronizar todos os documentos contidos no diretório compartilhado do Google Drive.</span>
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
