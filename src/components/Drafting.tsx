@@ -56,6 +56,7 @@ export default function Drafting({
       onOutlineUpdated(updated);
     } catch (err) {
       console.error('Error drafting chapter:', err);
+      alert('Falha na geração do capítulo em modo real. Verifique status da Gemini API (quota/chave) no painel lateral.');
     } finally {
       setIsGenerating(prev => ({ ...prev, [item.id]: false }));
     }

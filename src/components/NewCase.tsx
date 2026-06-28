@@ -38,6 +38,10 @@ interface ExtractedCaseMetadata {
   legalArea?: string;
 }
 
+function hasCriticalMetadata(meta: ExtractedCaseMetadata): boolean {
+  return Boolean(meta.number && meta.court && meta.plaintiff && meta.defendant);
+}
+
 const API_BASE_URL = (import.meta as any).env?.VITE_API_BASE_URL || 'http://localhost:8787';
 
 function isNotebooklmPath(rawPath: string): boolean {
@@ -52,6 +56,7 @@ function isNotebooklmPath(rawPath: string): boolean {
 
 export default function NewCase({ onCaseCreated }: NewCaseProps) {
   const autoCreatedFolderRef = useRef<Set<string>>(new Set());
+  const [autoCreatedFolderIds, setAutoCreatedFolderIds] = useState<string[]>([]);
 
   // Form fields state
   const [number, setNumber] = useState('');
@@ -80,6 +85,7 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
     contentSnippet?: string;
   }>>([]);
   const selectedFolderCase = folderCases.find(item => item.id === selectedFolderCaseId) || null;
+  const isAutoCreatedForSelectedFolder = selectedFolderCase ? autoCreatedFolderIds.includes(selectedFolderCase.id) : false;
 
   // Documents state
   const [selectedFiles, setSelectedFiles] = useState<{ name: string; size: string; type: string }[]>([]);
@@ -216,11 +222,16 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
         setObservations(`Caso carregado da subpasta commitada: ${selectedFolderCase.relativePath}. Base notebooklm/skills aplicada (SKILL.txt). Pré-processamento: ${payload.processed}/${payload.total} arquivo(s) com sucesso.`);
 
         if (!autoCreatedFolderRef.current.has(selectedFolderCase.id)) {
-          autoCreatedFolderRef.current.add(selectedFolderCase.id);
-          createCaseFromPreprocessedFolder(selectedFolderCase, docs, {
-            processed: Number(payload.processed ?? 0),
-            total: Number(payload.total ?? docs.length),
-          }, extractedMetadata);
+          if (hasCriticalMetadata(extractedMetadata)) {
+            autoCreatedFolderRef.current.add(selectedFolderCase.id);
+            setAutoCreatedFolderIds((prev) => (prev.includes(selectedFolderCase.id) ? prev : [...prev, selectedFolderCase.id]));
+            createCaseFromPreprocessedFolder(selectedFolderCase, docs, {
+              processed: Number(payload.processed ?? 0),
+              total: Number(payload.total ?? docs.length),
+            }, extractedMetadata);
+          } else {
+            setFolderPreprocessError('Pré-processamento concluído, mas não foi possível extrair metadados críticos (número, juízo, autor e réu). Revise os campos antes de criar o caso.');
+          }
         }
       } catch (error) {
         if (!isCancelled) {
@@ -770,15 +781,17 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
             <button
               id="newcase-submit-btn"
               type="submit"
-              disabled={storageType === 'local'}
+              disabled={storageType === 'local' && isAutoCreatedForSelectedFolder}
               className={`w-full flex items-center justify-center gap-2 py-3 rounded-md text-sm font-bold transition-all shadow border mt-4 ${
-                storageType === 'local'
+                storageType === 'local' && isAutoCreatedForSelectedFolder
                   ? 'bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed'
                   : 'bg-[#002B36] hover:bg-[#004050] text-white border-[#D4AF37]/30 hover:border-[#D4AF37]/60 cursor-pointer'
               }`}
             >
-              {storageType === 'local' ? 'Caso criado automaticamente no pré-processamento' : 'Criar Caso & Sincronizar Fontes'}
-              <ArrowRight className={`h-4.5 w-4.5 ${storageType === 'local' ? 'text-slate-400' : 'text-[#D4AF37]'}`} />
+              {storageType === 'local' && isAutoCreatedForSelectedFolder
+                ? 'Caso criado automaticamente no pré-processamento'
+                : 'Criar Caso & Sincronizar Fontes'}
+              <ArrowRight className={`h-4.5 w-4.5 ${storageType === 'local' && isAutoCreatedForSelectedFolder ? 'text-slate-400' : 'text-[#D4AF37]'}`} />
             </button>
           </div>
         </div>

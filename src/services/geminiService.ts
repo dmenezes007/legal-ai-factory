@@ -320,8 +320,8 @@ export const geminiService = {
     caseData: LegalCase,
     selectedTheses: LegalThesis[]
   ): Promise<{ outline: OutlineItem[]; logs: AuditLog[] }> {
+    const mode = getExecutionMode();
     try {
-      const mode = getExecutionMode();
       const apiResult = await postJson<{ outline: OutlineItem[] }>('/api/skill/architecture', {
         caseData,
         selectedTheses,
@@ -342,8 +342,11 @@ export const geminiService = {
       };
 
       return { outline: apiResult.outline, logs: [log] };
-    } catch {
-      // fallback mock abaixo
+    } catch (error) {
+      if (mode === 'real') {
+        throw error;
+      }
+      // fallback mock abaixo (somente modo simulado)
     }
 
     await delay(1200);
@@ -444,8 +447,8 @@ São Paulo, ${new Date().toLocaleDateString('pt-BR')}.`,
     chapter: OutlineItem,
     selectedTheses: LegalThesis[]
   ): Promise<{ draftedContent: string; log: AuditLog }> {
+    const mode = getExecutionMode();
     try {
-      const mode = getExecutionMode();
       const apiResult = await postJson<{ draftedContent: string }>('/api/skill/draft', {
         caseData,
         chapter,
@@ -467,8 +470,11 @@ São Paulo, ${new Date().toLocaleDateString('pt-BR')}.`,
       };
 
       return { draftedContent: apiResult.draftedContent, log: apiLog };
-    } catch {
-      // fallback mock abaixo
+    } catch (error) {
+      if (mode === 'real') {
+        throw error;
+      }
+      // fallback mock abaixo (somente modo simulado)
     }
 
     await delay(1800); // Simulate high-quality drafting delay

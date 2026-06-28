@@ -25,7 +25,7 @@ export function compileArchitecturePrompt(input: CompileArchitectureInput): Comp
       "Voce e um arquiteto juridico. Gere somente JSON valido com capitulos de contestacao no padrao brasileiro formal.",
     user: JSON.stringify(
       {
-        objective: "Gerar outline com 4 capitulos em ordem estrategica.",
+        objective: "Gerar outline completo da contestacao em ordem estrategica, alinhado ao SKILL central (preambulo, sintese, delimitacao, preliminares, merito, prequestionamento e pedidos finais).",
         caseData: input.caseData,
         plannerChapters: input.plan.chapters,
         knowledgeObjects: input.knowledgeObjects,
