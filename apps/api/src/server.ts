@@ -161,8 +161,8 @@ app.post("/api/export/docx", async (req, res) => {
   }
 });
 
-const port = Number(process.env.API_PORT ?? 8787);
+const port = Number(process.env.PORT ?? process.env.API_PORT ?? 8787);
 app.listen(port, () => {
   // eslint-disable-next-line no-console
-  console.log(`[legal-ai-factory] API local em http://localhost:${port}`);
+  console.log(`[legal-ai-factory] API listening on port ${port}`);
 });
