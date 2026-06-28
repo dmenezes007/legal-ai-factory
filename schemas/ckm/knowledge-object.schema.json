@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://legal-ai-factory.local/schemas/ckm/knowledge-object.schema.json",
+  "title": "CKM Knowledge Object",
+  "type": "object",
+  "required": ["id", "type", "source", "content", "version", "createdAt"],
+  "properties": {
+    "id": { "type": "string" },
+    "type": {
+      "type": "string",
+      "enum": [
+        "fato",
+        "argumento",
+        "fundamento",
+        "doutrina",
+        "jurisprudencia",
+        "legislacao",
+        "template",
+        "caso_exemplo",
+        "desconhecido"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "required": ["fileName", "category"],
+      "properties": {
+        "fileName": { "type": "string" },
+        "category": { "type": "string" },
+        "path": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "content": { "type": "string" },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "version": { "type": "string" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": true
+}

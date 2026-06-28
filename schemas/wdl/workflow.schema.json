@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://legal-ai-factory.local/schemas/wdl/workflow.schema.json",
+  "title": "Workflow Definition Language",
+  "type": "object",
+  "required": [
+    "metadata",
+    "identity",
+    "purpose",
+    "trigger",
+    "inputs",
+    "outputs",
+    "dependencies",
+    "preconditions",
+    "states",
+    "steps",
+    "decision_points",
+    "human_approval_points",
+    "retry_policies",
+    "error_handling",
+    "monitoring",
+    "versioning"
+  ],
+  "properties": {
+    "metadata": { "type": "object" },
+    "identity": { "type": "object" },
+    "purpose": { "type": "object" },
+    "trigger": { "type": "object" },
+    "inputs": { "type": "array", "minItems": 1 },
+    "outputs": { "type": "array", "minItems": 1 },
+    "dependencies": { "type": "array" },
+    "preconditions": { "type": "array" },
+    "states": { "type": "array", "minItems": 1 },
+    "steps": { "type": "array", "minItems": 1 },
+    "decision_points": { "type": "array" },
+    "human_approval_points": { "type": "array" },
+    "retry_policies": { "type": "object" },
+    "error_handling": { "type": "object" },
+    "monitoring": { "type": "object" },
+    "versioning": { "type": "object" }
+  },
+  "additionalProperties": true
+}

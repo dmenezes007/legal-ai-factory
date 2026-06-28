@@ -1,0 +1,121 @@
+metadata:
+  id: workflow.contestacao-saude.v1
+  name: Workflow Contestacao Saude MVP
+  category: workflow
+  area: direito_da_saude
+  version: "0.1.0"
+  author: legal-ai-factory
+  status: draft
+
+identity:
+  skill_id: skill.contestacao-saude
+
+purpose:
+  objective: Executar o fluxo ponta a ponta de contestacao saude para MVP local.
+
+trigger:
+  type: manual
+  event: CaseCreated
+
+inputs:
+  - case_metadata
+  - sources_original
+  - selected_skill
+
+outputs:
+  - defense_architecture
+  - draft_blocks
+  - final_docx
+
+dependencies:
+  - local_ingestion_service
+  - local_docx_generator
+
+preconditions:
+  - case_created
+  - sources_available
+
+states:
+  - Created
+  - Ready
+  - Running
+  - Review
+  - Completed
+  - Failed
+
+steps:
+  - id: step-01-ingestao
+    name: ingestao
+    objective: processar fontes em knowledge/sources
+    agent: Document Analyst
+    emits:
+      - SourcesIngested
+
+  - id: step-02-diagnostico
+    name: diagnostico
+    objective: estruturar fatos e pontos defensivos
+    agent: Legal Strategist
+    emits:
+      - DiagnosisGenerated
+
+  - id: step-03-arquitetura
+    name: arquitetura_da_defesa
+    objective: montar capitulos da contestacao
+    agent: Legal Strategist
+    emits:
+      - ArchitectureGenerated
+
+  - id: step-04-redacao
+    name: redacao_dos_capitulos
+    objective: redigir blocos da peca
+    agent: Draft Composer
+    emits:
+      - DraftGenerated
+
+  - id: step-05-revisao
+    name: revisao
+    objective: revisar e ajustar blocos
+    agent: Quality Reviewer
+    human_approval: true
+    emits:
+      - DraftReviewed
+
+  - id: step-06-docx
+    name: geracao_docx
+    objective: gerar arquivo final em knowledge/cases/<case-id>/output
+    agent: Draft Composer
+    emits:
+      - DOCXGenerated
+
+decision_points:
+  - id: dp-01
+    question: ha fontes processadas suficientes?
+    yes: step-02-diagnostico
+    no: step-01-ingestao
+
+human_approval_points:
+  - after: step-03-arquitetura
+  - after: step-05-revisao
+
+retry_policies:
+  default:
+    max_attempts: 2
+    interval_ms: 1000
+    strategy: fixed
+
+error_handling:
+  recoverable: retry
+  fatal: fail_and_log
+
+monitoring:
+  logs: structured
+  metrics:
+    - step_duration_ms
+    - success_rate
+    - simulated_data_flag
+
+versioning:
+  changelog:
+    - version: "0.1.0"
+      date: "2026-06-28"
+      changes: workflow MVP inicial

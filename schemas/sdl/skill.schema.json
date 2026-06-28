@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://legal-ai-factory.local/schemas/sdl/skill.schema.json",
+  "title": "Skill Definition Language",
+  "type": "object",
+  "required": [
+    "metadata",
+    "purpose",
+    "scope",
+    "inputs",
+    "outputs",
+    "preconditions",
+    "knowledge_sources",
+    "capabilities",
+    "cognitive_pipeline",
+    "agents",
+    "states",
+    "validation_rules",
+    "workflow_binding",
+    "events",
+    "human_review",
+    "versioning"
+  ],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["id", "name", "version", "status"],
+      "properties": {
+        "id": { "type": "string", "minLength": 3 },
+        "name": { "type": "string", "minLength": 3 },
+        "version": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "purpose": { "type": "object" },
+    "scope": { "type": "object" },
+    "inputs": { "type": "object" },
+    "outputs": { "type": "array", "minItems": 1 },
+    "preconditions": { "type": "array" },
+    "knowledge_sources": { "type": "object" },
+    "capabilities": { "type": "array", "minItems": 1 },
+    "cognitive_pipeline": { "type": "array", "minItems": 1 },
+    "agents": { "type": "array", "minItems": 1 },
+    "states": { "type": "array", "minItems": 1 },
+    "validation_rules": { "type": "array", "minItems": 1 },
+    "workflow_binding": { "type": "object" },
+    "events": { "type": "array", "minItems": 1 },
+    "human_review": { "type": "object" },
+    "versioning": { "type": "object" }
+  },
+  "additionalProperties": true
+}

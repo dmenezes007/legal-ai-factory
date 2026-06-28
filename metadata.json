@@ -1,0 +1,6 @@
+{
+  "name": "Legal AI Factory",
+  "description": "Plataforma de produção jurídica assistida por inteligência artificial para elaboração automática de contestação estruturada.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

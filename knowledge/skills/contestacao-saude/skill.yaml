@@ -1,0 +1,135 @@
+metadata:
+  id: skill.contestacao-saude
+  name: Contestacao Saude - Operadora
+  category: contestacao
+  legal_area: direito_da_saude
+  author: legal-ai-factory
+  organization: legal-ai-factory
+  created_at: "2026-06-28"
+  version: "0.1.0"
+  status: draft
+  license: internal
+  tags:
+    - contestacao
+    - saude
+    - operadora
+
+purpose:
+  objective: Produzir contestacao juridica completa para demandas de saude suplementar.
+  deliverable: Documento DOCX com capitulos juridicos e pedidos finais.
+
+scope:
+  does:
+    - Analisa fontes do caso
+    - Estrutura arquitetura da defesa
+    - Redige capitulos
+    - Gera DOCX formatado
+  does_not:
+    - Protocola automaticamente
+    - Assina eletronicamente
+    - Decide juridicamente sem revisao humana
+  limitations:
+    - Dependencia de qualidade das fontes processadas
+
+inputs:
+  required:
+    - case_metadata
+    - processed_sources
+    - selected_skill
+  optional:
+    - strategy_notes
+    - user_constraints
+  derived:
+    - diagnosis
+    - defense_architecture
+
+outputs:
+  - type: defense_architecture
+    format: json
+  - type: legal_draft
+    format: blocks
+  - type: final_document
+    format: docx
+
+preconditions:
+  - sources_ingested
+  - skill_selected
+  - case_created
+
+knowledge_sources:
+  required_categories:
+    - modelo_peca
+    - mapa_de_teses
+    - jurisprudencia
+    - legislacao
+  optional_categories:
+    - doutrina
+    - template
+
+capabilities:
+  - ingestion
+  - classification
+  - architecture_generation
+  - chapter_drafting
+  - legal_review_support
+  - docx_generation
+
+cognitive_pipeline:
+  - ingestao
+  - diagnostico
+  - arquitetura
+  - redacao
+  - revisao
+  - entrega
+
+agents:
+  - name: Document Analyst
+    responsibility: analisar fontes processadas
+  - name: Legal Strategist
+    responsibility: estruturar defesa
+  - name: Draft Composer
+    responsibility: redigir capitulos
+  - name: Quality Reviewer
+    responsibility: validar coerencia e completude
+
+states:
+  - Draft
+  - Validated
+  - Approved
+  - Deprecated
+  - Archived
+
+validation_rules:
+  - id: vr-001
+    description: Toda afirmacao relevante deve referenciar fonte do caso ou base normativa
+  - id: vr-002
+    description: Documento final deve conter introducao, fundamentacao e pedidos
+  - id: vr-003
+    description: Se houver dados simulados, incluir aviso explicito no resultado
+
+workflow_binding:
+  default_workflow: workflow.contestacao-saude.v1
+  compatible_workflows:
+    - workflow.contestacao-saude.v1
+
+events:
+  - SkillStarted
+  - SkillCompleted
+  - SkillFailed
+  - SkillReviewed
+
+human_review:
+  required: true
+  reviewer_role: advogado_revisor
+  checkpoints:
+    - apos_arquitetura
+    - apos_redacao
+    - antes_exportacao
+
+versioning:
+  schema_version: "1.0"
+  compatibility: backward-compatible
+  changelog:
+    - version: "0.1.0"
+      date: "2026-06-28"
+      changes: baseline MVP

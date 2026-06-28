@@ -1,0 +1,61 @@
+openapi: 3.1.0
+info:
+  title: Legal AI Factory Local API
+  version: 0.1.0
+  description: API minima local para ingestao, execucao da skill e geracao DOCX do MVP.
+servers:
+  - url: http://localhost:8787
+paths:
+  /api/health:
+    get:
+      summary: Healthcheck da API local
+      responses:
+        "200":
+          description: OK
+  /api/ingest:
+    post:
+      summary: Processa knowledge/sources/original e gera arquivos processados + metadados
+      responses:
+        "200":
+          description: Ingestao concluida
+  /api/skill/architecture:
+    post:
+      summary: Gera arquitetura inicial da defesa
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Arquitetura gerada
+  /api/skill/draft:
+    post:
+      summary: Gera texto de um capitulo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Capitulo redigido
+  /api/export/docx:
+    post:
+      summary: Gera e devolve arquivo DOCX
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Arquivo DOCX gerado
+          content:
+            application/vnd.openxmlformats-officedocument.wordprocessingml.document:
+              schema:
+                type: string
+                format: binary
