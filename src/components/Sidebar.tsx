@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   Scale, 
   LayoutDashboard, 
@@ -13,6 +13,15 @@ import {
   ShieldAlert
 } from 'lucide-react';
 import { LegalCase } from '../types';
+
+const API_BASE_URL = (import.meta as any).env?.VITE_API_BASE_URL || 'http://localhost:8787';
+
+interface HealthPayload {
+  status: string;
+  geminiConfigured: boolean;
+  geminiRuntime?: 'online' | 'not_configured' | 'quota_exceeded';
+  timestamp?: string;
+}
 
 interface SidebarProps {
   activeTab: string;
@@ -34,6 +43,40 @@ export default function Sidebar({
   setIntegrationMode
 }: SidebarProps) {
   const activeCase = cases.find(c => c.id === selectedCaseId);
+  const [healthStatus, setHealthStatus] = useState<HealthPayload | null>(null);
+  const [isHealthLoading, setIsHealthLoading] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadHealth = async () => {
+      setIsHealthLoading(true);
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/health`);
+        const payload = await response.json();
+        if (!cancelled) {
+          setHealthStatus(payload as HealthPayload);
+        }
+      } catch {
+        if (!cancelled) {
+          setHealthStatus(null);
+        }
+      } finally {
+        if (!cancelled) {
+          setIsHealthLoading(false);
+        }
+      }
+    };
+
+    loadHealth();
+    const timer = window.setInterval(loadHealth, 20000);
+    return () => {
+      cancelled = true;
+      window.clearInterval(timer);
+    };
+  }, []);
+
+  const geminiRuntime = healthStatus?.geminiRuntime || (healthStatus?.geminiConfigured ? 'online' : 'not_configured');
 
   // Helper to determine step status badge for navigation
   const getStepStatus = (step: string): { label: string; bg: string; text: string } | null => {
@@ -200,6 +243,28 @@ export default function Sidebar({
           >
             Real API
           </button>
+        </div>
+
+        <div className="mt-2 p-2 rounded border border-[#003D4D] bg-[#002B36]">
+          <div className="flex items-center justify-between text-[10px]">
+            <span className="text-[#7f9aa1] font-semibold">GEMINI API</span>
+            {isHealthLoading ? (
+              <span className="text-[#7f9aa1]">checando...</span>
+            ) : geminiRuntime === 'online' ? (
+              <span className="text-emerald-400 font-bold">online</span>
+            ) : geminiRuntime === 'quota_exceeded' ? (
+              <span className="text-amber-300 font-bold">quota limitada</span>
+            ) : (
+              <span className="text-rose-300 font-bold">inativa</span>
+            )}
+          </div>
+          <p className="mt-1 text-[10px] text-[#9db0b6]">
+            {geminiRuntime === 'online'
+              ? 'Geracao textual com LLM habilitada no backend.'
+              : geminiRuntime === 'quota_exceeded'
+              ? 'Chave ativa, mas com limite de cota no momento.'
+              : 'Backend sem chave Gemini configurada.'}
+          </p>
         </div>
 
         {integrationMode === 'real' && (

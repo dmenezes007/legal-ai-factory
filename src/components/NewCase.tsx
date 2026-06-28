@@ -28,6 +28,16 @@ interface FolderCaseSource {
   }>;
 }
 
+interface ExtractedCaseMetadata {
+  number?: string;
+  court?: string;
+  plaintiff?: string;
+  defendant?: string;
+  client?: string;
+  rite?: string;
+  legalArea?: string;
+}
+
 const API_BASE_URL = (import.meta as any).env?.VITE_API_BASE_URL || 'http://localhost:8787';
 
 function isNotebooklmPath(rawPath: string): boolean {
@@ -146,6 +156,32 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
           return;
         }
 
+        const extractedMetadata: ExtractedCaseMetadata = payload.caseMetadata || {};
+        if (extractedMetadata.number) {
+          setNumber(extractedMetadata.number);
+        }
+        if (extractedMetadata.court) {
+          setCourt(extractedMetadata.court);
+        }
+        if (extractedMetadata.plaintiff) {
+          setPlaintiff(extractedMetadata.plaintiff);
+        }
+        if (extractedMetadata.defendant) {
+          setDefendant(extractedMetadata.defendant);
+          if (!extractedMetadata.client) {
+            setClient(extractedMetadata.defendant);
+          }
+        }
+        if (extractedMetadata.client) {
+          setClient(extractedMetadata.client);
+        }
+        if (extractedMetadata.rite) {
+          setRite(extractedMetadata.rite);
+        }
+        if (extractedMetadata.legalArea) {
+          setLegalArea(extractedMetadata.legalArea);
+        }
+
         const metadataByName = new Map<string, any>();
         (payload.items || []).forEach((item: any) => {
           metadataByName.set(String(item.fileName || '').toLowerCase(), item);
@@ -184,7 +220,7 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
           createCaseFromPreprocessedFolder(selectedFolderCase, docs, {
             processed: Number(payload.processed ?? 0),
             total: Number(payload.total ?? docs.length),
-          });
+          }, extractedMetadata);
         }
       } catch (error) {
         if (!isCancelled) {
@@ -282,25 +318,26 @@ export default function NewCase({ onCaseCreated }: NewCaseProps) {
       contentSnippet?: string;
     }>,
     summary: { processed: number; total: number },
+    metadata?: ExtractedCaseMetadata,
   ) => {
     const caseId = 'case_' + Math.random().toString(36).substr(2, 9);
     const processNumberMatch = folderCase.displayName.match(/\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}/);
     const processNumber = processNumberMatch ? processNumberMatch[0] : folderCase.displayName;
 
-    const derivedPlaintiff = plaintiff.trim() || 'Parte autora a definir';
-    const derivedDefendant = defendant.trim() || 'Parte ré a definir';
-    const derivedClient = client.trim() || derivedDefendant;
-    const derivedCourt = court.trim() || 'Juízo a definir';
+    const derivedPlaintiff = metadata?.plaintiff?.trim() || plaintiff.trim() || 'Parte autora a definir';
+    const derivedDefendant = metadata?.defendant?.trim() || defendant.trim() || 'Parte ré a definir';
+    const derivedClient = metadata?.client?.trim() || client.trim() || derivedDefendant;
+    const derivedCourt = metadata?.court?.trim() || court.trim() || 'Juízo a definir';
 
     const autoCase: LegalCase = {
       id: caseId,
-      number: processNumber,
+      number: metadata?.number?.trim() || processNumber,
       court: derivedCourt,
-      rite,
+      rite: metadata?.rite?.trim() || rite,
       plaintiff: derivedPlaintiff,
       defendant: derivedDefendant,
       client: derivedClient,
-      legalArea,
+      legalArea: metadata?.legalArea?.trim() || legalArea,
       selectedSkillId,
       sourceMode: 'repository_folder',
       sourceFolder: folderCase.relativePath,

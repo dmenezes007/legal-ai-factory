@@ -69,6 +69,16 @@ const KNOWLEDGE_PROCESSED = path.join(ROOT, "knowledge", "sources", "processed")
 const KNOWLEDGE_METADATA = path.join(ROOT, "knowledge", "sources", "metadata");
 const SUPPORTED_EXTENSIONS = new Set([".txt", ".md", ".pdf", ".docx"]);
 
+interface ExtractedCaseMetadata {
+  number?: string;
+  court?: string;
+  plaintiff?: string;
+  defendant?: string;
+  client?: string;
+  rite?: string;
+  legalArea?: string;
+}
+
 function toPosixPath(rawPath: string): string {
   return rawPath.replace(/\\/g, "/");
 }
@@ -146,12 +156,151 @@ function mergeIngestionSummaries(
   };
 }
 
+function firstRegexValue(patterns: RegExp[], texts: string[]): string | undefined {
+  for (const text of texts) {
+    for (const pattern of patterns) {
+      const match = pattern.exec(text);
+      if (match && match[1]) {
+        const cleaned = match[1].replace(/\s+/g, " ").trim();
+        if (cleaned.length >= 3) {
+          return cleaned;
+        }
+      }
+    }
+  }
+  return undefined;
+}
+
+function inferLegalAreaFromTexts(texts: string[]): string | undefined {
+  const bag = texts.join("\n").toLowerCase();
+  if (/trabalh|clt|reclama[çc][aã]o trabalhista/.test(bag)) {
+    return "Direito do Trabalho";
+  }
+  if (/consumidor|cdc|rela[çc][aã]o de consumo/.test(bag)) {
+    return "Cível / Consumidor";
+  }
+  if (/imobili[áa]ri|compra e venda|lote/.test(bag)) {
+    return "Direito Imobiliário";
+  }
+  if (/tribut[áa]ri|icms|ipi|iss|execu[çc][aã]o fiscal/.test(bag)) {
+    return "Direito Tributário";
+  }
+  if (/plano de sa[úu]de|ans|operadora|hospital|procedimento/.test(bag)) {
+    return "Direito Médico / de Saúde";
+  }
+  return undefined;
+}
+
+function inferRiteFromTexts(texts: string[]): string | undefined {
+  const bag = texts.join("\n").toLowerCase();
+  if (/juizado especial|jec|lei\s*9\.099/.test(bag)) {
+    return "Juizado Especial Cível";
+  }
+  if (/procedimento comum/.test(bag)) {
+    return "Procedimento Comum Cível";
+  }
+  if (/rito sumar[íi]ssimo/.test(bag)) {
+    return "Rito Sumaríssimo";
+  }
+  return undefined;
+}
+
+async function extractCaseMetadataFromSummary(
+  summary: Awaited<ReturnType<typeof ingestKnowledgeSources>> | undefined,
+): Promise<ExtractedCaseMetadata> {
+  if (!summary || summary.items.length === 0) {
+    return {};
+  }
+
+  const texts: string[] = [];
+  for (const item of summary.items) {
+    try {
+      const raw = await fs.readFile(item.processedPath, "utf8");
+      if (raw.trim().length > 0) {
+        texts.push(raw.slice(0, 8000));
+      }
+    } catch {
+      // Ignora arquivos sem leitura util para metadados.
+    }
+  }
+
+  const number = firstRegexValue([/(\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4})/], texts);
+  const court = firstRegexValue(
+    [
+      /(?:ju[ií]zo|vara|tribunal)\s*[:\-]?\s*([^\n.;]{8,180})/i,
+      /((?:\d{1,2}ª?\s+vara[^\n.;]{4,180}))/i,
+    ],
+    texts,
+  );
+  const plaintiff = firstRegexValue(
+    [
+      /(?:autor(?:a)?|requerente|impugnante)\s*[:\-]\s*([^\n.;]{3,140})/i,
+      /proposta\s+por\s+([^\n,.;]{3,140})/i,
+    ],
+    texts,
+  );
+  const defendant = firstRegexValue(
+    [
+      /(?:r[ée]u|requerid[oa]|demandad[oa])\s*[:\-]\s*([^\n.;]{3,140})/i,
+      /em\s+face\s+de\s+([^\n,.;]{3,140})/i,
+    ],
+    texts,
+  );
+
+  const rite = inferRiteFromTexts(texts);
+  const legalArea = inferLegalAreaFromTexts(texts);
+
+  return {
+    number,
+    court,
+    plaintiff,
+    defendant,
+    client: defendant,
+    rite,
+    legalArea,
+  };
+}
+
+function getGeminiRuntimeStatus(): {
+  configured: boolean;
+  runtime: "online" | "not_configured" | "quota_exceeded";
+  lastIssue?: string;
+} {
+  const configured = Boolean(process.env.GEMINI_API_KEY);
+  if (!configured) {
+    return { configured, runtime: "not_configured" };
+  }
+
+  const recentFailure = apiLogs.find((entry) => {
+    const event = String(entry.event ?? "");
+    if (!event.endsWith("_failed")) {
+      return false;
+    }
+
+    const errorText = String(entry.error ?? "").toLowerCase();
+    return /429|resource_exhausted|quota exceeded/.test(errorText);
+  });
+
+  if (recentFailure) {
+    return {
+      configured,
+      runtime: "quota_exceeded",
+      lastIssue: String(recentFailure.error ?? ""),
+    };
+  }
+
+  return { configured, runtime: "online" };
+}
+
 app.get("/api/health", (_req, res) => {
   pushLog("healthcheck", {});
+  const gemini = getGeminiRuntimeStatus();
   res.json({
     status: "ok",
     service: "legal-ai-factory-local-api",
-    geminiConfigured: Boolean(process.env.GEMINI_API_KEY),
+    geminiConfigured: gemini.configured,
+    geminiRuntime: gemini.runtime,
+    geminiLastIssue: gemini.lastIssue,
     timestamp: new Date().toISOString(),
   });
 });
@@ -185,6 +334,10 @@ app.post("/api/ingest", async (req, res) => {
     );
 
     const summary = mergeIngestionSummaries(summaries);
+    const scopedSummary = summaries.find(
+      (entry) => path.resolve(entry.sourceDir) === path.resolve(scopedSourceDir),
+    );
+    const caseMetadata = await extractCaseMetadataFromSummary(scopedSummary);
 
     pushLog("ingestion_completed", {
       sourceDir: toPosixPath(path.relative(ROOT, scopedSourceDir)),
@@ -193,7 +346,7 @@ app.post("/api/ingest", async (req, res) => {
       processed: summary.processed,
       errors: summary.errors,
     });
-    res.json(summary);
+    res.json({ ...summary, caseMetadata });
   } catch (error) {
     pushLog("ingestion_failed", { error: error instanceof Error ? error.message : "unknown" });
     res.status(500).json({
