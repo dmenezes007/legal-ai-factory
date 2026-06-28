@@ -40,6 +40,38 @@ npm run demo:case
 npm test
 ```
 
+### Benchmark automatico por caso
+
+Endpoint para medir velocidade, precisao e consistencia do pipeline e comparar com baseline externo:
+
+```bash
+curl -X POST http://localhost:8787/api/benchmark/run \
+  -H "Content-Type: application/json" \
+  -d '{
+    "caseData": {
+      "id": "bench-001",
+      "number": "1000000-00.2026.8.26.0001",
+      "court": "1a Vara Civel",
+      "plaintiff": "Parte Autora",
+      "defendant": "Parte Re",
+      "client": "Parte Re"
+    },
+    "options": {
+      "iterations": 2,
+      "mode": "mock",
+      "simulatedData": true,
+      "baseline": {
+        "name": "NotebookLM",
+        "speedMs": 4500,
+        "precision": 0.72,
+        "consistency": 0.70
+      }
+    }
+  }'
+```
+
+Resposta: relatorio completo com medias, p95, score de precisao, score de consistencia e deltas contra baseline.
+
 ### Modo mock e modo real
 
 - Modo mock: funciona sem chave de API.

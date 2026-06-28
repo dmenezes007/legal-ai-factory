@@ -3,3 +3,8 @@ export * from "./classifier";
 export * from "./ingestion";
 export * from "./docxGenerator";
 export * from "./skillRunner";
+export * from "./aiGateway";
+export * from "./planner";
+export * from "./promptCompiler";
+export * from "./reviewEngine";
+export * from "./benchmark";

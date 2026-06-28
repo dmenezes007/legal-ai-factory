@@ -36,6 +36,23 @@ async function postJson<T>(path: string, payload: unknown): Promise<T> {
  */
 export const geminiService = {
   async autoReviewChapter(content: string): Promise<string> {
+    try {
+      const mode = getExecutionMode();
+      const review = await postJson<{ reviewedContent: string }>('/api/skill/review', {
+        content,
+        options: {
+          mode,
+          simulatedData: mode !== 'real'
+        }
+      });
+
+      if (review.reviewedContent && review.reviewedContent.trim().length > 0) {
+        return review.reviewedContent;
+      }
+    } catch {
+      // fallback local
+    }
+
     await delay(300);
 
     return content

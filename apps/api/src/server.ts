@@ -7,6 +7,8 @@ import {
   generateArchitecture,
   generateLegalDocx,
   ingestKnowledgeSources,
+  runBenchmarkCase,
+  reviewChapter,
 } from "../../../packages/core/src/index";
 
 const app = express();
@@ -133,6 +135,51 @@ app.post("/api/skill/draft", async (req, res) => {
   }
 });
 
+app.post("/api/skill/review", async (req, res) => {
+  try {
+    const { caseData, chapter, content, options } = req.body;
+    const fallbackCase = {
+      id: "review-case",
+      number: "N/A",
+      court: "N/A",
+      plaintiff: "N/A",
+      defendant: "N/A",
+      client: "N/A",
+    };
+    const fallbackChapter = {
+      id: "review-chapter",
+      title: "Capitulo em revisao",
+      sectionType: "merito",
+      order: 1,
+      content: "",
+    };
+
+    const result = await reviewChapter(
+      caseData ?? fallbackCase,
+      chapter ?? fallbackChapter,
+      String(content ?? ""),
+      {
+        mode: options?.mode === "real" ? "real" : "mock",
+        simulatedData: options?.simulatedData !== false,
+      },
+    );
+
+    pushLog("chapter_reviewed", {
+      caseId: (caseData ?? fallbackCase)?.id,
+      chapterId: (chapter ?? fallbackChapter)?.id,
+      approved: result.approved,
+      mode: options?.mode ?? "mock",
+    });
+
+    res.json(result);
+  } catch (error) {
+    pushLog("chapter_review_failed", { error: error instanceof Error ? error.message : "unknown" });
+    res.status(500).json({
+      error: error instanceof Error ? error.message : "Erro ao revisar capitulo",
+    });
+  }
+});
+
 app.post("/api/export/docx", async (req, res) => {
   try {
     const { caseData, outline, simulatedData } = req.body;
@@ -157,6 +204,42 @@ app.post("/api/export/docx", async (req, res) => {
     pushLog("docx_generation_failed", { error: error instanceof Error ? error.message : "unknown" });
     res.status(500).json({
       error: error instanceof Error ? error.message : "Erro ao gerar DOCX",
+    });
+  }
+});
+
+app.post("/api/benchmark/run", async (req, res) => {
+  try {
+    const { caseData, options } = req.body;
+    const fallbackCase = {
+      id: "benchmark-case",
+      number: "0000000-00.0000.0.00.0000",
+      court: "Juizo de Benchmark",
+      plaintiff: "Autor Benchmark",
+      defendant: "Reu Benchmark",
+      client: "Cliente Benchmark",
+    };
+
+    const report = await runBenchmarkCase(caseData ?? fallbackCase, {
+      iterations: Number(options?.iterations ?? 2),
+      mode: options?.mode === "real" ? "real" : "mock",
+      simulatedData: options?.simulatedData !== false,
+      baseline: options?.baseline,
+    });
+
+    pushLog("benchmark_completed", {
+      caseId: (caseData ?? fallbackCase).id,
+      iterations: report.iterations,
+      averageMs: report.speed.averageMs,
+      precision: report.precision.score,
+      consistency: report.consistency.score,
+    });
+
+    res.json(report);
+  } catch (error) {
+    pushLog("benchmark_failed", { error: error instanceof Error ? error.message : "unknown" });
+    res.status(500).json({
+      error: error instanceof Error ? error.message : "Erro ao executar benchmark",
     });
   }
 });
