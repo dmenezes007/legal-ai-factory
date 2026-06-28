@@ -59,6 +59,167 @@ export interface IngestionPaths {
   metadataDir: string;
 }
 
+interface CatalogEntry {
+  id: string;
+  title: string;
+  type: string;
+  category: string;
+  source_path: string;
+  processed_path: string;
+  status: "processed" | "error";
+  tags: string[];
+  related_skills: string[];
+  related_workflows: string[];
+  created_at: string;
+  updated_at: string;
+  provenance: {
+    ingestion_id: string;
+    source_format: string;
+    extracted: boolean;
+    extraction_warnings: string[];
+  };
+  notes: string;
+}
+
+interface IndexEntry {
+  id: string;
+  title: string;
+  type: string;
+  category: string;
+  source_path: string;
+  status: string;
+  tags: string[];
+  updated_at: string;
+}
+
+interface RelationshipsDoc {
+  nodes: Array<{ id: string; type: string; title: string }>;
+  edges: Array<{ source: string; target: string; relation: string }>;
+  updated_at: string;
+}
+
+async function readJsonSafe<T>(filePath: string, fallback: T): Promise<T> {
+  try {
+    const raw = await fs.readFile(filePath, "utf8");
+    return JSON.parse(raw) as T;
+  } catch {
+    return fallback;
+  }
+}
+
+function toWorkspaceRelative(targetPath: string): string {
+  const rel = path.relative(process.cwd(), targetPath).replace(/\\/g, "/");
+  return rel.length > 0 ? rel : targetPath.replace(/\\/g, "/");
+}
+
+function inferSkillLinks(fileName: string, category: string): string[] {
+  const lcName = fileName.toLowerCase();
+  if (lcName.includes("contestacao") || lcName.includes("saude") || category === "skill") {
+    return ["skill.contestacao-saude"];
+  }
+  return [];
+}
+
+function inferWorkflowLinks(skillLinks: string[]): string[] {
+  if (skillLinks.includes("skill.contestacao-saude")) {
+    return ["workflow.contestacao-saude.v1"];
+  }
+  return [];
+}
+
+async function updateKnowledgeGovernance(items: IngestionResult[], paths: IngestionPaths): Promise<void> {
+  const knowledgeDir = path.resolve(paths.sourceDir, "..", "..");
+  const catalogPath = path.join(knowledgeDir, "catalog.json");
+  const indexPath = path.join(knowledgeDir, "index.json");
+  const relationshipsPath = path.join(knowledgeDir, "relationships.json");
+
+  const existingCatalog = await readJsonSafe<CatalogEntry[]>(catalogPath, []);
+  const catalogBySource = new Map<string, CatalogEntry>();
+
+  for (const entry of existingCatalog) {
+    const absoluteSourcePath = path.join(process.cwd(), entry.source_path);
+    try {
+      await fs.access(absoluteSourcePath);
+      catalogBySource.set(entry.source_path, entry);
+    } catch {
+      // Remove registros orfaos quando a fonte original nao existe mais.
+    }
+  }
+
+  for (const item of items) {
+    const source_path = toWorkspaceRelative(item.originalPath);
+    const processed_path = toWorkspaceRelative(item.processedPath);
+    const now = new Date().toISOString();
+    const existing = catalogBySource.get(source_path);
+    const related_skills = inferSkillLinks(item.fileName, item.category);
+    const related_workflows = inferWorkflowLinks(related_skills);
+
+    const entry: CatalogEntry = {
+      id: existing?.id ?? `ko-${randomUUID()}`,
+      title: path.parse(item.fileName).name,
+      type: "knowledge_source",
+      category: item.category,
+      source_path,
+      processed_path,
+      status: item.extracted ? "processed" : "error",
+      tags: [item.category, item.extension.replace(".", "")],
+      related_skills,
+      related_workflows,
+      created_at: existing?.created_at ?? now,
+      updated_at: now,
+      provenance: {
+        ingestion_id: item.id,
+        source_format: item.extension,
+        extracted: item.extracted,
+        extraction_warnings: item.extractionWarnings,
+      },
+      notes: item.extracted
+        ? "Fonte processada e indexada pelo pipeline local."
+        : "Extracao parcial ou falha; revisar arquivo original.",
+    };
+
+    catalogBySource.set(source_path, entry);
+  }
+
+  const catalog = [...catalogBySource.values()].sort((a, b) => a.title.localeCompare(b.title));
+  const indexData: IndexEntry[] = catalog.map((entry) => ({
+    id: entry.id,
+    title: entry.title,
+    type: entry.type,
+    category: entry.category,
+    source_path: entry.source_path,
+    status: entry.status,
+    tags: entry.tags,
+    updated_at: entry.updated_at,
+  }));
+
+  const relationshipNodes = [
+    ...catalog.map((entry) => ({ id: entry.id, type: "knowledge_source", title: entry.title })),
+    { id: "skill.contestacao-saude", type: "skill", title: "Contestacao Saude" },
+    { id: "workflow.contestacao-saude.v1", type: "workflow", title: "Workflow Contestacao Saude MVP" },
+  ];
+
+  const relationshipEdges: RelationshipsDoc["edges"] = [];
+  for (const entry of catalog) {
+    for (const skillId of entry.related_skills) {
+      relationshipEdges.push({ source: entry.id, target: skillId, relation: "supports_skill" });
+    }
+    for (const workflowId of entry.related_workflows) {
+      relationshipEdges.push({ source: entry.id, target: workflowId, relation: "supports_workflow" });
+    }
+  }
+
+  const relationships: RelationshipsDoc = {
+    nodes: relationshipNodes,
+    edges: relationshipEdges,
+    updated_at: new Date().toISOString(),
+  };
+
+  await fs.writeFile(catalogPath, JSON.stringify(catalog, null, 2), "utf8");
+  await fs.writeFile(indexPath, JSON.stringify(indexData, null, 2), "utf8");
+  await fs.writeFile(relationshipsPath, JSON.stringify(relationships, null, 2), "utf8");
+}
+
 export async function ingestKnowledgeSources(paths: IngestionPaths): Promise<IngestionSummary> {
   await fs.mkdir(paths.sourceDir, { recursive: true });
   await fs.mkdir(paths.processedDir, { recursive: true });
@@ -118,6 +279,8 @@ export async function ingestKnowledgeSources(paths: IngestionPaths): Promise<Ing
       extractionWarnings: warnings,
     });
   }
+
+  await updateKnowledgeGovernance(items, paths);
 
   return {
     sourceDir: paths.sourceDir,

@@ -1,0 +1,50 @@
+version: 0.1.0
+updated_at: "2026-06-28"
+entities:
+  - name: Matter
+    description: Demanda juridica central da plataforma.
+  - name: Judicial Case
+    description: Especializacao de Matter para processos judiciais.
+  - name: Party
+    description: Parte envolvida no caso.
+  - name: Document
+    description: Arquivo de origem que gera conhecimento estruturado.
+  - name: Fact
+    description: Fato juridicamente relevante.
+  - name: Evidence
+    description: Elemento probatorio associado a fatos e teses.
+  - name: Legal Issue
+    description: Questao juridica identificada no caso.
+  - name: Legal Thesis
+    description: Tese defensiva ou ofensiva.
+  - name: Legal Strategy
+    description: Estrategia juridica consolidada para o Matter.
+  - name: Skill
+    description: Metodologia estruturada de producao intelectual.
+  - name: Workflow
+    description: Sequencia operacional para executar uma ou mais Skills.
+  - name: Draft
+    description: Documento juridico em elaboracao.
+  - name: Intellectual Product
+    description: Documento final entregue (ex.: contestacao).
+  - name: Knowledge Object
+    description: Unidade reutilizavel de conhecimento.
+relations:
+  - from: Matter
+    to: Document
+    type: has_documents
+  - from: Document
+    to: Knowledge Object
+    type: yields
+  - from: Knowledge Object
+    to: Legal Thesis
+    type: supports
+  - from: Skill
+    to: Workflow
+    type: binds_to
+  - from: Workflow
+    to: Draft
+    type: produces
+  - from: Draft
+    to: Intellectual Product
+    type: finalized_as

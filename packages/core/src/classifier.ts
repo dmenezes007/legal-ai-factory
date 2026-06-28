@@ -8,6 +8,9 @@ const RULES: Array<{ category: KnowledgeSourceCategory; terms: string[] }> = [
   { category: "doutrina", terms: ["doutrina", "autor", "obra", "capitulo", "edicao"] },
   { category: "legislacao", terms: ["art.", "lei", "codigo civil", "codigo de processo civil", "clt"] },
   { category: "template", terms: ["template", "placeholder", "{{", "modelo base"] },
+  { category: "checklist", terms: ["checklist", "lista de verificacao", "itens de validacao"] },
+  { category: "prompt_chain", terms: ["prompt chain", "cadeia de prompts", "prompt template"] },
+  { category: "documento_processual", terms: ["peticao inicial", "contestacao", "sentenca", "acordao"] },
   { category: "caso_exemplo", terms: ["exemplo", "caso demo", "simulado", "ficticio"] },
 ];
 

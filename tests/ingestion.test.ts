@@ -22,4 +22,22 @@ test("pipeline de ingestao processa fonte markdown", async () => {
   assert.ok(found?.textLength && found.textLength > 10);
 
   await fs.unlink(fixture);
+  if (found) {
+    await fs.rm(found.processedPath, { force: true });
+    await fs.rm(found.metadataPath, { force: true });
+  }
+
+  const processedFiles = await fs.readdir(processedDir);
+  for (const fileName of processedFiles) {
+    if (fileName.includes("fixture-ingestao") || fileName.includes("governance-fixture")) {
+      await fs.rm(path.join(processedDir, fileName), { force: true });
+    }
+  }
+
+  const metadataFiles = await fs.readdir(metadataDir);
+  for (const fileName of metadataFiles) {
+    if (fileName.includes("fixture-ingestao") || fileName.includes("governance-fixture")) {
+      await fs.rm(path.join(metadataDir, fileName), { force: true });
+    }
+  }
 });

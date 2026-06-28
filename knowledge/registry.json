@@ -1,0 +1,44 @@
+{
+  "version": "0.1.0",
+  "updated_at": "2026-06-28T00:00:00.000Z",
+  "skills": [
+    {
+      "id": "skill.contestacao-saude",
+      "name": "Contestacao Saude - Operadora",
+      "path": "knowledge/skills/contestacao-saude/skill.yaml",
+      "status": "draft"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "workflow.contestacao-saude.v1",
+      "name": "Workflow Contestacao Saude MVP",
+      "path": "knowledge/skills/contestacao-saude/workflow.wdl.yaml",
+      "status": "draft"
+    }
+  ],
+  "maps": [
+    {
+      "id": "map.contestacao-saude.base",
+      "name": "Mapa de Teses Contestacao Saude (planejado)",
+      "path": "knowledge/maps",
+      "status": "planned"
+    }
+  ],
+  "templates": [
+    {
+      "id": "template.contestacao.geral",
+      "name": "Template contestacao geral (planejado)",
+      "path": "knowledge/templates",
+      "status": "planned"
+    }
+  ],
+  "sources": [
+    {
+      "id": "source.root.original",
+      "name": "Knowledge Sources Original",
+      "path": "knowledge/sources/original",
+      "status": "active"
+    }
+  ]
+}

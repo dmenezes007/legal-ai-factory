@@ -6,7 +6,10 @@ export type KnowledgeSourceCategory =
   | "doutrina"
   | "legislacao"
   | "template"
+  | "checklist"
+  | "prompt_chain"
   | "caso_exemplo"
+  | "documento_processual"
   | "desconhecido";
 
 export interface IngestionResult {

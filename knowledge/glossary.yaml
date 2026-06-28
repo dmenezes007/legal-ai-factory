@@ -1,0 +1,23 @@
+version: 0.1.0
+updated_at: "2026-06-28"
+terms:
+  - term: Matter
+    definition: Entidade central que representa a demanda juridica.
+  - term: Skill
+    definition: Metodologia declarativa de producao juridica.
+  - term: Workflow
+    definition: Execucao operacional de uma ou mais Skills.
+  - term: Knowledge Object
+    definition: Unidade reutilizavel de conhecimento extraida de fontes.
+  - term: Rastreabilidade
+    definition: Capacidade de vincular output a fonte e fundamento.
+  - term: Ingestao
+    definition: Processo de leitura, extracao, classificacao e registro de fontes.
+  - term: Catalogo
+    definition: Registro mestre de artefatos de conhecimento.
+  - term: Registro
+    definition: Inventario oficial de ativos estruturantes (skills/workflows/mapas/templates).
+  - term: Ontologia
+    definition: Modelo semantico de entidades e relacoes do dominio juridico.
+  - term: Taxonomia
+    definition: Sistema de classificacao padrao das fontes.

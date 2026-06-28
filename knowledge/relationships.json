@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {
+      "id": "skill.contestacao-saude",
+      "type": "skill",
+      "title": "Contestacao Saude"
+    },
+    {
+      "id": "workflow.contestacao-saude.v1",
+      "type": "workflow",
+      "title": "Workflow Contestacao Saude MVP"
+    }
+  ],
+  "edges": [],
+  "updated_at": "2026-06-28T12:18:19.250Z"
+}

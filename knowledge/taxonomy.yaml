@@ -1,0 +1,27 @@
+version: 0.1.0
+updated_at: "2026-06-28"
+categories:
+  - id: skill
+    description: Conhecimento metodologico estruturado em SDL.
+  - id: mapa_de_teses
+    description: Mapa estrategico de teses e correlacoes.
+  - id: modelo_peca
+    description: Modelo de peca juridica reutilizavel.
+  - id: jurisprudencia
+    description: Jurisprudencia e precedentes.
+  - id: doutrina
+    description: Conteudo doutrinario.
+  - id: legislacao
+    description: Normas legais e regulamentos.
+  - id: template
+    description: Template base de documentos.
+  - id: checklist
+    description: Checklist operacional ou de qualidade.
+  - id: prompt_chain
+    description: Cadeia de prompts para orquestracao.
+  - id: caso_exemplo
+    description: Caso ficticio para demonstracao e teste.
+  - id: documento_processual
+    description: Documento processual de caso real ou simulado.
+  - id: desconhecido
+    description: Categoria temporaria para classificacao pendente.

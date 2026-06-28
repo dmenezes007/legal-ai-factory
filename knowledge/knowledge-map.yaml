@@ -1,0 +1,55 @@
+version: 0.1.0
+updated_at: "2026-06-28"
+legal_areas:
+  - id: direito_da_saude
+    name: Direito da Saude
+    priority: alta
+  - id: civel_consumidor
+    name: Civel e Consumidor
+    priority: media
+
+skills:
+  existing:
+    - id: skill.contestacao-saude
+      area: direito_da_saude
+      status: draft
+      workflow: workflow.contestacao-saude.v1
+  planned:
+    - id: skill.contestacao-consumidor
+      area: civel_consumidor
+      status: planned
+
+sources:
+  required:
+    - categoria: modelo_peca
+    - categoria: mapa_de_teses
+    - categoria: jurisprudencia
+    - categoria: legislacao
+  optional:
+    - categoria: doutrina
+    - categoria: template
+    - categoria: checklist
+
+dependencies:
+  - from: skill.contestacao-saude
+    to: workflow.contestacao-saude.v1
+    type: requires
+  - from: workflow.contestacao-saude.v1
+    to: knowledge/sources/original
+    type: consumes
+
+migration_priority:
+  - source_group: notebooklm/skills
+    priority: 1
+  - source_group: notebooklm/mapas
+    priority: 2
+  - source_group: notebooklm/modelos
+    priority: 3
+  - source_group: notebooklm/jurisprudencia
+    priority: 4
+  - source_group: notebooklm/doutrina
+    priority: 5
+  - source_group: notebooklm/templates
+    priority: 6
+  - source_group: notebooklm/casos
+    priority: 7
