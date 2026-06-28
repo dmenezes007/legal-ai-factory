@@ -1,1 +1,682 @@
-[]
+[
+  {
+    "id": "ko-669771ad-0928-427d-9c65-7977ae4ebd31",
+    "title": "0085849-19.2023.8.05.0001 - RECURSO ESPECIAL N 2214841 - SP (2025.0182109-1)",
+    "type": "knowledge_source",
+    "category": "jurisprudencia",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/0085849-19.2023.8.05.0001 - RECURSO ESPECIAL N 2214841 - SP (2025.0182109-1).txt",
+    "processed_path": "knowledge/sources/processed/0085849-19.2023.8.05.0001 - RECURSO ESPECIAL N 2214841 - SP (2025.0182109-1).5a037992-240d-4304-9455-c100b7b77863.processed.txt",
+    "status": "processed",
+    "tags": [
+      "jurisprudencia",
+      "txt"
+    ],
+    "related_skills": [],
+    "related_workflows": [],
+    "created_at": "2026-06-28T13:55:46.725Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "5a037992-240d-4304-9455-c100b7b77863",
+      "source_format": ".txt",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-903a7499-37f5-4d1c-ac3f-5801927ddb28",
+    "title": "Acórdão - Nº 2628808 SP - 2024 0160580-4",
+    "type": "knowledge_source",
+    "category": "skill",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Acórdão - Nº 2628808 SP - 2024 0160580-4.txt",
+    "processed_path": "knowledge/sources/processed/Acórdão - Nº 2628808 SP - 2024 0160580-4.274f371e-9bd1-453f-acd5-10716f2fb1b4.processed.txt",
+    "status": "processed",
+    "tags": [
+      "skill",
+      "txt"
+    ],
+    "related_skills": [
+      "skill.contestacao-saude"
+    ],
+    "related_workflows": [
+      "workflow.contestacao-saude.v1"
+    ],
+    "created_at": "2026-06-28T13:55:46.725Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "274f371e-9bd1-453f-acd5-10716f2fb1b4",
+      "source_format": ".txt",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-3c0d9eb1-f0ca-42ca-b795-9e02edec13e3",
+    "title": "ACORDAO - reforma falso coletivo - TJSE - CIV-032572.25",
+    "type": "knowledge_source",
+    "category": "jurisprudencia",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/ACORDAO - reforma falso coletivo - TJSE - CIV-032572.25.txt",
+    "processed_path": "knowledge/sources/processed/ACORDAO - reforma falso coletivo - TJSE - CIV-032572.25.8c6d9a51-f423-4b7a-a4df-7ed81adc259a.processed.txt",
+    "status": "processed",
+    "tags": [
+      "jurisprudencia",
+      "txt"
+    ],
+    "related_skills": [],
+    "related_workflows": [],
+    "created_at": "2026-06-28T13:55:46.725Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "8c6d9a51-f423-4b7a-a4df-7ed81adc259a",
+      "source_format": ".txt",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-276b7c8c-3eb4-4bdc-8a89-1f3a0195deac",
+    "title": "Acordao AI - revogacao tutela - 557 - falso coletivo - TJ SP",
+    "type": "knowledge_source",
+    "category": "jurisprudencia",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Acordao AI - revogacao tutela - 557 - falso coletivo - TJ SP.txt",
+    "processed_path": "knowledge/sources/processed/Acordao AI - revogacao tutela - 557 - falso coletivo - TJ SP.cf2e17e1-03fb-4c4e-a720-26fd2872b364.processed.txt",
+    "status": "processed",
+    "tags": [
+      "jurisprudencia",
+      "txt"
+    ],
+    "related_skills": [],
+    "related_workflows": [],
+    "created_at": "2026-06-28T13:55:46.725Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "cf2e17e1-03fb-4c4e-a720-26fd2872b364",
+      "source_format": ".txt",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-8f290c28-3d7f-4bfd-b397-646c2b82c81b",
+    "title": "Acordao Apelacao - TJSP - falso coletivo - cerceamento de defesa - produto 557",
+    "type": "knowledge_source",
+    "category": "jurisprudencia",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Acordao Apelacao - TJSP - falso coletivo - cerceamento de defesa - produto 557.txt",
+    "processed_path": "knowledge/sources/processed/Acordao Apelacao - TJSP - falso coletivo - cerceamento de defesa - produto 557.1086cecb-61a2-47bc-9a8a-216c7b2a0f4a.processed.txt",
+    "status": "processed",
+    "tags": [
+      "jurisprudencia",
+      "txt"
+    ],
+    "related_skills": [],
+    "related_workflows": [],
+    "created_at": "2026-06-28T13:55:46.725Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "1086cecb-61a2-47bc-9a8a-216c7b2a0f4a",
+      "source_format": ".txt",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-58537dcf-ecdd-457c-99f9-c14a5b7a2951",
+    "title": "Acórdão do Agravo Interno - 2.008.784-SP - necessidade de pericia",
+    "type": "knowledge_source",
+    "category": "mapa_de_teses",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Acórdão do Agravo Interno - 2.008.784-SP - necessidade de pericia.txt",
+    "processed_path": "knowledge/sources/processed/Acórdão do Agravo Interno - 2.008.784-SP - necessidade de pericia.0fa2f06d-506d-4c1e-a798-c91a3ade2598.processed.txt",
+    "status": "processed",
+    "tags": [
+      "mapa_de_teses",
+      "txt"
+    ],
+    "related_skills": [],
+    "related_workflows": [],
+    "created_at": "2026-06-28T13:55:46.725Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "0fa2f06d-506d-4c1e-a798-c91a3ade2598",
+      "source_format": ".txt",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-9fdf2cfd-8f10-497e-a0d1-cb96c66ccb9e",
+    "title": "ACÓRDÃO RECURSO ESPECIAL Nº 2061483 - SP 2023 0087659-0",
+    "type": "knowledge_source",
+    "category": "mapa_de_teses",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/ACÓRDÃO RECURSO ESPECIAL Nº 2061483 - SP 2023 0087659-0.txt",
+    "processed_path": "knowledge/sources/processed/ACÓRDÃO RECURSO ESPECIAL Nº 2061483 - SP 2023 0087659-0.2c6f3b2b-3b14-410e-beb8-75140add7b7d.processed.txt",
+    "status": "processed",
+    "tags": [
+      "mapa_de_teses",
+      "txt"
+    ],
+    "related_skills": [],
+    "related_workflows": [],
+    "created_at": "2026-06-28T13:55:46.725Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "2c6f3b2b-3b14-410e-beb8-75140add7b7d",
+      "source_format": ".txt",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-75acb0b7-7dd0-4cf0-93eb-a19a36bc4635",
+    "title": "Acordao Resp 1964110 SP - 2021.02971993 - produto 515 - Min Raul Araújo - reajuste anual",
+    "type": "knowledge_source",
+    "category": "jurisprudencia",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Acordao Resp 1964110 SP - 2021.02971993 - produto 515 - Min Raul Araújo - reajuste anual.txt",
+    "processed_path": "knowledge/sources/processed/Acordao Resp 1964110 SP - 2021.02971993 - produto 515 - Min Raul Araújo - reajuste anual.cdbeb32f-d09a-4451-bc9c-88cd67ba2722.processed.txt",
+    "status": "processed",
+    "tags": [
+      "jurisprudencia",
+      "txt"
+    ],
+    "related_skills": [],
+    "related_workflows": [],
+    "created_at": "2026-06-28T13:55:46.725Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "cdbeb32f-d09a-4451-bc9c-88cd67ba2722",
+      "source_format": ".txt",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-7d47d7ab-4aa5-466a-bf5b-62df031dc39f",
+    "title": "Acordão TJSP - cerceamento de defesa - falso coletivo - sentenca anulada - pericia aturial - produto 557",
+    "type": "knowledge_source",
+    "category": "documento_processual",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Acordão TJSP - cerceamento de defesa - falso coletivo - sentenca anulada - pericia aturial - produto 557.txt",
+    "processed_path": "knowledge/sources/processed/Acordão TJSP - cerceamento de defesa - falso coletivo - sentenca anulada - pericia aturial - produto 557.ec98ecdf-bf23-4dab-ae23-ecc406c2bb32.processed.txt",
+    "status": "processed",
+    "tags": [
+      "documento_processual",
+      "txt"
+    ],
+    "related_skills": [],
+    "related_workflows": [],
+    "created_at": "2026-06-28T13:55:46.725Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "ec98ecdf-bf23-4dab-ae23-ecc406c2bb32",
+      "source_format": ".txt",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-fcdfa88e-8186-4699-8842-594f9eb21c3e",
+    "title": "Antonio cordeiro produto 557 - favorável",
+    "type": "knowledge_source",
+    "category": "desconhecido",
+    "source_path": "knowledge/sources/original/notebooklm/laudos/Antonio cordeiro produto 557 - favorável.txt",
+    "processed_path": "knowledge/sources/processed/Antonio cordeiro produto 557 - favorável.df4ad01a-56d3-4398-91f4-8a4c42b29241.processed.txt",
+    "status": "processed",
+    "tags": [
+      "desconhecido",
+      "txt"
+    ],
+    "related_skills": [],
+    "related_workflows": [],
+    "created_at": "2026-06-28T13:55:46.725Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "df4ad01a-56d3-4398-91f4-8a4c42b29241",
+      "source_format": ".txt",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-57aa7c6a-a6ac-428d-b9eb-3dd3430ab3da",
+    "title": "Aviso_Previo_Premio_Complementar_SulAmerica_Contestacao",
+    "type": "knowledge_source",
+    "category": "mapa_de_teses",
+    "source_path": "knowledge/sources/original/notebooklm/modelos/Aviso_Previo_Premio_Complementar_SulAmerica_Contestacao.txt",
+    "processed_path": "knowledge/sources/processed/Aviso_Previo_Premio_Complementar_SulAmerica_Contestacao.b06154db-a12f-4007-acd2-f4d3aa74aa13.processed.txt",
+    "status": "processed",
+    "tags": [
+      "mapa_de_teses",
+      "txt"
+    ],
+    "related_skills": [
+      "skill.contestacao-saude"
+    ],
+    "related_workflows": [
+      "workflow.contestacao-saude.v1"
+    ],
+    "created_at": "2026-06-28T13:55:46.725Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "b06154db-a12f-4007-acd2-f4d3aa74aa13",
+      "source_format": ".txt",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-7e22e7bb-d65d-41f9-8941-e5a02d1ab210",
+    "title": "fixture-ingestao",
+    "type": "knowledge_source",
+    "category": "modelo_peca",
+    "source_path": "knowledge/sources/original/fixture-ingestao.md",
+    "processed_path": "knowledge/sources/processed/fixture-ingestao.c327b7f4-a8bb-4caf-82c9-7bf2ad75b30e.processed.txt",
+    "status": "processed",
+    "tags": [
+      "modelo_peca",
+      "md"
+    ],
+    "related_skills": [],
+    "related_workflows": [],
+    "created_at": "2026-06-28T13:55:46.724Z",
+    "updated_at": "2026-06-28T13:55:46.794Z",
+    "provenance": {
+      "ingestion_id": "c327b7f4-a8bb-4caf-82c9-7bf2ad75b30e",
+      "source_format": ".md",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-9be226a0-75fb-4d2e-aeaa-8b664de8daa7",
+    "title": "governance-fixture-1782654943886",
+    "type": "knowledge_source",
+    "category": "modelo_peca",
+    "source_path": "knowledge/sources/original/governance-fixture-1782654943886.md",
+    "processed_path": "knowledge/sources/processed/governance-fixture-1782654943886.a4e1df15-ee62-4e58-a49d-e4e534f1cc8d.processed.txt",
+    "status": "processed",
+    "tags": [
+      "modelo_peca",
+      "md"
+    ],
+    "related_skills": [],
+    "related_workflows": [],
+    "created_at": "2026-06-28T13:55:46.724Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "a4e1df15-ee62-4e58-a49d-e4e534f1cc8d",
+      "source_format": ".md",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-288ce268-b147-4eef-9150-41df435a6deb",
+    "title": "LAUDO-FAVORÁVEL-078.9823-EMPRESARIAL-PRODUTO-557-PERITA-ADELITA-ADAMS",
+    "type": "knowledge_source",
+    "category": "skill",
+    "source_path": "knowledge/sources/original/notebooklm/laudos/LAUDO-FAVORÁVEL-078.9823-EMPRESARIAL-PRODUTO-557-PERITA-ADELITA-ADAMS.txt",
+    "processed_path": "knowledge/sources/processed/LAUDO-FAVORÁVEL-078.9823-EMPRESARIAL-PRODUTO-557-PERITA-ADELITA-ADAMS.39802114-cc23-4165-ac8d-63cbfb1a6883.processed.txt",
+    "status": "processed",
+    "tags": [
+      "skill",
+      "txt"
+    ],
+    "related_skills": [
+      "skill.contestacao-saude"
+    ],
+    "related_workflows": [
+      "workflow.contestacao-saude.v1"
+    ],
+    "created_at": "2026-06-28T13:55:46.725Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "39802114-cc23-4165-ac8d-63cbfb1a6883",
+      "source_format": ".txt",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-6bcda81b-686f-4bd0-bfdd-fc3ee46515a8",
+    "title": "Laudo-favorável-produto-557-perito-Jose-Luiz-Montelo-da-Fonseca",
+    "type": "knowledge_source",
+    "category": "desconhecido",
+    "source_path": "knowledge/sources/original/notebooklm/laudos/Laudo-favorável-produto-557-perito-Jose-Luiz-Montelo-da-Fonseca.txt",
+    "processed_path": "knowledge/sources/processed/Laudo-favorável-produto-557-perito-Jose-Luiz-Montelo-da-Fonseca.6ef278db-c511-4141-a96d-7d65dcb02a8a.processed.txt",
+    "status": "processed",
+    "tags": [
+      "desconhecido",
+      "txt"
+    ],
+    "related_skills": [],
+    "related_workflows": [],
+    "created_at": "2026-06-28T13:55:46.725Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "6ef278db-c511-4141-a96d-7d65dcb02a8a",
+      "source_format": ".txt",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-734cfda6-bce4-4302-bfec-4243b9b7655b",
+    "title": "MAPA_DE_ADERENCIA_DE_TESES",
+    "type": "knowledge_source",
+    "category": "skill",
+    "source_path": "knowledge/sources/original/notebooklm/mapas/MAPA_DE_ADERENCIA_DE_TESES.txt",
+    "processed_path": "knowledge/sources/processed/MAPA_DE_ADERENCIA_DE_TESES.9b8a2c4a-c9d8-49a4-b13b-05446a77e8ef.processed.txt",
+    "status": "processed",
+    "tags": [
+      "skill",
+      "txt"
+    ],
+    "related_skills": [
+      "skill.contestacao-saude"
+    ],
+    "related_workflows": [
+      "workflow.contestacao-saude.v1"
+    ],
+    "created_at": "2026-06-28T13:55:46.725Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "9b8a2c4a-c9d8-49a4-b13b-05446a77e8ef",
+      "source_format": ".txt",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-bf71989e-7ced-4cf9-8cb2-514b226ad847",
+    "title": "Reajuste_Doutrina_Validade_Contratos_Coletivos_Empresariais",
+    "type": "knowledge_source",
+    "category": "mapa_de_teses",
+    "source_path": "knowledge/sources/original/notebooklm/doutrina/Reajuste_Doutrina_Validade_Contratos_Coletivos_Empresariais.txt",
+    "processed_path": "knowledge/sources/processed/Reajuste_Doutrina_Validade_Contratos_Coletivos_Empresariais.e9b5c112-1159-4837-8286-f9f0179e9c87.processed.txt",
+    "status": "processed",
+    "tags": [
+      "mapa_de_teses",
+      "txt"
+    ],
+    "related_skills": [],
+    "related_workflows": [],
+    "created_at": "2026-06-28T13:55:46.725Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "e9b5c112-1159-4837-8286-f9f0179e9c87",
+      "source_format": ".txt",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-17a29e28-6091-4b0e-87fe-4ac643b2d03d",
+    "title": "Reajuste_Extratos_Pormenorizados_PME_2014_2025",
+    "type": "knowledge_source",
+    "category": "desconhecido",
+    "source_path": "knowledge/sources/original/notebooklm/extratos/Reajuste_Extratos_Pormenorizados_PME_2014_2025.txt",
+    "processed_path": "knowledge/sources/processed/Reajuste_Extratos_Pormenorizados_PME_2014_2025.8c8e38cf-d43d-4111-90e2-c7180865ef27.processed.txt",
+    "status": "processed",
+    "tags": [
+      "desconhecido",
+      "txt"
+    ],
+    "related_skills": [],
+    "related_workflows": [],
+    "created_at": "2026-06-28T13:55:46.725Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "8c8e38cf-d43d-4111-90e2-c7180865ef27",
+      "source_format": ".txt",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-e82b366e-e0dd-4312-94ab-10d72d1553c7",
+    "title": "Reajuste_SulAmerica_Contestacao",
+    "type": "knowledge_source",
+    "category": "mapa_de_teses",
+    "source_path": "knowledge/sources/original/notebooklm/modelos/Reajuste_SulAmerica_Contestacao.txt",
+    "processed_path": "knowledge/sources/processed/Reajuste_SulAmerica_Contestacao.0c452502-3efc-493e-9b4b-d224a1d31865.processed.txt",
+    "status": "processed",
+    "tags": [
+      "mapa_de_teses",
+      "txt"
+    ],
+    "related_skills": [
+      "skill.contestacao-saude"
+    ],
+    "related_workflows": [
+      "workflow.contestacao-saude.v1"
+    ],
+    "created_at": "2026-06-28T13:55:46.725Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "0c452502-3efc-493e-9b4b-d224a1d31865",
+      "source_format": ".txt",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-1e322497-f35a-4e73-9399-064b861523a3",
+    "title": "Sentença-–-TJSP-–-557-–-falso-coletivo-reajustes-devidos-anual",
+    "type": "knowledge_source",
+    "category": "desconhecido",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Sentença-–-TJSP-–-557-–-falso-coletivo-reajustes-devidos-anual.txt",
+    "processed_path": "knowledge/sources/processed/Sentença-–-TJSP-–-557-–-falso-coletivo-reajustes-devidos-anual.1425267d-6324-45aa-94c4-f3b9c11d2342.processed.txt",
+    "status": "processed",
+    "tags": [
+      "desconhecido",
+      "txt"
+    ],
+    "related_skills": [],
+    "related_workflows": [],
+    "created_at": "2026-06-28T13:55:46.725Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "1425267d-6324-45aa-94c4-f3b9c11d2342",
+      "source_format": ".txt",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-c6241e3f-486b-4e72-87d5-bb7cf28e93a9",
+    "title": "SENTENÇA-DE-IMPROCEDÊNCIA-4001635-55.2026.8.26.0577-anual-falso-coletivo-produto-557-TJSP",
+    "type": "knowledge_source",
+    "category": "desconhecido",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/SENTENÇA-DE-IMPROCEDÊNCIA-4001635-55.2026.8.26.0577-anual-falso-coletivo-produto-557-TJSP.txt",
+    "processed_path": "knowledge/sources/processed/SENTENÇA-DE-IMPROCEDÊNCIA-4001635-55.2026.8.26.0577-anual-falso-coletivo-produto-557-TJSP.a28c9930-8c73-4a91-881f-180249391c5a.processed.txt",
+    "status": "processed",
+    "tags": [
+      "desconhecido",
+      "txt"
+    ],
+    "related_skills": [],
+    "related_workflows": [],
+    "created_at": "2026-06-28T13:55:46.725Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "a28c9930-8c73-4a91-881f-180249391c5a",
+      "source_format": ".txt",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-200f197e-03f1-479d-9808-9e628e99abfe",
+    "title": "Sentenca-improcedente-557-faixa-etaria-pericia-in-loco-tjsp",
+    "type": "knowledge_source",
+    "category": "documento_processual",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Sentenca-improcedente-557-faixa-etaria-pericia-in-loco-tjsp.txt",
+    "processed_path": "knowledge/sources/processed/Sentenca-improcedente-557-faixa-etaria-pericia-in-loco-tjsp.c567f62d-c17b-49f2-82ef-8ce4676eb699.processed.txt",
+    "status": "processed",
+    "tags": [
+      "documento_processual",
+      "txt"
+    ],
+    "related_skills": [],
+    "related_workflows": [],
+    "created_at": "2026-06-28T13:55:46.725Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "c567f62d-c17b-49f2-82ef-8ce4676eb699",
+      "source_format": ".txt",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-14ab226e-b9f5-4feb-881a-9b74cb1c849b",
+    "title": "Sentenca-improcedente-Suzano-TJ-SP-produto-557-base-atuarial-idonea-nucleo-4.0",
+    "type": "knowledge_source",
+    "category": "documento_processual",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Sentenca-improcedente-Suzano-TJ-SP-produto-557-base-atuarial-idonea-nucleo-4.0.txt",
+    "processed_path": "knowledge/sources/processed/Sentenca-improcedente-Suzano-TJ-SP-produto-557-base-atuarial-idonea-nucleo-4.0.afcb4d21-9ac6-4de9-bc37-290ef04bdef7.processed.txt",
+    "status": "processed",
+    "tags": [
+      "documento_processual",
+      "txt"
+    ],
+    "related_skills": [],
+    "related_workflows": [],
+    "created_at": "2026-06-28T13:55:46.725Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "afcb4d21-9ac6-4de9-bc37-290ef04bdef7",
+      "source_format": ".txt",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-c1c5f30f-f0ea-4d5a-bc15-e988ca6fc10e",
+    "title": "Sentenca-TJSP-anual-falso-coletivo-produto-557-sem-pericia",
+    "type": "knowledge_source",
+    "category": "documento_processual",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Sentenca-TJSP-anual-falso-coletivo-produto-557-sem-pericia.txt",
+    "processed_path": "knowledge/sources/processed/Sentenca-TJSP-anual-falso-coletivo-produto-557-sem-pericia.13c95f7d-f393-4688-bfaa-9895b6abba3b.processed.txt",
+    "status": "processed",
+    "tags": [
+      "documento_processual",
+      "txt"
+    ],
+    "related_skills": [],
+    "related_workflows": [],
+    "created_at": "2026-06-28T13:55:46.725Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "13c95f7d-f393-4688-bfaa-9895b6abba3b",
+      "source_format": ".txt",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-73c39880-fa4d-4588-bc28-17150a89f9ee",
+    "title": "SKILL",
+    "type": "knowledge_source",
+    "category": "skill",
+    "source_path": "knowledge/sources/original/notebooklm/skills/SKILL.txt",
+    "processed_path": "knowledge/sources/processed/SKILL.0ff7fbf7-45fd-4cce-91fd-1eca09ff2167.processed.txt",
+    "status": "processed",
+    "tags": [
+      "skill",
+      "txt"
+    ],
+    "related_skills": [
+      "skill.contestacao-saude"
+    ],
+    "related_workflows": [
+      "workflow.contestacao-saude.v1"
+    ],
+    "created_at": "2026-06-28T13:55:46.725Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "0ff7fbf7-45fd-4cce-91fd-1eca09ff2167",
+      "source_format": ".txt",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-2f9a59b1-94fe-4c79-94c7-2974059caaa0",
+    "title": "SKILL DE REDAÇÃO JURÍDICA PARA JEC",
+    "type": "knowledge_source",
+    "category": "skill",
+    "source_path": "knowledge/sources/original/notebooklm/skills/SKILL DE REDAÇÃO JURÍDICA PARA JEC.txt",
+    "processed_path": "knowledge/sources/processed/SKILL DE REDAÇÃO JURÍDICA PARA JEC.74f485e6-b5af-498f-a9bf-52b855355616.processed.txt",
+    "status": "processed",
+    "tags": [
+      "skill",
+      "txt"
+    ],
+    "related_skills": [
+      "skill.contestacao-saude"
+    ],
+    "related_workflows": [
+      "workflow.contestacao-saude.v1"
+    ],
+    "created_at": "2026-06-28T13:55:46.725Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "74f485e6-b5af-498f-a9bf-52b855355616",
+      "source_format": ".txt",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  },
+  {
+    "id": "ko-4694c688-7b50-41b1-b864-8d657187a0ef",
+    "title": "SKILL DE REDAÇÃO JURÍDICA PARA JUSTIÇA COMUM",
+    "type": "knowledge_source",
+    "category": "skill",
+    "source_path": "knowledge/sources/original/notebooklm/skills/SKILL DE REDAÇÃO JURÍDICA PARA JUSTIÇA COMUM.txt",
+    "processed_path": "knowledge/sources/processed/SKILL DE REDAÇÃO JURÍDICA PARA JUSTIÇA COMUM.ddbc2af7-4c9a-4651-a7db-e6e5593ee0d2.processed.txt",
+    "status": "processed",
+    "tags": [
+      "skill",
+      "txt"
+    ],
+    "related_skills": [
+      "skill.contestacao-saude"
+    ],
+    "related_workflows": [
+      "workflow.contestacao-saude.v1"
+    ],
+    "created_at": "2026-06-28T13:55:46.725Z",
+    "updated_at": "2026-06-28T13:55:46.795Z",
+    "provenance": {
+      "ingestion_id": "ddbc2af7-4c9a-4651-a7db-e6e5593ee0d2",
+      "source_format": ".txt",
+      "extracted": true,
+      "extraction_warnings": []
+    },
+    "notes": "Fonte processada e indexada pelo pipeline local."
+  }
+]

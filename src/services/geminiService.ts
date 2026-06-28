@@ -4,7 +4,7 @@ import { DEFAULT_DIAGNOSTICS, DEFAULT_THESES, DEFAULT_OUTLINES } from '../data/m
 // Simulated latency helper
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-const LOCAL_API_BASE = (import.meta as any).env?.VITE_LOCAL_API_BASE || 'http://localhost:8787';
+const API_BASE_URL = (import.meta as any).env?.VITE_API_BASE_URL || 'http://localhost:8787';
 
 function getExecutionMode(): 'mock' | 'real' {
   try {
@@ -16,7 +16,7 @@ function getExecutionMode(): 'mock' | 'real' {
 }
 
 async function postJson<T>(path: string, payload: unknown): Promise<T> {
-  const response = await fetch(`${LOCAL_API_BASE}${path}`, {
+  const response = await fetch(`${API_BASE_URL}${path}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
@@ -625,7 +625,7 @@ OAB/UF DE ORIGEM`;
 
   async generateDocxViaApi(caseData: LegalCase, outline: OutlineItem[]): Promise<Blob> {
     const mode = getExecutionMode();
-    const response = await fetch(`${LOCAL_API_BASE}/api/export/docx`, {
+    const response = await fetch(`${API_BASE_URL}/api/export/docx`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

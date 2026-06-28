@@ -1,6 +1,141 @@
 {
   "nodes": [
     {
+      "id": "ko-669771ad-0928-427d-9c65-7977ae4ebd31",
+      "type": "knowledge_source",
+      "title": "0085849-19.2023.8.05.0001 - RECURSO ESPECIAL N 2214841 - SP (2025.0182109-1)"
+    },
+    {
+      "id": "ko-903a7499-37f5-4d1c-ac3f-5801927ddb28",
+      "type": "knowledge_source",
+      "title": "Acórdão - Nº 2628808 SP - 2024 0160580-4"
+    },
+    {
+      "id": "ko-3c0d9eb1-f0ca-42ca-b795-9e02edec13e3",
+      "type": "knowledge_source",
+      "title": "ACORDAO - reforma falso coletivo - TJSE - CIV-032572.25"
+    },
+    {
+      "id": "ko-276b7c8c-3eb4-4bdc-8a89-1f3a0195deac",
+      "type": "knowledge_source",
+      "title": "Acordao AI - revogacao tutela - 557 - falso coletivo - TJ SP"
+    },
+    {
+      "id": "ko-8f290c28-3d7f-4bfd-b397-646c2b82c81b",
+      "type": "knowledge_source",
+      "title": "Acordao Apelacao - TJSP - falso coletivo - cerceamento de defesa - produto 557"
+    },
+    {
+      "id": "ko-58537dcf-ecdd-457c-99f9-c14a5b7a2951",
+      "type": "knowledge_source",
+      "title": "Acórdão do Agravo Interno - 2.008.784-SP - necessidade de pericia"
+    },
+    {
+      "id": "ko-9fdf2cfd-8f10-497e-a0d1-cb96c66ccb9e",
+      "type": "knowledge_source",
+      "title": "ACÓRDÃO RECURSO ESPECIAL Nº 2061483 - SP 2023 0087659-0"
+    },
+    {
+      "id": "ko-75acb0b7-7dd0-4cf0-93eb-a19a36bc4635",
+      "type": "knowledge_source",
+      "title": "Acordao Resp 1964110 SP - 2021.02971993 - produto 515 - Min Raul Araújo - reajuste anual"
+    },
+    {
+      "id": "ko-7d47d7ab-4aa5-466a-bf5b-62df031dc39f",
+      "type": "knowledge_source",
+      "title": "Acordão TJSP - cerceamento de defesa - falso coletivo - sentenca anulada - pericia aturial - produto 557"
+    },
+    {
+      "id": "ko-fcdfa88e-8186-4699-8842-594f9eb21c3e",
+      "type": "knowledge_source",
+      "title": "Antonio cordeiro produto 557 - favorável"
+    },
+    {
+      "id": "ko-57aa7c6a-a6ac-428d-b9eb-3dd3430ab3da",
+      "type": "knowledge_source",
+      "title": "Aviso_Previo_Premio_Complementar_SulAmerica_Contestacao"
+    },
+    {
+      "id": "ko-7e22e7bb-d65d-41f9-8941-e5a02d1ab210",
+      "type": "knowledge_source",
+      "title": "fixture-ingestao"
+    },
+    {
+      "id": "ko-9be226a0-75fb-4d2e-aeaa-8b664de8daa7",
+      "type": "knowledge_source",
+      "title": "governance-fixture-1782654943886"
+    },
+    {
+      "id": "ko-288ce268-b147-4eef-9150-41df435a6deb",
+      "type": "knowledge_source",
+      "title": "LAUDO-FAVORÁVEL-078.9823-EMPRESARIAL-PRODUTO-557-PERITA-ADELITA-ADAMS"
+    },
+    {
+      "id": "ko-6bcda81b-686f-4bd0-bfdd-fc3ee46515a8",
+      "type": "knowledge_source",
+      "title": "Laudo-favorável-produto-557-perito-Jose-Luiz-Montelo-da-Fonseca"
+    },
+    {
+      "id": "ko-734cfda6-bce4-4302-bfec-4243b9b7655b",
+      "type": "knowledge_source",
+      "title": "MAPA_DE_ADERENCIA_DE_TESES"
+    },
+    {
+      "id": "ko-bf71989e-7ced-4cf9-8cb2-514b226ad847",
+      "type": "knowledge_source",
+      "title": "Reajuste_Doutrina_Validade_Contratos_Coletivos_Empresariais"
+    },
+    {
+      "id": "ko-17a29e28-6091-4b0e-87fe-4ac643b2d03d",
+      "type": "knowledge_source",
+      "title": "Reajuste_Extratos_Pormenorizados_PME_2014_2025"
+    },
+    {
+      "id": "ko-e82b366e-e0dd-4312-94ab-10d72d1553c7",
+      "type": "knowledge_source",
+      "title": "Reajuste_SulAmerica_Contestacao"
+    },
+    {
+      "id": "ko-1e322497-f35a-4e73-9399-064b861523a3",
+      "type": "knowledge_source",
+      "title": "Sentença-–-TJSP-–-557-–-falso-coletivo-reajustes-devidos-anual"
+    },
+    {
+      "id": "ko-c6241e3f-486b-4e72-87d5-bb7cf28e93a9",
+      "type": "knowledge_source",
+      "title": "SENTENÇA-DE-IMPROCEDÊNCIA-4001635-55.2026.8.26.0577-anual-falso-coletivo-produto-557-TJSP"
+    },
+    {
+      "id": "ko-200f197e-03f1-479d-9808-9e628e99abfe",
+      "type": "knowledge_source",
+      "title": "Sentenca-improcedente-557-faixa-etaria-pericia-in-loco-tjsp"
+    },
+    {
+      "id": "ko-14ab226e-b9f5-4feb-881a-9b74cb1c849b",
+      "type": "knowledge_source",
+      "title": "Sentenca-improcedente-Suzano-TJ-SP-produto-557-base-atuarial-idonea-nucleo-4.0"
+    },
+    {
+      "id": "ko-c1c5f30f-f0ea-4d5a-bc15-e988ca6fc10e",
+      "type": "knowledge_source",
+      "title": "Sentenca-TJSP-anual-falso-coletivo-produto-557-sem-pericia"
+    },
+    {
+      "id": "ko-73c39880-fa4d-4588-bc28-17150a89f9ee",
+      "type": "knowledge_source",
+      "title": "SKILL"
+    },
+    {
+      "id": "ko-2f9a59b1-94fe-4c79-94c7-2974059caaa0",
+      "type": "knowledge_source",
+      "title": "SKILL DE REDAÇÃO JURÍDICA PARA JEC"
+    },
+    {
+      "id": "ko-4694c688-7b50-41b1-b864-8d657187a0ef",
+      "type": "knowledge_source",
+      "title": "SKILL DE REDAÇÃO JURÍDICA PARA JUSTIÇA COMUM"
+    },
+    {
       "id": "skill.contestacao-saude",
       "type": "skill",
       "title": "Contestacao Saude"
@@ -11,6 +146,87 @@
       "title": "Workflow Contestacao Saude MVP"
     }
   ],
-  "edges": [],
-  "updated_at": "2026-06-28T12:18:19.250Z"
+  "edges": [
+    {
+      "source": "ko-903a7499-37f5-4d1c-ac3f-5801927ddb28",
+      "target": "skill.contestacao-saude",
+      "relation": "supports_skill"
+    },
+    {
+      "source": "ko-903a7499-37f5-4d1c-ac3f-5801927ddb28",
+      "target": "workflow.contestacao-saude.v1",
+      "relation": "supports_workflow"
+    },
+    {
+      "source": "ko-57aa7c6a-a6ac-428d-b9eb-3dd3430ab3da",
+      "target": "skill.contestacao-saude",
+      "relation": "supports_skill"
+    },
+    {
+      "source": "ko-57aa7c6a-a6ac-428d-b9eb-3dd3430ab3da",
+      "target": "workflow.contestacao-saude.v1",
+      "relation": "supports_workflow"
+    },
+    {
+      "source": "ko-288ce268-b147-4eef-9150-41df435a6deb",
+      "target": "skill.contestacao-saude",
+      "relation": "supports_skill"
+    },
+    {
+      "source": "ko-288ce268-b147-4eef-9150-41df435a6deb",
+      "target": "workflow.contestacao-saude.v1",
+      "relation": "supports_workflow"
+    },
+    {
+      "source": "ko-734cfda6-bce4-4302-bfec-4243b9b7655b",
+      "target": "skill.contestacao-saude",
+      "relation": "supports_skill"
+    },
+    {
+      "source": "ko-734cfda6-bce4-4302-bfec-4243b9b7655b",
+      "target": "workflow.contestacao-saude.v1",
+      "relation": "supports_workflow"
+    },
+    {
+      "source": "ko-e82b366e-e0dd-4312-94ab-10d72d1553c7",
+      "target": "skill.contestacao-saude",
+      "relation": "supports_skill"
+    },
+    {
+      "source": "ko-e82b366e-e0dd-4312-94ab-10d72d1553c7",
+      "target": "workflow.contestacao-saude.v1",
+      "relation": "supports_workflow"
+    },
+    {
+      "source": "ko-73c39880-fa4d-4588-bc28-17150a89f9ee",
+      "target": "skill.contestacao-saude",
+      "relation": "supports_skill"
+    },
+    {
+      "source": "ko-73c39880-fa4d-4588-bc28-17150a89f9ee",
+      "target": "workflow.contestacao-saude.v1",
+      "relation": "supports_workflow"
+    },
+    {
+      "source": "ko-2f9a59b1-94fe-4c79-94c7-2974059caaa0",
+      "target": "skill.contestacao-saude",
+      "relation": "supports_skill"
+    },
+    {
+      "source": "ko-2f9a59b1-94fe-4c79-94c7-2974059caaa0",
+      "target": "workflow.contestacao-saude.v1",
+      "relation": "supports_workflow"
+    },
+    {
+      "source": "ko-4694c688-7b50-41b1-b864-8d657187a0ef",
+      "target": "skill.contestacao-saude",
+      "relation": "supports_skill"
+    },
+    {
+      "source": "ko-4694c688-7b50-41b1-b864-8d657187a0ef",
+      "target": "workflow.contestacao-saude.v1",
+      "relation": "supports_workflow"
+    }
+  ],
+  "updated_at": "2026-06-28T13:55:46.808Z"
 }

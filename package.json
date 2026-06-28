@@ -8,6 +8,8 @@
     "dev:api": "tsx apps/api/src/server.ts",
     "dev:all": "npm-run-all -p dev dev:api",
     "build": "vite build",
+    "start:api": "tsx apps/api/src/server.ts",
+    "deploy:check": "node tools/deployment/deploy-check.mjs",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit",

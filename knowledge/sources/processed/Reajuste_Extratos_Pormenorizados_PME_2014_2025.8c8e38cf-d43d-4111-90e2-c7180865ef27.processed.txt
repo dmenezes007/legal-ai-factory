@@ -1,0 +1,117 @@
+Empresa: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+Produto: 557 - PME AMB HOSP C/ OBST ADAPTADO
+
+Memória de Cálculo do Reajuste do Contrato de 12/2013 a 11/2014
+- VCMH (*) 03/2011 a 02/2012: 100
+- VCMH (*) 03/2012 a 02/2013: 107,84
+- Índice VCMH: 7,84
+- IRS 05/2013 a 04/2014: 100
+- Sinistro: 69,79
+- Sinistralidade: 69,79
+- Índice IRS: 7,37
+- Índice de Reajuste: [(1,0737 * 1,0784 - 1)*100] = 15,79%
+
+Memória de Cálculo do Reajuste do Contrato de 12/2014 a 11/2015
+- VCMH (*) 03/2012 a 02/2013: 100
+- VCMH (*) 03/2013 a 02/2014: 110,27
+- Índice VCMH: 10,27
+- IRS 05/2014 a 04/2015: 100
+- Sinistro: 69,39
+- Sinistralidade: 69,39
+- Índice IRS: 6,75
+- Índice de Reajuste: [(1,0675 * 1,1027 - 1)*100] = 17,71%
+
+Memória de Cálculo do Reajuste do Contrato de 12/2015 a 11/2016
+- VCMH (*) 03/2013 a 02/2012: 100
+- VCMH (*) 03/2014 a 02/2015: 111,90
+- Índice VCMH: 11,90
+- IRS 05/2015 a 04/2016: 100
+- Sinistro: 67,56
+- Sinistralidade: 67,56
+- Índice IRS: 3,94
+- Índice de Reajuste: [(1,0394 * 1,1190 - 1)*100] = 16,31%
+
+Memória de Cálculo do Reajuste do Contrato de 12/2016 a 11/2017
+- VCMH (*) 03/2014 a 02/2015: 100
+- VCMH (*) 03/2015 a 02/2016: 115,01
+- Índice VCMH: 15,01
+- IRS 05/2016 a 04/2017: 100
+- Sinistro: 67,80
+- Sinistralidade: 67,80
+- Índice IRS: 4,31
+- Índice de Reajuste: [(1,0431 * 1,1501 - 1)*100] = 19,97%
+
+Memória de Cálculo do Reajuste do Contrato de 12/2017 a 11/2018
+- VCMH (*) 03/2015 a 02/2016: 100
+- VCMH (*) 03/2016 a 02/2017: 118,89
+- Índice VCMH: 18,89
+- IRS 05/2017 a 04/2018: 100
+- Sinistro: 65,16
+- Sinistralidade: 65,16
+- Índice IRS: 0,24
+- Índice de Reajuste: [(1,0024 * 1,1889 - 1)*100] = 19,18%
+
+Memória de Cálculo do Reajuste do Contrato de 12/2018 a 11/2019
+- VCMH (*) 03/2016 a 02/2017: 100
+- VCMH (*) 03/2017 a 02/2018: 114,69
+- Índice VCMH: 14,69
+- IRS 05/2018 a 04/2019: 100
+- Sinistro: 65,94
+- Sinistralidade: 65,94
+- Índice IRS: 1,44
+- Índice de Reajuste: [(1,0144 * 1,1469 - 1)*100] = 16,34%
+
+Memória de Cálculo do Reajuste do Contrato de 12/2019 a 11/2020
+- VCMH (*) 03/2017 a 02/2018: 100
+- VCMH (*) 03/2018 a 02/2019: 113,78
+- Índice VCMH: 13,78
+- IRS 05/2019 a 04/2020: 100
+- Sinistro: 65,62
+- Sinistralidade: 65,62
+- Índice IRS: 0,95
+- Índice de Reajuste: [(1,0095 * 1,1378 - 1)*100] = 14,86%
+
+Memória de Cálculo do Reajuste do Contrato de 12/2020 a 11/2021
+- VCMH (*) 03/2018 a 02/2019: 100
+- VCMH (*) 03/2019 a 02/2020: 106,65
+- Índice VCMH: 6,65
+- IRS 05/2020 a 04/2021: 100
+- Sinistro: 68,80
+- Sinistralidade: 68,80
+- Índice IRS: 5,84
+- Índice de Reajuste: [(1,0584 * 1,0665 - 1)*100] = 12,88%
+
+Memória de Cálculo do Reajuste do Contrato de 12/2021 a 11/2022
+- VCMH (*) 03/2019 a 02/2020: 100
+- VCMH (*) 03/2020 a 02/2021: 101,43
+- Índice VCMH: 1,43
+- IRS 05/2021 a 04/2022: 100
+- Sinistro: 70,08
+- Sinistralidade: 70,08
+- Índice IRS: 7,81
+- Índice de Reajuste: [(1,0781 * 1,0143 - 1)*100] = 9,35%
+
+Memória de Cálculo do Reajuste do Contrato de 12/2022 a 11/2023
+- VCMH (*) 03/2020 a 02/2021: 100
+- VCMH (*) 03/2021 a 02/2022: 119,4
+- Índice VCMH: 19,40
+- IRS 05/2022 a 04/2023: 100
+- Sinistro: 65,00
+- Sinistralidade: 65,00
+- Índice IRS: 0,00
+- Índice de Reajuste: [(1 * 1,194 - 1)*100] = 19,40%
+
+Legenda
+- R = Reajuste
+- IRS = Índice de Reajuste de Sinistralidade
+- IMS = Índice Máximo de Sinistralidade
+- VCMH = Variação dos Custos Médicos Hospitalares
+- VCMH = (sinistro por beneficiário no período 2 / sinistro por beneficiário no período 1)
+- IRS = (Sinistros / Prêmios) / IMS
+
+Definições
+- Prêmio: é o valor que a empresa paga à seguradora.
+- Sinistro: é a utilização do seguro.
+- Sinistralidade: é a medida através do índice que relaciona prêmio e sinistro em um determinado período.
+
+Observação: conteúdo transcrito da fonte aberta no NotebookLM (## Reajuste - Extratos Pormenorizados PME (2014 a 2025)).

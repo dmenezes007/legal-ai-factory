@@ -1,0 +1,95 @@
+SKILL DE REDAÇÃO JURÍDICA PARA JEC: PROTOCOLO DE DEFESA ESTRATÉGICA PME
+
+Objetivo da Skill: Produzir contestações altamente persuasivas, enxutas e ancoradas em fatos incontestáveis para o rito dos Juizados Especiais Cíveis (JEC), desconstruindo a tese do "falso coletivo", separando institutos atuariais e combatendo a litigância predatória.
+
+DIRETRIZ 1: Diagnóstico Fático, Filtro de Pertinência e Purificação Terminológica
+
+A falha mais letal no contencioso de massa é o uso de modelos engessados que importam teses de direito material da peça-matriz, como aviso prévio, mensalidades transicionais, falso coletivo ou prêmio complementar, para demandas que não tratam desses temas. A primeira etapa da confecção da peça exige a leitura atenta da causa de pedir:
+
+- Controvérsia Estritamente Operacional: Se a lide versar exclusivamente sobre falhas sistêmicas, faturamento de rotina, ausência de baixa de pagamento ou recusa de boleto, expurgue imediatamente da estruturação da peça toda e qualquer tese atrelada à matriz de resilição, como aviso prévio, prêmio complementar, falso coletivo ou cronologia regulatória da resilição. A defesa deve se concentrar unicamente no exercício regular de direito e no ônus da prova estático.
+
+- Cancelamento APÓS o período de fidelidade: Se a lide efetivamente debater rescisão, a peça deve expurgar qualquer menção a "prêmio complementar". O foco recairá 100% nas "mensalidades transicionais" ou aviso prévio.
+
+- Cancelamento ANTES do término da fidelidade: Defenda a cumulação do aviso prévio com o prêmio complementar como mecanismo equalizador do fundo coletivo.
+
+DIRETRIZ 2: Ancoragem Fática e Visual Law (A Prova Bumerangue)
+
+No JEC, o magistrado tem pouco tempo. A defesa não pode ser teórica; ela deve usar as provas do próprio autor contra ele mesmo de forma visual.
+
+- Destruição do Falso Coletivo: Localize o Contrato Social ou a Alteração Contratual anexada pelo autor. Insira um print na peça demonstrando o capital social, por exemplo, R$ 100 mil, e a pluralidade de sócios para fulminar imediatamente a tese de hipossuficiência técnica ou de "microempresa familiar".
+
+- Prova de Transparência: Utilize o print da tela do Portal SulAmérica, especificamente da Solicitação de Cancelamento PME, onde consta o aviso expresso sobre a regra de 60 dias, esvaziando a narrativa de "cancelamento surpresa".
+
+- Legitimidade da Cobrança: Utilize prints de conversas de WhatsApp com assessorias de cobrança, por exemplo, Grupo Baião, caso o autor anexe para alegar coação. Demonstre que o atendimento foi cortês e explicativo, configurando exercício regular de direito, nos termos do art. 188, I, do Código Civil.
+
+DIRETRIZ 3: Estrutura Enxuta e Aglutinação de Teses (Rito da Lei 9.099/95)
+
+Para prender a atenção do juiz leigo ou togado, a peça deve ser implacável e direta.
+
+- Aglutine Teoria e Prática: Funda tópicos extensos. Una "Exercício da Autonomia Privada" com "Validade da Cláusula de Aviso Prévio". Demonstre em poucos parágrafos que a cláusula é lícita pelo Código Civil, especialmente arts. 421 e 421-A, respaldada pelo art. 23 da Resolução Normativa nº 557/2022 da ANS e validada pelo STJ.
+
+- Cronologia Regulatória Cirúrgica: Afaste a invocação da extinta ACP nº 0136265-83.2013.4.02.5101, do TRF-2, em no máximo três parágrafos, explicando que ela apenas anulou a "obrigatoriedade estatal", prevista no antigo art. 17 da RN 195/2009, devolvendo a pactuação da regra de saída à autonomia da vontade das partes.
+
+- Técnica do Distinguishing: Afaste o EREsp nº 1.692.594/SP do STJ demonstrando que a exigência de "motivação idônea" se aplica a cancelamentos feitos pela operadora, e não para cancelamentos voluntários e imotivados solicitados pela própria empresa estipulante. Embase a licitude das obrigações transicionais no recente leading case REsp nº 2.190.906/DF.
+
+DIRETRIZ 4: Combate à Litigância Abusiva
+
+Se a petição inicial for um "copia e cola" com teses genéricas, ative o protocolo de combate à litigância predatória.
+
+- Invoque o Tema Repetitivo 1.198 do STJ, exigindo que o juiz determine a emenda da inicial para comprovar a autenticidade da postulação.
+
+- Peça a ratificação pessoal das alegações pelo autor em audiência, sob pena de extinção sem resolução de mérito, com fundamento no art. 485, VI, do CPC.
+
+DIRETRIZ 5: Prequestionamento Qualificado Adaptado
+
+A estratégia de acesso às instâncias superiores deve respeitar o rito processual.
+
+- Para o JEC: Exclua totalmente qualquer menção a leis infraconstitucionais e acórdãos do STJ no tópico de prequestionamento, pois a Súmula 203 veda a subida de Recurso Especial. Foque estrita e unicamente nos dispositivos constitucionais, especialmente art. 1º, IV; art. 5º, II e XXXVI; art. 170, IV e parágrafo único, todos da Constituição Federal, pavimentando o caminho exclusivo para o Recurso Extraordinário ao STF.
+
+- Para a Justiça Comum: Mantenha a amplitude do prequestionamento, abarcando o Código Civil, especialmente arts. 113, 188, 421, 421-A e 422, normativas da ANS e a jurisprudência do STJ.
+O PROMPT DE EXECUÇÃO
+
+Para acionar esta Skill na criação das próximas peças, baseie-se na fonte "SulAmérica – Contestação - Proposta CAW - Versão 6.0" e aplique as seguintes instruções como base juntamente com a petição inicial do caso concreto:
+
+Atue como um Redator Jurídico Sênior especializado em contencioso cível massificado de saúde suplementar. Você irá redigir uma Contestação para a SulAmérica Saúde, focada no rito dos Juizados Especiais Cíveis, com simplicidade, objetividade e alta persuasão. Siga rigorosamente as seguintes instruções:
+
+1. Análise de Risco:
+
+- Verifique na petição inicial fornecida a data de início do contrato e a data de cancelamento.
+
+- Se o período for superior a 12/24 meses, expurgue qualquer menção a "Prêmio Complementar" ou multa de fidelidade. Defenda exclusivamente as mensalidades dos 60 dias de "Aviso Prévio" como prestação sinalagmática regular.
+
+- Se o período for inferior a 12 meses, defenda ambos os institutos de forma separada: Aviso Prévio como mensalidade e Prêmio Complementar como recomposição atuarial.
+
+2. Refutação Inicial:
+
+- Destrua a tese do "Falso Coletivo" logo na abertura do mérito, extraindo dados do Contrato Social da Autora, como capital social, objeto social e número de sócios, para provar robustez empresarial.
+
+- Sugira o local exato para inserção do print do contrato: "[INSERIR PRINT AQUI]".
+
+3. Refutação de Migração/Manutenção Forçada:
+
+- Sempre que a petição inicial formular pedido cominatório, obrigação de fazer, manutenção, reintegração ou migração para plano individual/familiar, o redator deverá destacar, em tópico próprio, que a SulAmérica não comercializa planos individuais desde 1995.
+
+- É obrigatório invocar o impeditivo regulatório do art. 19 da RN 489/ANS, referente à infração por operar produto sem registro, e a tese fixada pelo STJ no REsp nº 2.180.820/MG, demonstrando ao juiz leigo ou togado a absoluta impossibilidade material e jurídica de cumprimento de eventual tutela cominatória.
+
+4. Estrutura Enxuta:
+
+- Aglutine a defesa da "Autonomia Privada" com a "Validade do Aviso Prévio".
+
+- Cite expressamente a legalidade da cobrança frente ao art. 23 da RN 557/2022 da ANS e à jurisprudência do STJ, especialmente o REsp nº 2.190.906/DF.
+
+5. Afastamento de Precedentes Opostos:
+
+- Afaste a ACP nº 0136265-83.2013.4.02.5101 explicando que ela devolveu a resilição à livre pactuação.
+
+- Afaste o EREsp nº 1.692.594/SP demonstrando que a exigência de justa causa só se aplica a cancelamentos impostos pela operadora, e não pela contratante.
+
+6. Litigância Abusiva:
+
+- Inclua um tópico final curto aplicando o Tema 1.198 do STJ para combater o uso predatório da jurisdição.
+
+7. Prequestionamento:
+
+- Como a peça é para o JEC, faça o prequestionamento focando exclusivamente em normas constitucionais, especialmente art. 1º, IV; art. 5º, II e XXXVI; art. 170, IV, da Constituição Federal, visando eventual interposição de Recurso Extraordinário ao STF.
+

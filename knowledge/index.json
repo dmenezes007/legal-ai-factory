@@ -1,1 +1,353 @@
-[]
+[
+  {
+    "id": "ko-669771ad-0928-427d-9c65-7977ae4ebd31",
+    "title": "0085849-19.2023.8.05.0001 - RECURSO ESPECIAL N 2214841 - SP (2025.0182109-1)",
+    "type": "knowledge_source",
+    "category": "jurisprudencia",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/0085849-19.2023.8.05.0001 - RECURSO ESPECIAL N 2214841 - SP (2025.0182109-1).txt",
+    "status": "processed",
+    "tags": [
+      "jurisprudencia",
+      "txt"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  },
+  {
+    "id": "ko-903a7499-37f5-4d1c-ac3f-5801927ddb28",
+    "title": "Acórdão - Nº 2628808 SP - 2024 0160580-4",
+    "type": "knowledge_source",
+    "category": "skill",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Acórdão - Nº 2628808 SP - 2024 0160580-4.txt",
+    "status": "processed",
+    "tags": [
+      "skill",
+      "txt"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  },
+  {
+    "id": "ko-3c0d9eb1-f0ca-42ca-b795-9e02edec13e3",
+    "title": "ACORDAO - reforma falso coletivo - TJSE - CIV-032572.25",
+    "type": "knowledge_source",
+    "category": "jurisprudencia",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/ACORDAO - reforma falso coletivo - TJSE - CIV-032572.25.txt",
+    "status": "processed",
+    "tags": [
+      "jurisprudencia",
+      "txt"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  },
+  {
+    "id": "ko-276b7c8c-3eb4-4bdc-8a89-1f3a0195deac",
+    "title": "Acordao AI - revogacao tutela - 557 - falso coletivo - TJ SP",
+    "type": "knowledge_source",
+    "category": "jurisprudencia",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Acordao AI - revogacao tutela - 557 - falso coletivo - TJ SP.txt",
+    "status": "processed",
+    "tags": [
+      "jurisprudencia",
+      "txt"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  },
+  {
+    "id": "ko-8f290c28-3d7f-4bfd-b397-646c2b82c81b",
+    "title": "Acordao Apelacao - TJSP - falso coletivo - cerceamento de defesa - produto 557",
+    "type": "knowledge_source",
+    "category": "jurisprudencia",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Acordao Apelacao - TJSP - falso coletivo - cerceamento de defesa - produto 557.txt",
+    "status": "processed",
+    "tags": [
+      "jurisprudencia",
+      "txt"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  },
+  {
+    "id": "ko-58537dcf-ecdd-457c-99f9-c14a5b7a2951",
+    "title": "Acórdão do Agravo Interno - 2.008.784-SP - necessidade de pericia",
+    "type": "knowledge_source",
+    "category": "mapa_de_teses",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Acórdão do Agravo Interno - 2.008.784-SP - necessidade de pericia.txt",
+    "status": "processed",
+    "tags": [
+      "mapa_de_teses",
+      "txt"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  },
+  {
+    "id": "ko-9fdf2cfd-8f10-497e-a0d1-cb96c66ccb9e",
+    "title": "ACÓRDÃO RECURSO ESPECIAL Nº 2061483 - SP 2023 0087659-0",
+    "type": "knowledge_source",
+    "category": "mapa_de_teses",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/ACÓRDÃO RECURSO ESPECIAL Nº 2061483 - SP 2023 0087659-0.txt",
+    "status": "processed",
+    "tags": [
+      "mapa_de_teses",
+      "txt"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  },
+  {
+    "id": "ko-75acb0b7-7dd0-4cf0-93eb-a19a36bc4635",
+    "title": "Acordao Resp 1964110 SP - 2021.02971993 - produto 515 - Min Raul Araújo - reajuste anual",
+    "type": "knowledge_source",
+    "category": "jurisprudencia",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Acordao Resp 1964110 SP - 2021.02971993 - produto 515 - Min Raul Araújo - reajuste anual.txt",
+    "status": "processed",
+    "tags": [
+      "jurisprudencia",
+      "txt"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  },
+  {
+    "id": "ko-7d47d7ab-4aa5-466a-bf5b-62df031dc39f",
+    "title": "Acordão TJSP - cerceamento de defesa - falso coletivo - sentenca anulada - pericia aturial - produto 557",
+    "type": "knowledge_source",
+    "category": "documento_processual",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Acordão TJSP - cerceamento de defesa - falso coletivo - sentenca anulada - pericia aturial - produto 557.txt",
+    "status": "processed",
+    "tags": [
+      "documento_processual",
+      "txt"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  },
+  {
+    "id": "ko-fcdfa88e-8186-4699-8842-594f9eb21c3e",
+    "title": "Antonio cordeiro produto 557 - favorável",
+    "type": "knowledge_source",
+    "category": "desconhecido",
+    "source_path": "knowledge/sources/original/notebooklm/laudos/Antonio cordeiro produto 557 - favorável.txt",
+    "status": "processed",
+    "tags": [
+      "desconhecido",
+      "txt"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  },
+  {
+    "id": "ko-57aa7c6a-a6ac-428d-b9eb-3dd3430ab3da",
+    "title": "Aviso_Previo_Premio_Complementar_SulAmerica_Contestacao",
+    "type": "knowledge_source",
+    "category": "mapa_de_teses",
+    "source_path": "knowledge/sources/original/notebooklm/modelos/Aviso_Previo_Premio_Complementar_SulAmerica_Contestacao.txt",
+    "status": "processed",
+    "tags": [
+      "mapa_de_teses",
+      "txt"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  },
+  {
+    "id": "ko-7e22e7bb-d65d-41f9-8941-e5a02d1ab210",
+    "title": "fixture-ingestao",
+    "type": "knowledge_source",
+    "category": "modelo_peca",
+    "source_path": "knowledge/sources/original/fixture-ingestao.md",
+    "status": "processed",
+    "tags": [
+      "modelo_peca",
+      "md"
+    ],
+    "updated_at": "2026-06-28T13:55:46.794Z"
+  },
+  {
+    "id": "ko-9be226a0-75fb-4d2e-aeaa-8b664de8daa7",
+    "title": "governance-fixture-1782654943886",
+    "type": "knowledge_source",
+    "category": "modelo_peca",
+    "source_path": "knowledge/sources/original/governance-fixture-1782654943886.md",
+    "status": "processed",
+    "tags": [
+      "modelo_peca",
+      "md"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  },
+  {
+    "id": "ko-288ce268-b147-4eef-9150-41df435a6deb",
+    "title": "LAUDO-FAVORÁVEL-078.9823-EMPRESARIAL-PRODUTO-557-PERITA-ADELITA-ADAMS",
+    "type": "knowledge_source",
+    "category": "skill",
+    "source_path": "knowledge/sources/original/notebooklm/laudos/LAUDO-FAVORÁVEL-078.9823-EMPRESARIAL-PRODUTO-557-PERITA-ADELITA-ADAMS.txt",
+    "status": "processed",
+    "tags": [
+      "skill",
+      "txt"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  },
+  {
+    "id": "ko-6bcda81b-686f-4bd0-bfdd-fc3ee46515a8",
+    "title": "Laudo-favorável-produto-557-perito-Jose-Luiz-Montelo-da-Fonseca",
+    "type": "knowledge_source",
+    "category": "desconhecido",
+    "source_path": "knowledge/sources/original/notebooklm/laudos/Laudo-favorável-produto-557-perito-Jose-Luiz-Montelo-da-Fonseca.txt",
+    "status": "processed",
+    "tags": [
+      "desconhecido",
+      "txt"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  },
+  {
+    "id": "ko-734cfda6-bce4-4302-bfec-4243b9b7655b",
+    "title": "MAPA_DE_ADERENCIA_DE_TESES",
+    "type": "knowledge_source",
+    "category": "skill",
+    "source_path": "knowledge/sources/original/notebooklm/mapas/MAPA_DE_ADERENCIA_DE_TESES.txt",
+    "status": "processed",
+    "tags": [
+      "skill",
+      "txt"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  },
+  {
+    "id": "ko-bf71989e-7ced-4cf9-8cb2-514b226ad847",
+    "title": "Reajuste_Doutrina_Validade_Contratos_Coletivos_Empresariais",
+    "type": "knowledge_source",
+    "category": "mapa_de_teses",
+    "source_path": "knowledge/sources/original/notebooklm/doutrina/Reajuste_Doutrina_Validade_Contratos_Coletivos_Empresariais.txt",
+    "status": "processed",
+    "tags": [
+      "mapa_de_teses",
+      "txt"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  },
+  {
+    "id": "ko-17a29e28-6091-4b0e-87fe-4ac643b2d03d",
+    "title": "Reajuste_Extratos_Pormenorizados_PME_2014_2025",
+    "type": "knowledge_source",
+    "category": "desconhecido",
+    "source_path": "knowledge/sources/original/notebooklm/extratos/Reajuste_Extratos_Pormenorizados_PME_2014_2025.txt",
+    "status": "processed",
+    "tags": [
+      "desconhecido",
+      "txt"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  },
+  {
+    "id": "ko-e82b366e-e0dd-4312-94ab-10d72d1553c7",
+    "title": "Reajuste_SulAmerica_Contestacao",
+    "type": "knowledge_source",
+    "category": "mapa_de_teses",
+    "source_path": "knowledge/sources/original/notebooklm/modelos/Reajuste_SulAmerica_Contestacao.txt",
+    "status": "processed",
+    "tags": [
+      "mapa_de_teses",
+      "txt"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  },
+  {
+    "id": "ko-1e322497-f35a-4e73-9399-064b861523a3",
+    "title": "Sentença-–-TJSP-–-557-–-falso-coletivo-reajustes-devidos-anual",
+    "type": "knowledge_source",
+    "category": "desconhecido",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Sentença-–-TJSP-–-557-–-falso-coletivo-reajustes-devidos-anual.txt",
+    "status": "processed",
+    "tags": [
+      "desconhecido",
+      "txt"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  },
+  {
+    "id": "ko-c6241e3f-486b-4e72-87d5-bb7cf28e93a9",
+    "title": "SENTENÇA-DE-IMPROCEDÊNCIA-4001635-55.2026.8.26.0577-anual-falso-coletivo-produto-557-TJSP",
+    "type": "knowledge_source",
+    "category": "desconhecido",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/SENTENÇA-DE-IMPROCEDÊNCIA-4001635-55.2026.8.26.0577-anual-falso-coletivo-produto-557-TJSP.txt",
+    "status": "processed",
+    "tags": [
+      "desconhecido",
+      "txt"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  },
+  {
+    "id": "ko-200f197e-03f1-479d-9808-9e628e99abfe",
+    "title": "Sentenca-improcedente-557-faixa-etaria-pericia-in-loco-tjsp",
+    "type": "knowledge_source",
+    "category": "documento_processual",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Sentenca-improcedente-557-faixa-etaria-pericia-in-loco-tjsp.txt",
+    "status": "processed",
+    "tags": [
+      "documento_processual",
+      "txt"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  },
+  {
+    "id": "ko-14ab226e-b9f5-4feb-881a-9b74cb1c849b",
+    "title": "Sentenca-improcedente-Suzano-TJ-SP-produto-557-base-atuarial-idonea-nucleo-4.0",
+    "type": "knowledge_source",
+    "category": "documento_processual",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Sentenca-improcedente-Suzano-TJ-SP-produto-557-base-atuarial-idonea-nucleo-4.0.txt",
+    "status": "processed",
+    "tags": [
+      "documento_processual",
+      "txt"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  },
+  {
+    "id": "ko-c1c5f30f-f0ea-4d5a-bc15-e988ca6fc10e",
+    "title": "Sentenca-TJSP-anual-falso-coletivo-produto-557-sem-pericia",
+    "type": "knowledge_source",
+    "category": "documento_processual",
+    "source_path": "knowledge/sources/original/notebooklm/jurisprudencia/Sentenca-TJSP-anual-falso-coletivo-produto-557-sem-pericia.txt",
+    "status": "processed",
+    "tags": [
+      "documento_processual",
+      "txt"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  },
+  {
+    "id": "ko-73c39880-fa4d-4588-bc28-17150a89f9ee",
+    "title": "SKILL",
+    "type": "knowledge_source",
+    "category": "skill",
+    "source_path": "knowledge/sources/original/notebooklm/skills/SKILL.txt",
+    "status": "processed",
+    "tags": [
+      "skill",
+      "txt"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  },
+  {
+    "id": "ko-2f9a59b1-94fe-4c79-94c7-2974059caaa0",
+    "title": "SKILL DE REDAÇÃO JURÍDICA PARA JEC",
+    "type": "knowledge_source",
+    "category": "skill",
+    "source_path": "knowledge/sources/original/notebooklm/skills/SKILL DE REDAÇÃO JURÍDICA PARA JEC.txt",
+    "status": "processed",
+    "tags": [
+      "skill",
+      "txt"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  },
+  {
+    "id": "ko-4694c688-7b50-41b1-b864-8d657187a0ef",
+    "title": "SKILL DE REDAÇÃO JURÍDICA PARA JUSTIÇA COMUM",
+    "type": "knowledge_source",
+    "category": "skill",
+    "source_path": "knowledge/sources/original/notebooklm/skills/SKILL DE REDAÇÃO JURÍDICA PARA JUSTIÇA COMUM.txt",
+    "status": "processed",
+    "tags": [
+      "skill",
+      "txt"
+    ],
+    "updated_at": "2026-06-28T13:55:46.795Z"
+  }
+]
