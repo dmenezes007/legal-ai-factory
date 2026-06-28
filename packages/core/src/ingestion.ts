@@ -197,6 +197,13 @@ interface RelationshipsDoc {
   updated_at: string;
 }
 
+interface IngestionCacheEntry {
+  signature: string;
+  item: IngestionResult;
+}
+
+type IngestionCacheMap = Record<string, IngestionCacheEntry>;
+
 async function readJsonSafe<T>(filePath: string, fallback: T): Promise<T> {
   try {
     const raw = await fs.readFile(filePath, "utf8");
@@ -324,17 +331,36 @@ export async function ingestKnowledgeSources(paths: IngestionPaths): Promise<Ing
   await fs.mkdir(paths.processedDir, { recursive: true });
   await fs.mkdir(paths.metadataDir, { recursive: true });
 
+  const cachePath = path.join(paths.metadataDir, "_ingestion_cache.json");
+  const cache = await readJsonSafe<IngestionCacheMap>(cachePath, {});
+
   const files = await listFilesRecursively(paths.sourceDir);
   const candidates = files.filter((file) => SUPPORTED_EXTENSIONS.has(path.extname(file).toLowerCase()));
 
   const items: IngestionResult[] = [];
 
   for (const filePath of candidates) {
-    const id = randomUUID();
-    const fileName = path.basename(filePath);
-    const extension = path.extname(filePath).toLowerCase();
+    const absolutePath = path.resolve(filePath);
+    const stat = await fs.stat(absolutePath);
+    const signature = `${stat.size}:${Math.trunc(stat.mtimeMs)}`;
+    const cached = cache[absolutePath];
 
-    const { text, warnings, extracted } = await extractText(filePath);
+    if (cached && cached.signature === signature) {
+      try {
+        await fs.access(cached.item.processedPath);
+        await fs.access(cached.item.metadataPath);
+        items.push(cached.item);
+        continue;
+      } catch {
+        // Cache inconsistente: reprocessa o arquivo.
+      }
+    }
+
+    const id = randomUUID();
+    const fileName = path.basename(absolutePath);
+    const extension = path.extname(absolutePath).toLowerCase();
+
+    const { text, warnings, extracted } = await extractText(absolutePath);
     const category = classifySource(fileName, text);
 
     const processedName = `${path.parse(fileName).name}.${id}.processed.txt`;
@@ -354,7 +380,7 @@ export async function ingestKnowledgeSources(paths: IngestionPaths): Promise<Ing
           category,
           extracted,
           extractionWarnings: warnings,
-          sourcePath: filePath,
+          sourcePath: absolutePath,
           processedPath,
           createdAt: new Date().toISOString(),
           textLength: text.length,
@@ -365,9 +391,9 @@ export async function ingestKnowledgeSources(paths: IngestionPaths): Promise<Ing
       "utf8",
     );
 
-    items.push({
+    const item: IngestionResult = {
       id,
-      originalPath: filePath,
+      originalPath: absolutePath,
       processedPath,
       metadataPath,
       fileName,
@@ -376,8 +402,16 @@ export async function ingestKnowledgeSources(paths: IngestionPaths): Promise<Ing
       textLength: text.length,
       extracted,
       extractionWarnings: warnings,
-    });
+    };
+
+    items.push(item);
+    cache[absolutePath] = {
+      signature,
+      item,
+    };
   }
+
+  await fs.writeFile(cachePath, JSON.stringify(cache, null, 2), "utf8");
 
   await updateKnowledgeGovernance(items, paths);
 

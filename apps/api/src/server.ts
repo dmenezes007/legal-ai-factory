@@ -68,6 +68,7 @@ const KNOWLEDGE_ORIGINAL = path.join(ROOT, "knowledge", "sources", "original");
 const KNOWLEDGE_NOTEBOOKLM = path.join(KNOWLEDGE_ORIGINAL, "notebooklm");
 const KNOWLEDGE_PROCESSED = path.join(ROOT, "knowledge", "sources", "processed");
 const KNOWLEDGE_METADATA = path.join(ROOT, "knowledge", "sources", "metadata");
+const KNOWLEDGE_REFERENCE_STATE = path.join(KNOWLEDGE_METADATA, "_reference_base_state.json");
 const SUPPORTED_EXTENSIONS = new Set([".txt", ".md", ".pdf", ".docx"]);
 
 interface ExtractedCaseMetadata {
@@ -86,6 +87,12 @@ interface CaseMetadataDiagnostics {
   emptyTextFiles: number;
   likelyScannedPdf: boolean;
   emptyTextFileNames: string[];
+}
+
+interface DirectorySignature {
+  fileCount: number;
+  totalBytes: number;
+  maxMtimeMs: number;
 }
 
 function hasCriticalMetadata(meta: ExtractedCaseMetadata): boolean {
@@ -119,6 +126,64 @@ function resolveInOriginalDir(sourceSubdir?: string): string | null {
   }
 
   return null;
+}
+
+async function buildDirectorySignature(dir: string): Promise<DirectorySignature> {
+  const files = await listFilesRecursively(dir);
+  const stats = await Promise.all(files.map((filePath) => fs.stat(filePath)));
+
+  let totalBytes = 0;
+  let maxMtimeMs = 0;
+  for (const stat of stats) {
+    totalBytes += stat.size;
+    maxMtimeMs = Math.max(maxMtimeMs, stat.mtimeMs);
+  }
+
+  return {
+    fileCount: files.length,
+    totalBytes,
+    maxMtimeMs: Math.trunc(maxMtimeMs),
+  };
+}
+
+async function shouldRefreshReferenceBase(): Promise<{ refresh: boolean; signature: DirectorySignature }> {
+  await fs.mkdir(KNOWLEDGE_METADATA, { recursive: true });
+  const signature = await buildDirectorySignature(KNOWLEDGE_NOTEBOOKLM);
+
+  try {
+    const raw = await fs.readFile(KNOWLEDGE_REFERENCE_STATE, "utf8");
+    const parsed = JSON.parse(raw) as { signature?: DirectorySignature };
+    const prev = parsed.signature;
+
+    if (!prev) {
+      return { refresh: true, signature };
+    }
+
+    const unchanged =
+      prev.fileCount === signature.fileCount &&
+      prev.totalBytes === signature.totalBytes &&
+      prev.maxMtimeMs === signature.maxMtimeMs;
+
+    return { refresh: !unchanged, signature };
+  } catch {
+    return { refresh: true, signature };
+  }
+}
+
+async function markReferenceBaseIngested(signature: DirectorySignature): Promise<void> {
+  await fs.mkdir(KNOWLEDGE_METADATA, { recursive: true });
+  await fs.writeFile(
+    KNOWLEDGE_REFERENCE_STATE,
+    JSON.stringify(
+      {
+        signature,
+        updatedAt: new Date().toISOString(),
+      },
+      null,
+      2,
+    ),
+    "utf8",
+  );
 }
 
 async function listFilesRecursively(dir: string): Promise<string[]> {
@@ -444,37 +509,53 @@ app.post("/api/ingest", async (req, res) => {
       return;
     }
 
-    const ingestionTargets = [scopedSourceDir];
-    if (path.resolve(scopedSourceDir) !== path.resolve(KNOWLEDGE_NOTEBOOKLM)) {
-      ingestionTargets.push(KNOWLEDGE_NOTEBOOKLM);
-    }
+    const summaries: Array<Awaited<ReturnType<typeof ingestKnowledgeSources>>> = [];
+    const scopedSummary = await ingestKnowledgeSources({
+      sourceDir: scopedSourceDir,
+      processedDir: KNOWLEDGE_PROCESSED,
+      metadataDir: KNOWLEDGE_METADATA,
+    });
+    summaries.push(scopedSummary);
 
-    const uniqueTargets = [...new Set(ingestionTargets.map((target) => path.resolve(target)))];
-    const summaries = await Promise.all(
-      uniqueTargets.map((sourceDir) =>
-        ingestKnowledgeSources({
-          sourceDir,
+    let referenceBaseRefreshed = false;
+    let referenceBaseSkippedAsCached = false;
+
+    if (path.resolve(scopedSourceDir) !== path.resolve(KNOWLEDGE_NOTEBOOKLM)) {
+      const decision = await shouldRefreshReferenceBase();
+      if (decision.refresh) {
+        const notebookSummary = await ingestKnowledgeSources({
+          sourceDir: KNOWLEDGE_NOTEBOOKLM,
           processedDir: KNOWLEDGE_PROCESSED,
           metadataDir: KNOWLEDGE_METADATA,
-        }),
-      ),
-    );
+        });
+        summaries.push(notebookSummary);
+        await markReferenceBaseIngested(decision.signature);
+        referenceBaseRefreshed = true;
+      } else {
+        referenceBaseSkippedAsCached = true;
+      }
+    }
 
     const summary = mergeIngestionSummaries(summaries);
-    const scopedSummary = summaries.find(
-      (entry) => path.resolve(entry.sourceDir) === path.resolve(scopedSourceDir),
-    );
     const caseMetadata = await extractCaseMetadataFromSummary(scopedSummary);
     const caseMetadataDiagnostics = buildCaseMetadataDiagnostics(scopedSummary);
 
     pushLog("ingestion_completed", {
       sourceDir: toPosixPath(path.relative(ROOT, scopedSourceDir)),
       includedReferenceBase: toPosixPath(path.relative(ROOT, KNOWLEDGE_NOTEBOOKLM)),
+      referenceBaseRefreshed,
+      referenceBaseSkippedAsCached,
       total: summary.total,
       processed: summary.processed,
       errors: summary.errors,
     });
-    res.json({ ...summary, caseMetadata, caseMetadataDiagnostics });
+    res.json({
+      ...summary,
+      caseMetadata,
+      caseMetadataDiagnostics,
+      referenceBaseRefreshed,
+      referenceBaseSkippedAsCached,
+    });
   } catch (error) {
     pushLog("ingestion_failed", { error: error instanceof Error ? error.message : "unknown" });
     res.status(500).json({
