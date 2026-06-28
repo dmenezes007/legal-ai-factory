@@ -64,6 +64,7 @@ function pushLog(event: string, payload: Record<string, unknown>): void {
 
 const ROOT = process.cwd();
 const KNOWLEDGE_ORIGINAL = path.join(ROOT, "knowledge", "sources", "original");
+const KNOWLEDGE_NOTEBOOKLM = path.join(KNOWLEDGE_ORIGINAL, "notebooklm");
 const KNOWLEDGE_PROCESSED = path.join(ROOT, "knowledge", "sources", "processed");
 const KNOWLEDGE_METADATA = path.join(ROOT, "knowledge", "sources", "metadata");
 const SUPPORTED_EXTENSIONS = new Set([".txt", ".md", ".pdf", ".docx"]);
@@ -108,6 +109,34 @@ async function listFilesRecursively(dir: string): Promise<string[]> {
   return nested.flat();
 }
 
+function mergeIngestionSummaries(
+  summaries: Array<Awaited<ReturnType<typeof ingestKnowledgeSources>>>,
+) {
+  const seen = new Set<string>();
+  const items: Array<(typeof summaries)[number]["items"][number]> = [];
+
+  for (const summary of summaries) {
+    for (const item of summary.items) {
+      const key = toPosixPath(item.originalPath);
+      if (!seen.has(key)) {
+        seen.add(key);
+        items.push(item);
+      }
+    }
+  }
+
+  return {
+    sourceDir: summaries[0]?.sourceDir ?? KNOWLEDGE_ORIGINAL,
+    processedDir: summaries[0]?.processedDir ?? KNOWLEDGE_PROCESSED,
+    metadataDir: summaries[0]?.metadataDir ?? KNOWLEDGE_METADATA,
+    timestamp: new Date().toISOString(),
+    total: items.length,
+    processed: items.length,
+    errors: items.filter((item) => !item.extracted).length,
+    items,
+  };
+}
+
 app.get("/api/health", (_req, res) => {
   pushLog("healthcheck", {});
   res.json({
@@ -130,14 +159,27 @@ app.post("/api/ingest", async (req, res) => {
       return;
     }
 
-    const summary = await ingestKnowledgeSources({
-      sourceDir: scopedSourceDir,
-      processedDir: KNOWLEDGE_PROCESSED,
-      metadataDir: KNOWLEDGE_METADATA,
-    });
+    const ingestionTargets = [scopedSourceDir];
+    if (path.resolve(scopedSourceDir) !== path.resolve(KNOWLEDGE_NOTEBOOKLM)) {
+      ingestionTargets.push(KNOWLEDGE_NOTEBOOKLM);
+    }
+
+    const uniqueTargets = [...new Set(ingestionTargets.map((target) => path.resolve(target)))];
+    const summaries = await Promise.all(
+      uniqueTargets.map((sourceDir) =>
+        ingestKnowledgeSources({
+          sourceDir,
+          processedDir: KNOWLEDGE_PROCESSED,
+          metadataDir: KNOWLEDGE_METADATA,
+        }),
+      ),
+    );
+
+    const summary = mergeIngestionSummaries(summaries);
 
     pushLog("ingestion_completed", {
       sourceDir: toPosixPath(path.relative(ROOT, scopedSourceDir)),
+      includedReferenceBase: toPosixPath(path.relative(ROOT, KNOWLEDGE_NOTEBOOKLM)),
       total: summary.total,
       processed: summary.processed,
       errors: summary.errors,
@@ -176,7 +218,14 @@ app.get("/api/sources/folder-cases", async (_req, res) => {
     }
 
     const items = [...folders.entries()]
-      .filter(([, folderFiles]) => folderFiles.length > 0)
+      .filter(([relativePath, folderFiles]) => {
+        if (folderFiles.length === 0) {
+          return false;
+        }
+
+        const normalized = toPosixPath(relativePath || "").toLowerCase();
+        return normalized !== "notebooklm" && !normalized.startsWith("notebooklm/");
+      })
       .map(([relativePath, folderFiles]) => ({
         id: relativePath || "root",
         displayName: relativePath ? path.basename(relativePath) : "Raiz",
