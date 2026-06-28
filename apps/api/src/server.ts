@@ -385,17 +385,18 @@ async function extractCaseMetadataFromSummary(
   );
   const plaintiff = firstRegexValue(
     [
-      /(?:autor(?:a)?|requerente|impugnante)\s*[:\-]\s*([^\n.;]{3,140})/i,
+      /(?:autor(?:a)?|parte\s+autora|requerente(?:\(s\))?|impugnante|promovente|demandante|exequente|embargante|reclamante|impetrante)\s*[:\-]\s*([^\n.;]{3,180})/i,
       /proposta\s+por\s+([^\n,.;]{3,140})/i,
-      /(?:exequente|embargante|reclamante|impetrante)\s*[:\-]\s*([^\n.;]{3,140})/i,
+      /movid[ao]s?\s+por\s+([^\n,.;]{3,160})/i,
+      /ajuizad[ao]s?\s+por\s+([^\n,.;]{3,160})/i,
     ],
     texts,
   );
   const defendant = firstRegexValue(
     [
-      /(?:r[ée]u|requerid[oa]|demandad[oa])\s*[:\-]\s*([^\n.;]{3,140})/i,
+      /(?:r[ée]u|parte\s+r[ée]|requerid[oa](?:\(s\))?|demandad[oa]|executad[oa]|embargad[oa]|reclamad[oa]|autoridad[ea]\s+coatora|impetrad[oa]|promovid[oa]|recorrid[oa]|apelad[oa]|agravad[oa])\s*[:\-]\s*([^\n.;]{3,180})/i,
       /em\s+face\s+de\s+([^\n,.;]{3,140})/i,
-      /(?:executad[oa]|embargad[oa]|reclamad[oa]|autoridad[ea]\s+coatora)\s*[:\-]\s*([^\n.;]{3,140})/i,
+      /em\s+desfavor\s+de\s+([^\n,.;]{3,160})/i,
     ],
     texts,
   );
