@@ -69,6 +69,7 @@ const KNOWLEDGE_NOTEBOOKLM = path.join(KNOWLEDGE_ORIGINAL, "notebooklm");
 const KNOWLEDGE_PROCESSED = path.join(ROOT, "knowledge", "sources", "processed");
 const KNOWLEDGE_METADATA = path.join(ROOT, "knowledge", "sources", "metadata");
 const KNOWLEDGE_REFERENCE_STATE = path.join(KNOWLEDGE_METADATA, "_reference_base_state.json");
+const KNOWLEDGE_REFERENCE_PACKAGE = path.join(KNOWLEDGE_METADATA, "_reference_base_package.json");
 const SUPPORTED_EXTENSIONS = new Set([".txt", ".md", ".pdf", ".docx"]);
 
 interface ExtractedCaseMetadata {
@@ -93,6 +94,34 @@ interface DirectorySignature {
   fileCount: number;
   totalBytes: number;
   maxMtimeMs: number;
+}
+
+interface ReferenceBasePackage {
+  generatedAt: string;
+  sourceDir: string;
+  signature: DirectorySignature;
+  summary: {
+    total: number;
+    processed: number;
+    errors: number;
+  };
+  stats: {
+    emptyTextFiles: number;
+    nonEmptyTextFiles: number;
+    extensions: Record<string, number>;
+    categories: Record<string, number>;
+  };
+  items: Array<{
+    id: string;
+    relativePath: string;
+    fileName: string;
+    extension: string;
+    category: string;
+    textLength: number;
+    extracted: boolean;
+    extractionWarnings: string[];
+    preview: string;
+  }>;
 }
 
 function hasCriticalMetadata(meta: ExtractedCaseMetadata): boolean {
@@ -184,6 +213,132 @@ async function markReferenceBaseIngested(signature: DirectorySignature): Promise
     ),
     "utf8",
   );
+}
+
+async function loadReferenceBasePackage(): Promise<ReferenceBasePackage | null> {
+  try {
+    const raw = await fs.readFile(KNOWLEDGE_REFERENCE_PACKAGE, "utf8");
+    return JSON.parse(raw) as ReferenceBasePackage;
+  } catch {
+    return null;
+  }
+}
+
+async function buildReferenceBasePackage(
+  summary: Awaited<ReturnType<typeof ingestKnowledgeSources>>,
+  signature: DirectorySignature,
+): Promise<ReferenceBasePackage> {
+  const extensions: Record<string, number> = {};
+  const categories: Record<string, number> = {};
+
+  const items = await Promise.all(
+    summary.items.map(async (item) => {
+      const extension = item.extension.toLowerCase();
+      const category = item.category || "desconhecido";
+      extensions[extension] = (extensions[extension] ?? 0) + 1;
+      categories[category] = (categories[category] ?? 0) + 1;
+
+      let preview = "";
+      try {
+        const raw = await fs.readFile(item.processedPath, "utf8");
+        preview = raw.replace(/\s+/g, " ").trim().slice(0, 420);
+      } catch {
+        preview = "";
+      }
+
+      return {
+        id: item.id,
+        relativePath: toPosixPath(path.relative(KNOWLEDGE_ORIGINAL, item.originalPath)),
+        fileName: item.fileName,
+        extension,
+        category,
+        textLength: item.textLength,
+        extracted: item.extracted,
+        extractionWarnings: item.extractionWarnings,
+        preview,
+      };
+    }),
+  );
+
+  const emptyTextFiles = items.filter((item) => item.textLength === 0).length;
+
+  return {
+    generatedAt: new Date().toISOString(),
+    sourceDir: toPosixPath(path.relative(ROOT, KNOWLEDGE_NOTEBOOKLM)),
+    signature,
+    summary: {
+      total: summary.total,
+      processed: summary.processed,
+      errors: summary.errors,
+    },
+    stats: {
+      emptyTextFiles,
+      nonEmptyTextFiles: Math.max(0, items.length - emptyTextFiles),
+      extensions,
+      categories,
+    },
+    items,
+  };
+}
+
+async function persistReferenceBasePackage(referencePackage: ReferenceBasePackage): Promise<void> {
+  await fs.mkdir(KNOWLEDGE_METADATA, { recursive: true });
+  await fs.writeFile(KNOWLEDGE_REFERENCE_PACKAGE, JSON.stringify(referencePackage, null, 2), "utf8");
+}
+
+async function syncReferenceBaseAutomation(): Promise<{
+  refreshed: boolean;
+  skippedAsCached: boolean;
+  signature: DirectorySignature;
+  referencePackage: ReferenceBasePackage;
+  refreshedSummary?: Awaited<ReturnType<typeof ingestKnowledgeSources>>;
+}> {
+  const decision = await shouldRefreshReferenceBase();
+
+  if (decision.refresh) {
+    const notebookSummary = await ingestKnowledgeSources({
+      sourceDir: KNOWLEDGE_NOTEBOOKLM,
+      processedDir: KNOWLEDGE_PROCESSED,
+      metadataDir: KNOWLEDGE_METADATA,
+    });
+
+    const referencePackage = await buildReferenceBasePackage(notebookSummary, decision.signature);
+    await persistReferenceBasePackage(referencePackage);
+    await markReferenceBaseIngested(decision.signature);
+
+    return {
+      refreshed: true,
+      skippedAsCached: false,
+      signature: decision.signature,
+      referencePackage,
+      refreshedSummary: notebookSummary,
+    };
+  }
+
+  const existingPackage = await loadReferenceBasePackage();
+  if (existingPackage) {
+    return {
+      refreshed: false,
+      skippedAsCached: true,
+      signature: decision.signature,
+      referencePackage: existingPackage,
+    };
+  }
+
+  const notebookSummary = await ingestKnowledgeSources({
+    sourceDir: KNOWLEDGE_NOTEBOOKLM,
+    processedDir: KNOWLEDGE_PROCESSED,
+    metadataDir: KNOWLEDGE_METADATA,
+  });
+  const referencePackage = await buildReferenceBasePackage(notebookSummary, decision.signature);
+  await persistReferenceBasePackage(referencePackage);
+
+  return {
+    refreshed: false,
+    skippedAsCached: true,
+    signature: decision.signature,
+    referencePackage,
+  };
 }
 
 async function listFilesRecursively(dir: string): Promise<string[]> {
@@ -502,6 +657,52 @@ app.get("/api/logs", (_req, res) => {
   res.json({ total: apiLogs.length, items: apiLogs });
 });
 
+app.get("/api/reference-base/status", async (_req, res) => {
+  try {
+    const signature = await buildDirectorySignature(KNOWLEDGE_NOTEBOOKLM);
+    const referencePackage = await loadReferenceBasePackage();
+
+    res.json({
+      sourceDir: toPosixPath(path.relative(ROOT, KNOWLEDGE_NOTEBOOKLM)),
+      signature,
+      packageReady: Boolean(referencePackage),
+      packageGeneratedAt: referencePackage?.generatedAt,
+      stats: referencePackage?.stats,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: error instanceof Error ? error.message : "Erro ao consultar status da base de referencia",
+    });
+  }
+});
+
+app.post("/api/reference-base/sync", async (_req, res) => {
+  try {
+    const sync = await syncReferenceBaseAutomation();
+    pushLog("reference_base_sync_completed", {
+      refreshed: sync.refreshed,
+      skippedAsCached: sync.skippedAsCached,
+      signature: sync.signature,
+      total: sync.referencePackage.summary.total,
+      errors: sync.referencePackage.summary.errors,
+    });
+
+    res.json({
+      refreshed: sync.refreshed,
+      skippedAsCached: sync.skippedAsCached,
+      signature: sync.signature,
+      packageGeneratedAt: sync.referencePackage.generatedAt,
+      stats: sync.referencePackage.stats,
+      summary: sync.referencePackage.summary,
+    });
+  } catch (error) {
+    pushLog("reference_base_sync_failed", { error: error instanceof Error ? error.message : "unknown" });
+    res.status(500).json({
+      error: error instanceof Error ? error.message : "Erro ao sincronizar base de referencia",
+    });
+  }
+});
+
 app.post("/api/ingest", async (req, res) => {
   try {
     const scopedSourceDir = resolveInOriginalDir(req.body?.sourceSubdir);
@@ -521,19 +722,15 @@ app.post("/api/ingest", async (req, res) => {
     let referenceBaseRefreshed = false;
     let referenceBaseSkippedAsCached = false;
 
+    let referenceBasePackageGeneratedAt: string | undefined;
     if (path.resolve(scopedSourceDir) !== path.resolve(KNOWLEDGE_NOTEBOOKLM)) {
-      const decision = await shouldRefreshReferenceBase();
-      if (decision.refresh) {
-        const notebookSummary = await ingestKnowledgeSources({
-          sourceDir: KNOWLEDGE_NOTEBOOKLM,
-          processedDir: KNOWLEDGE_PROCESSED,
-          metadataDir: KNOWLEDGE_METADATA,
-        });
-        summaries.push(notebookSummary);
-        await markReferenceBaseIngested(decision.signature);
-        referenceBaseRefreshed = true;
-      } else {
-        referenceBaseSkippedAsCached = true;
+      const sync = await syncReferenceBaseAutomation();
+      referenceBaseRefreshed = sync.refreshed;
+      referenceBaseSkippedAsCached = sync.skippedAsCached;
+      referenceBasePackageGeneratedAt = sync.referencePackage.generatedAt;
+
+      if (sync.refreshedSummary) {
+        summaries.push(sync.refreshedSummary);
       }
     }
 
@@ -556,6 +753,7 @@ app.post("/api/ingest", async (req, res) => {
       caseMetadataDiagnostics,
       referenceBaseRefreshed,
       referenceBaseSkippedAsCached,
+      referenceBasePackageGeneratedAt,
     });
   } catch (error) {
     pushLog("ingestion_failed", { error: error instanceof Error ? error.message : "unknown" });
