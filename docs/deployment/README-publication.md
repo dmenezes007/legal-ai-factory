@@ -21,6 +21,7 @@ git push -u origin <NOME_DA_BRANCH>
 4. Output directory: `dist`.
 5. Configure variavel de ambiente:
    - `VITE_API_BASE_URL=https://<sua-api-no-render>`
+6. No frontend (Vercel), nao manter segredos de backend como `SUPABASE_SERVICE_ROLE_KEY` e `GEMINI_API_KEY`.
 
 ## 5. Conectar backend no Render
 1. No Render, crie um Web Service apontando para o mesmo repositorio.
@@ -52,3 +53,4 @@ npm test
 
 ## 8. Observacao
 - Este repositorio foi preparado para deploy, mas nenhum deploy automatico foi executado.
+- O endpoint de saude implementado na API e `GET /api/health`.

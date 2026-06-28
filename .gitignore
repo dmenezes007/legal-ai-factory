@@ -10,3 +10,7 @@ coverage/
 # Generated ingestion artifacts (volatile)
 knowledge/sources/metadata/*.metadata.json
 knowledge/sources/processed/*.processed.txt
+
+# Playwright artifacts
+test-results/
+playwright-report/

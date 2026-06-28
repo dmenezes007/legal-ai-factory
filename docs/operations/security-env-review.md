@@ -17,4 +17,11 @@ Durante a configuracao do projeto na Vercel, foram identificadas variaveis de am
 
 ## Status
 - Revisao registrada.
-- Acao recomendada pendente de execucao manual no painel da Vercel.
+- Acao executada em 2026-06-28 no painel da Vercel (frontend):
+   - `SUPABASE_SERVICE_ROLE_KEY` removida.
+   - `GEMINI_API_KEY` removida.
+- Variaveis mantidas no frontend (Vercel):
+   - `SUPABASE_URL`
+   - `SUPABASE_ANON_KEY`
+- Atualizacao EPIC 4:
+   - `VITE_API_BASE_URL` configurada para `https://legal-ai-factory.onrender.com`.

@@ -15,7 +15,8 @@
     "lint": "tsc --noEmit",
     "ingest": "tsx tools/migration/src/ingest_sources.ts",
     "demo:case": "tsx tools/generators/src/run_demo_case.ts",
-    "test": "tsx --test tests/**/*.test.ts"
+    "test": "tsx --test tests/**/*.test.ts",
+    "test:e2e:online": "playwright test tests/e2e/online-first-legal-production.spec.ts"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",
@@ -36,6 +37,7 @@
     "npm-run-all": "^4.1.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.55.1",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^22.14.0",
     "autoprefixer": "^10.4.21",
